@@ -28,7 +28,7 @@ public class main {
 		cajaprincipal.agregarProducto(art1);
 		cajaprincipal.agregarProducto(art1);
 		
-		cajaprincipal.mostrarFactura();
+		cajaprincipal.terminarCompraActual();
 	
 		
 	}
