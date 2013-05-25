@@ -72,16 +72,29 @@ public class Caja {
 		cajaCerrada=false;
 	}
 	
-	public void cerrarCaja() {
+	public void cerrarCaja() throws cerrarCajaConCompraEnCurso, cerrarCajaConCajaCerrada {
+		if (this.cajaCerrada) {
+			throw new cerrarCajaConCajaCerrada();
+		}		
+		
+		if (this.compraEnCurso) {
+			throw new cerrarCajaConCompraEnCurso();
+		}
+		
 		cajaCerrada=true;
 	}
 	
 	
-	public void iniciarCompra(){
+	public void iniciarCompra() throws iniciarCompraConCajaCerrada, iniciarCompraConCompraEnCurso{
 		
-		if (this.cajaCerrada || this.compraEnCurso) {
-			// Lanzar Exepcion	no se puede iniciar
+		if (this.cajaCerrada) {
+			throw new iniciarCompraConCajaCerrada();
 		}		
+		
+		if (this.compraEnCurso) {
+			throw new iniciarCompraConCompraEnCurso();
+		}		
+		
 		
 		this.compraActual = new Compra();
 		this.compraEnCurso= true;

@@ -3,8 +3,11 @@ public class main {
 
 	/**
 	 * @param args
+	 * @throws iniciarCompraConCompraEnCurso 
+	 * @throws iniciarCompraConCajaCerrada 
+	 * @throws exepcionCajaCerradaoCompraEnCurso 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws iniciarCompraConCajaCerrada, iniciarCompraConCompraEnCurso{
 
 		Producto art1 = new Producto(1,"Galletas",100);
 		Producto art2 = new Producto(2,"Manteca",100);
@@ -13,6 +16,7 @@ public class main {
 		Producto art5 = new Producto(5,"Mcallan 24 years",100);
 		
 		Caja cajaprincipal = new Caja(1234);
+		cajaprincipal.abrirCaja();
 		cajaprincipal.iniciarCompra();
 		
 		cajaprincipal.agregarProducto(art1);
@@ -25,7 +29,7 @@ public class main {
 		cajaprincipal.agregarProducto(art1);
 		
 		cajaprincipal.mostrarFactura();
-		
+	
 		
 	}
 
