@@ -13,6 +13,9 @@ public class Compra {
 		this.vectorProductos.add(unProducto);
 		
 	}
+	
+	//TODO: CONFIRMAR COMPRA
+	// CLASE FACTURA o COMPRA?
 
 	public void generarFactura(){
 		
@@ -20,6 +23,7 @@ public class Compra {
 		System.out.println("\\\\\\SUPERTECNICAS//////");
 		System.out.println("Ticket No valido como factura");
 		
+		//TODO: REEMPLAZAR POR UN ITERADOR
 		for (int i=0; i< this.vectorProductos.size(); i++){
 			// id me da codigo de barra o algo asi y me da el descuento
 			
