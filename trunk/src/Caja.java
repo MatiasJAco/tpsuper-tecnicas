@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 public class Caja {
 	
@@ -10,6 +12,8 @@ public class Caja {
 	
 	private Compra compraActual;
 	
+	private ArrayList<Compra> compras;
+	
 
 	public Caja(int numero) {
 		// TODO Auto-generated constructor stub
@@ -17,6 +21,7 @@ public class Caja {
 		this.compraEnCurso = false;
 		this.compraActual = null;
 		this.identificacionCaja = numero;
+		compras = new ArrayList<Compra>();
 	}
 
 
@@ -107,9 +112,19 @@ public class Caja {
 		this.compraActual.agregarProducto(unProducto);
 	}
 
-	public void mostrarFactura()
+	//TODO: CONFIRMAR COMPRA
+	
+	public void terminarCompraActual()
 	{
 		this.compraActual.generarFactura();
+		
+		//TODO:GUARDAR FACTURA GENERADA PARA ESTADISTICAS
+		// CHEQUEAR SI ESTA OK EL CONCEPTO COMPRA, FACTURA, ETC.
+		this.compras.add(compraActual);
+		
+		this.compraEnCurso=false;
+		
+		
 	}
 	
 }
