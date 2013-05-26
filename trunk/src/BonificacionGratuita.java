@@ -1,10 +1,10 @@
-import java.util.Vector;
+import java.util.ArrayList;
 
 
 public class BonificacionGratuita extends Bonificacion{
 
 	@Override
-	public Vector<Producto> bonificar(Vector<Producto> misproducts) {
+	public ArrayList<Producto> bonificar(ArrayList<Producto> misproducts, ArrayList<Restriccion> excepciones) {
 		// TODO Auto-generated method stub
 		return null;
 	}

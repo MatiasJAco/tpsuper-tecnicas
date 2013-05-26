@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 public class main {
 
@@ -14,8 +16,21 @@ public class main {
 		Producto art3 = new Producto(3,"Carne Fresca",100);
 		Producto art4 = new Producto(4,"Coca cola 1lt",100);
 		Producto art5 = new Producto(5,"Mcallan 24 years",100);
+
+		RestriccionMarca res1 = new RestriccionMarca("Coca cola 1lt", 1);
+		RestriccionMarca res2 = new RestriccionMarca("Galletas", 2);
+		BonificacionDescuentoMarca bon1 = new BonificacionDescuentoMarca("Galletas", 2, 30);
 		
-		Caja cajaprincipal = new Caja(1234);
+				
+		ArrayList<Promocion> misPromociones = new ArrayList<Promocion>();	
+		Promocion promo1 = new Promocion();
+		promo1.addRestriccion(res1);		
+		promo1.addRestriccion(res2);
+		promo1.addBonificacion(bon1);
+		misPromociones.add(promo1);
+//		Caja cajaprincipal = new Caja(1234);
+		
+		Caja cajaprincipal = new Caja(1234,misPromociones);
 		cajaprincipal.abrirCaja();
 		cajaprincipal.iniciarCompra();
 		
@@ -25,6 +40,7 @@ public class main {
 		cajaprincipal.agregarProducto(art4);
 		cajaprincipal.agregarProducto(art5);
 		cajaprincipal.agregarProducto(art1);
+		cajaprincipal.agregarProducto(art4);
 		cajaprincipal.agregarProducto(art1);
 		cajaprincipal.agregarProducto(art1);
 		

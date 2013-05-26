@@ -1,8 +1,8 @@
 
 public class RestriccionCantidad extends Restriccion{
 
-	int cantidad;
-	int contabilizados;
+	private final int cantidad;
+	private int contabilizados;
 	
 	public RestriccionCantidad(int cant) {
 		super();
@@ -14,10 +14,19 @@ public class RestriccionCantidad extends Restriccion{
 	public boolean cumpleRestriccion(Producto p) {
 		contabilizados++;
 		boolean result = false;
-		if (contabilizados==cantidad)
+		if (contabilizados==cantidad){
 			result=true;
+			activa=true;
+		}
 	
 		return result;
+	}
+
+	@Override
+	public void reset() {
+		this.activa=false;
+		this.contabilizados=0;
+		
 	}
 
 }

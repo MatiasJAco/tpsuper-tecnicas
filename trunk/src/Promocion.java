@@ -1,29 +1,53 @@
-import java.util.Vector;
+import java.util.ArrayList;
 
 
 public class Promocion {
 
-private final	Vector<Bonificacion> bonificaciones;
-private final	Vector <Restriccion> excepciones;
-private final Vector <Restriccion> restricciones;
+private final	ArrayList<Bonificacion> bonificaciones;
+private final	ArrayList <Restriccion> excepciones;
+private final ArrayList <Restriccion> restricciones;
 private	boolean activa;
+private int vecesActivada;
 	
-	public Promocion(Vector <Restriccion> r, Vector <Restriccion> e,Vector <Bonificacion> b) {
+	
+	public Promocion() {
+		restricciones= new ArrayList<Restriccion>();
+		excepciones=new ArrayList<Restriccion>();
+		bonificaciones=new ArrayList<Bonificacion>();
+		activa = false;
+		vecesActivada=0;
+	
+	}
+	
+
+	public Promocion(ArrayList <Restriccion> r, ArrayList <Restriccion> e,ArrayList <Bonificacion> b) {
 		restricciones=r;
 		excepciones=e;
 		bonificaciones=b;
 		activa = false;
+		vecesActivada=0;
 	
 	}
 	
-	
-	public void checkProductos(Vector <Producto> p){
-		updateRestricciones(p);
-		updateExcepciones(p);		
-		if(checkRestricciones() && !checkExcepciones()){
-			this.activa=true;
-		}		
+	public Promocion(ArrayList <Restriccion> r,ArrayList <Bonificacion> b) {
+		restricciones=r;
+		excepciones= new ArrayList<Restriccion>();
+		bonificaciones=b;
+		activa = false;
+		vecesActivada=0;
 		
+	}
+	
+	
+	public void checkProductos(ArrayList <Producto> p){
+		if (!isActiva()){
+			updateRestricciones(p);
+			updateExcepciones(p);		
+			if(checkRestricciones() && !checkExcepciones()){
+				this.activa=true;
+				this.vecesActivada++;
+			}		
+		}
 	}
 	
 	private boolean checkExcepciones() {
@@ -48,16 +72,17 @@ private	boolean activa;
 	}
 
 
-	private void updateExcepciones(Vector<Producto> p) {
+	private void updateExcepciones(ArrayList<Producto> p) {
 		
 		
 	}
 
 
-	private void updateRestricciones(Vector<Producto> p) {
+	private void updateRestricciones(ArrayList<Producto> p) {
 		for (int i=0;i<p.size();i++){
 			for (int j=0;j<restricciones.size();j++){
-				restricciones.get(j).cumpleRestriccion(p.get(i));	
+				if (!restricciones.get(j).isActiva())
+					restricciones.get(j).cumpleRestriccion(p.get(i));	
 			}			
 		}
 		
@@ -69,16 +94,69 @@ private	boolean activa;
 	}
 
 
-	public Vector<Producto> aplicarBonificaciones(Vector<Producto> misproducts) {
-		Vector<Producto> listaResultado=null;
-		if (this.activa){
-			for (int i=0;i<this.bonificaciones.size();i++){
-				listaResultado = this.bonificaciones.get(i).bonificar(misproducts);					
+	public ArrayList<Producto> aplicarBonificaciones(ArrayList<Producto> misproducts) {
+		ArrayList<Producto> listaResultado=new ArrayList<Producto>();
+		if (this.vecesActivada>0){
+			for (int j =0;j<this.vecesActivada;j++){
+				for (int i=0;i<this.bonificaciones.size();i++){
+					listaResultado.addAll(this.bonificaciones.get(i).bonificar(misproducts,excepciones));					
 				}				
+			}
 		}else
-			listaResultado=misproducts;
-				
+			listaResultado=new ArrayList<Producto>();
 		return listaResultado;
+	}
+
+
+	public void addRestriccion(RestriccionMarca res) {
+		this.restricciones.add(res);		
+	}
+
+
+	public void addExcepcion(RestriccionMarca exc) {
+		this.excepciones.add(exc);
+		
+	}
+
+
+	public void addBonificacion(BonificacionDescuentoMarca bon) {
+		this.bonificaciones.add(bon);
+		
+	}
+
+
+	public void checkProducto(Producto producto) {
+		if (isActiva()){
+			this.activa=false;
+		};
+		updateRestricciones(producto);
+		updateExcepciones(producto);		
+		if(checkRestricciones() && !checkExcepciones()){
+			this.activa=true;
+			this.vecesActivada++;
+			resetRestricciones();			
+		}		
+	}
+
+
+	private void resetRestricciones() {
+		for (int j=0;j<restricciones.size();j++){
+			this.restricciones.get(j).reset();			
+		}		
+	}
+
+
+	private void updateRestricciones(Producto producto) {
+		for (int j=0;j<restricciones.size();j++){
+				if (!restricciones.get(j).isActiva())
+					restricciones.get(j).cumpleRestriccion(producto);	
+		}	
+	}
+
+
+	private void updateExcepciones(Producto producto) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

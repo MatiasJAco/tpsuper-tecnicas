@@ -26,15 +26,17 @@ public class RestriccionMarca extends Restriccion{
 	
 	@Override
 	public boolean cumpleRestriccion(Producto p) {
-		
+		boolean result;
 		if (p.getNombre() == this.marca){
 				
 				
 				this.activa=checkCantidad(p);
-		}
+				result = this.activa;
+		}else
+			result = false;
 		
 		
-		return activa;
+		return result;
 	}
 
 	private boolean checkCantidad(Producto p) {
@@ -45,6 +47,13 @@ public class RestriccionMarca extends Restriccion{
 
 	public void setCantidad(RestriccionCantidad rCantidad) {
 		this.rCant=rCantidad;		
+	}
+
+	@Override
+	public void reset() {
+		this.activa=false;
+		this.rCant.reset();
+		
 	}
 
 }

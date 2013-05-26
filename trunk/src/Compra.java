@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Compra {
 
-	private ArrayList<Producto> vectorProductos;
+	private final ArrayList<Producto> vectorProductos;
 	
 	public Compra() {	
 		vectorProductos = new ArrayList<Producto>();
@@ -45,5 +45,29 @@ public class Compra {
 		System.out.println("Gracias Por su compra");
 		
 	}
+
+	public void aplicarPromociones(ArrayList<Promocion> promociones) {
+		promociones=validarPromociones(promociones);
+		for (int i=0;i<promociones.size();i++){
+			ArrayList<Producto> descuentos = promociones.get(i).aplicarBonificaciones(this.vectorProductos);
+			for (int j=0;j<descuentos.size();j++){
+				this.vectorProductos.add(descuentos.get(j));
+			}
+			
+		}
+		
+	}
+
+	private ArrayList<Promocion> validarPromociones(ArrayList<Promocion> promociones) {
+		for (int i=0;i<promociones.size();i++){
+//			promociones.get(i).checkProductos(this.vectorProductos);
+			for (int j=0;j<this.vectorProductos.size();j++){
+				promociones.get(i).checkProducto(this.vectorProductos.get(j));
+				
+			}
+		}
+		return promociones;
+	}
+
 	
 }

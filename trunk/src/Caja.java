@@ -12,7 +12,9 @@ public class Caja {
 	
 	private Compra compraActual;
 	
-	private ArrayList<Compra> compras;
+	private final ArrayList<Compra> compras;
+	
+	private final ArrayList<Promocion> promociones;
 	
 
 	public Caja(int numero) {
@@ -22,8 +24,19 @@ public class Caja {
 		this.compraActual = null;
 		this.identificacionCaja = numero;
 		compras = new ArrayList<Compra>();
+		promociones = new ArrayList<Promocion>();
 	}
 
+	public Caja(int numero, ArrayList<Promocion> p) {
+		// TODO Auto-generated constructor stub
+		this.cajaCerrada = true;
+		this.compraEnCurso = false;
+		this.compraActual = null;
+		this.identificacionCaja = numero;
+		compras = new ArrayList<Compra>();
+		promociones = p;
+	}
+	
 
 
 	public int getIdentificacionCaja() {
@@ -116,6 +129,7 @@ public class Caja {
 	
 	public void terminarCompraActual()
 	{
+		this.compraActual.aplicarPromociones(this.promociones);
 		this.compraActual.generarFactura();
 		
 		//TODO:GUARDAR FACTURA GENERADA PARA ESTADISTICAS
@@ -126,5 +140,6 @@ public class Caja {
 		
 		
 	}
+
 	
 }

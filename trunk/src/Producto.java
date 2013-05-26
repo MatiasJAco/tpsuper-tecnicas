@@ -16,6 +16,13 @@ public class Producto {
 		this.nombre=nombre;
 		this.precio=costo;	
 	}
+	
+	public Producto(int id, String nombre, float costo,String cat) {	
+		this.id=id;
+		this.nombre=nombre;
+		this.precio=costo;	
+		this.categoria=cat;
+	}
 
 
 	public int getId() {

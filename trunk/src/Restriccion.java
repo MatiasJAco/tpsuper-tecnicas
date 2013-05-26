@@ -1,7 +1,7 @@
 
 public abstract class Restriccion {
 
-	boolean activa;
+	protected boolean activa;
 	
 	public Restriccion() {
 	}
@@ -11,6 +11,8 @@ public abstract class Restriccion {
 	public boolean isActiva() {
 		return activa;
 	}
+
+	public abstract void reset();
 	
 	
 	
