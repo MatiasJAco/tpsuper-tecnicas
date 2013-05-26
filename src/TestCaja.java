@@ -3,11 +3,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 
-public class cajaTest {
+public class TestCaja {
 	
 	
 	@Test
-	public void testCerrarCajaConCajaCerrada() throws cerrarCajaConCompraEnCurso {
+	public void testCerrarCajaConCajaCerrada() throws ExceptionCerrarCajaConCompraEnCurso {
 		
 		Caja cajaTest = new Caja(1);
 		
@@ -17,7 +17,7 @@ public class cajaTest {
 		try {
 			cajaTest.cerrarCaja();
 		}
-		catch (cerrarCajaConCajaCerrada e) {
+		catch (ExceptionCerrarCajaConCajaCerrada e) {
 			estabaCerrada = true;
 			assertEquals("Verifica...", estaCerrada, estabaCerrada);
 		}

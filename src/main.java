@@ -5,11 +5,11 @@ public class main {
 
 	/**
 	 * @param args
-	 * @throws iniciarCompraConCompraEnCurso 
-	 * @throws iniciarCompraConCajaCerrada 
+	 * @throws ExceptionIniciarCompraConCompraEnCurso 
+	 * @throws ExceptionIniciarCompraConCajaCerrada 
 	 * @throws exepcionCajaCerradaoCompraEnCurso 
 	 */
-	public static void main(String[] args) throws iniciarCompraConCajaCerrada, iniciarCompraConCompraEnCurso{
+	public static void main(String[] args) throws ExceptionIniciarCompraConCajaCerrada, ExceptionIniciarCompraConCompraEnCurso{
 
 		Producto art1 = new Producto(1,"Galletas",100);
 		Producto art2 = new Producto(2,"Manteca",100);
