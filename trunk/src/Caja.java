@@ -90,27 +90,27 @@ public class Caja {
 		cajaCerrada=false;
 	}
 	
-	public void cerrarCaja() throws cerrarCajaConCompraEnCurso, cerrarCajaConCajaCerrada {
+	public void cerrarCaja() throws ExceptionCerrarCajaConCompraEnCurso, ExceptionCerrarCajaConCajaCerrada {
 		if (this.cajaCerrada) {
-			throw new cerrarCajaConCajaCerrada();
+			throw new ExceptionCerrarCajaConCajaCerrada();
 		}		
 		
 		if (this.compraEnCurso) {
-			throw new cerrarCajaConCompraEnCurso();
+			throw new ExceptionCerrarCajaConCompraEnCurso();
 		}
 		
 		cajaCerrada=true;
 	}
 	
 	
-	public void iniciarCompra() throws iniciarCompraConCajaCerrada, iniciarCompraConCompraEnCurso{
+	public void iniciarCompra() throws ExceptionIniciarCompraConCajaCerrada, ExceptionIniciarCompraConCompraEnCurso{
 		
 		if (this.cajaCerrada) {
-			throw new iniciarCompraConCajaCerrada();
+			throw new ExceptionIniciarCompraConCajaCerrada();
 		}		
 		
 		if (this.compraEnCurso) {
-			throw new iniciarCompraConCompraEnCurso();
+			throw new ExceptionIniciarCompraConCompraEnCurso();
 		}		
 		
 		

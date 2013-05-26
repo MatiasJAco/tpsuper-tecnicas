@@ -1,8 +1,8 @@
 
-public class cerrarCajaConCajaCerrada extends Exception {
+public class ExceptionCerrarCajaConCajaCerrada extends Exception {
 	private static final long serialVersionUID = 1L;
 
-	public cerrarCajaConCajaCerrada() {
+	public ExceptionCerrarCajaConCajaCerrada() {
 		super("No se puede cerrar la caja: La Caja YA Esta Cerrada");
 	}
 
