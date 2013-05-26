@@ -1,9 +1,16 @@
+package tp_supermarket.tests;
+
+import tp_supermarket.restriccion.*;
+import tp_supermarket.producto.*;
+import tp_supermarket.promocion.*;
+import tp_supermarket.fecha.*;
+import tp_supermarket.bonificacion.*;
+
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
 import org.junit.Test;
-
 
 public class TestPromociones {
 
@@ -207,5 +214,23 @@ public class TestPromociones {
 		assertEquals(totalEsperado, total, 0.0001);
 	}
 	
+	@Test
+	public void testPromoActivaPorFecha() {
+		RestriccionMarca rMArca = new RestriccionMarca("Pepsi");
+		ArrayList<Restriccion> restricciones= new ArrayList<Restriccion>();
+		restricciones.add(rMArca);
+		ArrayList<Restriccion> excepciones =new ArrayList<Restriccion>();
+		ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();				
+		Promocion miPromo =new Promocion(restricciones,excepciones,bonificaciones);
+		/*
+		 * Seteo de la fecha de vigencia de la promocion
+		 */
+		Fecha fechaI = new Fecha(26, 05, 2013);
+		Fecha fechaF = new Fecha(27, 05, 2013);
+		miPromo.setPeriodoValidezPromocion(fechaI, fechaF);
+		miPromo.verificarSiPromocionEstaActivaPorFecha();
+		//-----------------------------------
+		assertEquals(true, miPromo.isActivaPorFecha());
+	}	
 	
 }

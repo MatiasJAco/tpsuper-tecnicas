@@ -1,3 +1,6 @@
+package tp_supermarket.restriccion;
+
+import tp_supermarket.producto.Producto;
 
 public abstract class Restriccion {
 

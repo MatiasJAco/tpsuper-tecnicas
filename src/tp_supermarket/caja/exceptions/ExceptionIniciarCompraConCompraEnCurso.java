@@ -1,3 +1,5 @@
+package tp_supermarket.caja.exceptions;
+
 public class ExceptionIniciarCompraConCompraEnCurso extends Exception {
 
 	private static final long serialVersionUID = 1L;

@@ -1,5 +1,8 @@
-import java.util.ArrayList;
+package tp_supermarket.bonificacion;
 
+import java.util.ArrayList;
+import tp_supermarket.producto.*;
+import tp_supermarket.restriccion.*;
 
 public abstract class  Bonificacion {
 

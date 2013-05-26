@@ -1,3 +1,5 @@
+package tp_supermarket.producto;
+
 
 public class Producto {
 	
