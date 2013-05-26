@@ -7,4 +7,10 @@ public class RestriccionTipoProducto extends Restriccion{
 		return false;
 	}
 
+	@Override
+	public void reset() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
