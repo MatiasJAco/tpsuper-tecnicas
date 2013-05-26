@@ -15,7 +15,7 @@ public class TestPromociones {
 		ArrayList<Restriccion> excepciones =new ArrayList<Restriccion>();
 		ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();				
 		Promocion miPromo =new Promocion(restricciones,excepciones,bonificaciones);
-		Producto miProd = new Producto(1,"Pepsi",100);
+		Producto miProd = new Producto(1,"Pepsi",100,"Alimentos","Pepsi","");
 		ArrayList<Producto> misproducts = new ArrayList<Producto>();
 		misproducts.add(miProd);
 		for (int j=0;j<misproducts.size();j++){
@@ -37,7 +37,7 @@ public class TestPromociones {
 		ArrayList<Restriccion> excepciones =new ArrayList<Restriccion>();
 		ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();				
 		Promocion miPromo =new Promocion(restricciones,excepciones,bonificaciones);
-		Producto miProd = new Producto(1,"Pepsi",100);
+		Producto miProd = new Producto(1,"Pepsi",100,"Alimentos","Pepsi","");
 		ArrayList<Producto> misproducts = new ArrayList<Producto>();
 		misproducts.add(miProd);
 		misproducts.add(miProd);
@@ -63,8 +63,8 @@ public class TestPromociones {
 		ArrayList<Restriccion> excepciones =new ArrayList<Restriccion>();
 		ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();				
 		Promocion miPromo =new Promocion(restricciones,excepciones,bonificaciones);
-		Producto miProdPepsi = new Producto(1,"Pepsi",100);
-		Producto miProdFanta = new Producto(2,"Fanta",100);
+		Producto miProdPepsi = new Producto(1,"Pepsi",100,"Alimentos","Pepsi","");
+		Producto miProdFanta = new Producto(2,"Fanta",100,"Alimentos","Fanta","");
 		ArrayList<Producto> misproducts = new ArrayList<Producto>();
 		misproducts.add(miProdPepsi);
 		misproducts.add(miProdFanta);
@@ -89,7 +89,7 @@ public class TestPromociones {
 		ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();
 		bonificaciones.add(bDescuento);
 		Promocion miPromo =new Promocion(restricciones,excepciones,bonificaciones);
-		Producto miProd = new Producto(1,"Pepsi",100);
+		Producto miProd = new Producto(1,"Pepsi",100,"Alimentos","Pepsi","");
 		ArrayList<Producto> misproducts = new ArrayList<Producto>();
 		misproducts.add(miProd);
 		for (int j=0;j<misproducts.size();j++){
@@ -131,9 +131,9 @@ public class TestPromociones {
 		ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();
 		bonificaciones.add(bDescuento);
 		Promocion miPromo =new Promocion(restricciones,excepciones,bonificaciones);
-		Producto miProd1 = new Producto(1,"Vino Toro",100,"Vinoteca");
-		Producto miProd2 = new Producto(1,"Vino Toro Tetra",40,"Vinoteca");
-		Producto miProd3 = new Producto(1,"Chandon",500,"Vinoteca");
+		Producto miProd1 = new Producto(1,"Vino Toro",100,"Vinoteca","Vino Toro","");
+		Producto miProd2 = new Producto(1,"Vino Toro Tetra",40,"Vinoteca","Vino Toro","");
+		Producto miProd3 = new Producto(1,"Chandon",500,"Vinoteca","Chandon","");
 		ArrayList<Producto> misproducts = new ArrayList<Producto>();
 		misproducts.add(miProd1);
 		misproducts.add(miProd2);
@@ -174,9 +174,9 @@ public class TestPromociones {
 		excepciones.add(exc);
 		bonificaciones.add(bDescuento);
 		Promocion miPromo =new Promocion(restricciones,excepciones,bonificaciones);
-		Producto miProd1 = new Producto(1,"Vino Toro",100,"Vinoteca");
-		Producto miProd2 = new Producto(1,"Vino Toro Tetra",40,"Vinoteca");
-		Producto miProd3 = new Producto(1,"Chandon",500,"Vinoteca");
+		Producto miProd1 = new Producto(1,"Vino Toro",100,"Vinoteca","Vino Toro","");
+		Producto miProd2 = new Producto(1,"Vino Toro Tetra",40,"Vinoteca","Vino Toro","");
+		Producto miProd3 = new Producto(1,"Chandon",500,"Vinoteca","Chandon","");
 		ArrayList<Producto> misproducts = new ArrayList<Producto>();
 		misproducts.add(miProd1);
 		misproducts.add(miProd2);
@@ -187,7 +187,7 @@ public class TestPromociones {
 //		miPromo.checkProductos(misproducts);
 		float totalEsperado =0;
 		for (int i=0; i<misproducts.size();i++){
-			if (misproducts.get(i).getNombre() =="Chandon")
+			if (misproducts.get(i).getMarca() =="Chandon")
 				totalEsperado+=misproducts.get(i).getCosto();
 			else
 				totalEsperado+=(misproducts.get(i).getCosto()-((40 * misproducts.get(i).getCosto())/100));			

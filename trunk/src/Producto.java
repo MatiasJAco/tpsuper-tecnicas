@@ -23,6 +23,16 @@ public class Producto {
 		this.precio=costo;	
 		this.categoria=cat;
 	}
+	
+	public Producto(int id, String nombre, float costo,String cat,String Marca , String descripcion) {	
+		this.id=id;
+		this.nombre=nombre;
+		this.precio=costo;	
+		this.categoria=cat;
+		this.marca=Marca;
+		this.descripcion=descripcion;
+		
+	}
 
 
 	public int getId() {
