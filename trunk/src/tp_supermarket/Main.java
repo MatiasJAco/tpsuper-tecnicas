@@ -1,7 +1,15 @@
+package tp_supermarket;
+
 import java.util.ArrayList;
+import tp_supermarket.restriccion.*;
+import tp_supermarket.producto.*;
+import tp_supermarket.promocion.*;
+import tp_supermarket.bonificacion.*;
+import tp_supermarket.caja.Caja;
+import tp_supermarket.caja.exceptions.ExceptionIniciarCompraConCajaCerrada;
+import tp_supermarket.caja.exceptions.ExceptionIniciarCompraConCompraEnCurso;
 
-
-public class main {
+public class Main {
 
 	/**
 	 * @param args

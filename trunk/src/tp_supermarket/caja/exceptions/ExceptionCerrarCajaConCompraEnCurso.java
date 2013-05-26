@@ -1,3 +1,5 @@
+package tp_supermarket.caja.exceptions;
+
 
 public class ExceptionCerrarCajaConCompraEnCurso extends Exception {
 

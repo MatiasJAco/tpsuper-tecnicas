@@ -1,5 +1,14 @@
+package tp_supermarket.caja;
+
 import java.util.ArrayList;
 
+import tp_supermarket.caja.exceptions.ExceptionCerrarCajaConCajaCerrada;
+import tp_supermarket.caja.exceptions.ExceptionCerrarCajaConCompraEnCurso;
+import tp_supermarket.caja.exceptions.ExceptionIniciarCompraConCajaCerrada;
+import tp_supermarket.caja.exceptions.ExceptionIniciarCompraConCompraEnCurso;
+import tp_supermarket.compra.Compra;
+import tp_supermarket.producto.Producto;
+import tp_supermarket.promocion.Promocion;
 
 public class Caja {
 	

@@ -1,6 +1,12 @@
+package tp_supermarket.tests;
+
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import tp_supermarket.caja.Caja;
+import tp_supermarket.caja.exceptions.ExceptionCerrarCajaConCajaCerrada;
+import tp_supermarket.caja.exceptions.ExceptionCerrarCajaConCompraEnCurso;
 
 
 public class TestCaja {

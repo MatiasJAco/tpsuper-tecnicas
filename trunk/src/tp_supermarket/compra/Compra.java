@@ -1,5 +1,8 @@
-import java.util.ArrayList;
+package tp_supermarket.compra;
 
+import java.util.ArrayList;
+import tp_supermarket.producto.*;
+import tp_supermarket.promocion.*;
 
 public class Compra {
 
