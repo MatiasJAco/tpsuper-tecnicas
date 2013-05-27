@@ -17,14 +17,12 @@ public class ParserXml {
 		try {
 
 			File fXmlFile = new File("src/tp_supermarket/xml/ofertas.xml");
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
-					.newInstance();
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
 			doc.getDocumentElement().normalize();
 
-			System.out.println("Root element :"
-					+ doc.getDocumentElement().getNodeName());
+			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 
 			NodeList nList = doc.getElementsByTagName("oferta");
 
@@ -41,8 +39,7 @@ public class ParserXml {
 					Element eElement = (Element) nNode;
 
 					
-					System.out.println("Promo id : "
-							+ eElement.getAttribute("id"));
+					System.out.println("Promo id : " + eElement.getAttribute("id"));
 					
 					NodeList nLRestriccionNP = eElement.getElementsByTagName("RestriccionNombreProducto");
 					Element restriccionNP= (Element)nLRestriccionNP.item(0);
