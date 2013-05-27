@@ -6,7 +6,6 @@ public class Producto {
 	private int id;
 	private String nombre;
 	private float precio;
-	private String medioDePago;
 	private String categoria;
 	private String marca;
 	
@@ -17,7 +16,6 @@ public class Producto {
 		this.id=id;
 		this.nombre=nombre;
 		this.precio=costo;	
-		this.medioDePago="";
 	}
 	
 	public Producto(int id, String nombre, float costo,String cat) {	
@@ -25,7 +23,6 @@ public class Producto {
 		this.nombre=nombre;
 		this.precio=costo;	
 		this.categoria=cat;
-		this.medioDePago="";
 	}
 	
 	public Producto(int id, String nombre, float costo,String cat,String Marca , String descripcion) {	
@@ -35,7 +32,6 @@ public class Producto {
 		this.categoria=cat;
 		this.marca=Marca;
 		this.descripcion=descripcion;
-		this.medioDePago="";
 	}
 
 
@@ -91,14 +87,6 @@ public class Producto {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
-
-	public void setMedioDePago(String medioDePago) {		
-		this.medioDePago=medioDePago;
-	}
-	
-	public String getMedioDePago(){
-		return this.medioDePago;
 	}
 
 }

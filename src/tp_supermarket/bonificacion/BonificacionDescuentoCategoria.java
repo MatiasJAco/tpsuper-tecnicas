@@ -7,23 +7,13 @@ import tp_supermarket.restriccion.*;
 public class BonificacionDescuentoCategoria extends Bonificacion {
 
 	private final String categoria;
-	private final int cant;
 	private final float porcentaje;
 	private boolean aplicada;
 
-	public BonificacionDescuentoCategoria(String cat, int c, float p) {
-		// TODO Auto-generated constructor stub
+	public BonificacionDescuentoCategoria(String cat, float p) {
 		this.categoria = cat;
-		this.cant = c;
 		this.porcentaje = p;
 		this.aplicada = false;
-	}
-
-	public BonificacionDescuentoCategoria(String cat, float p) {
-		// TODO Auto-generated constructor stub
-		this.categoria = cat;
-		this.cant = 1;
-		this.porcentaje = p;
 	}
 
 	@Override
@@ -38,16 +28,14 @@ public class BonificacionDescuentoCategoria extends Bonificacion {
 					result = misproducts.get(i).getCosto();
 					float costo = result;
 					float descuento = ((costo * porcentaje) / 100) * -1;
-					Producto nuevoDescuento = new Producto(0, "Descuento de "
-							+ porcentaje + " % por " + categoria, descuento);
+					Producto nuevoDescuento = new Producto(0, porcentaje
+							+ " % en " + categoria + " prod: "
+							+ misproducts.get(i).getNombre(), descuento);
 					descuentos.add(nuevoDescuento);
 				}
-				;
 			}
-			;
 			aplicada = true;
 		}
-		;
 		return descuentos;
 	}
 

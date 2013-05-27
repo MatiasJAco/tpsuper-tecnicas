@@ -136,8 +136,10 @@ public class Caja {
 
 	//TODO: CONFIRMAR COMPRA
 	
-	public void terminarCompraActual()
+	public void terminarCompraActual(MedioDePago medioDePago)
 	{
+		
+		this.compraActual.setMedioDePago(medioDePago);		
 		this.compraActual.aplicarPromociones(this.promociones);
 		this.compraActual.generarFactura();
 		
@@ -145,10 +147,12 @@ public class Caja {
 		// CHEQUEAR SI ESTA OK EL CONCEPTO COMPRA, FACTURA, ETC.
 		this.compras.add(compraActual);
 		
+		
+		
 		this.compraEnCurso=false;
 		
 		
 	}
-
+	
 	
 }
