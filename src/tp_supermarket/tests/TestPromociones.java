@@ -9,6 +9,7 @@ import tp_supermarket.bonificacion.*;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.junit.Test;
 
@@ -225,8 +226,12 @@ public class TestPromociones {
 		/*
 		 * Seteo de la fecha de vigencia de la promocion
 		 */
-		Fecha fechaI = new Fecha(26, 05, 2013);
-		Fecha fechaF = new Fecha(27, 05, 2013);
+		Fecha fechaI = new Fecha();
+		Fecha fechaF = new Fecha();
+		fechaI.getFecha().set(Calendar.HOUR_OF_DAY, 00);
+		fechaI.getFecha().set(Calendar.MINUTE, 00);
+		fechaI.getFecha().set(Calendar.SECOND, 00);
+		fechaF.getFecha().add(Calendar.DAY_OF_MONTH, 2);
 		miPromo.setPeriodoValidezPromocion(fechaI, fechaF);
 		miPromo.verificarSiPromocionEstaActivaPorFecha();
 		//-----------------------------------
