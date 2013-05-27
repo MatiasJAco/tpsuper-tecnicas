@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<ofertas>
+	<oferta id="Promo1">
+		<RestriccionNombreProducto>
+			<Nombre>Coca cola 1,5 lts</Nombre>
+			<Cantidad>1</Cantidad>
+		</RestriccionNombreProducto>
+
+		<RestriccionMarca>
+
+			<Marca>Lays</Marca>
+			<Cantidad>2</Cantidad>
+
+		</RestriccionMarca>
+
+		<BonificacionMarca>
+			<Marca>Lays</Marca>
+			<Cantidad>1</Cantidad>
+			<Porcentaje>30</Porcentaje>
+		</BonificacionMarca>
+	</oferta>
+	<oferta id="Promo2">
+		<RestriccionNombreProducto>
+			<Nombre>Pepsi 1,5 lts</Nombre>
+			<Cantidad>2</Cantidad>
+		</RestriccionNombreProducto>
+
+		<RestriccionMarca>
+
+			<Marca>Doritos</Marca>
+			<Cantidad>3</Cantidad>
+
+		</RestriccionMarca>
+
+		<BonificacionMarca>
+			<Marca>Doritos</Marca>
+			<Cantidad>1</Cantidad>
+			<Porcentaje>25</Porcentaje>
+		</BonificacionMarca>
+	</oferta>
+	<oferta id="Promo3">
+		<RestriccionNombreProducto>
+			<Nombre>Fanta 1,5 lts</Nombre>
+			<Cantidad>5</Cantidad>
+		</RestriccionNombreProducto>
+
+		<RestriccionMarca>
+
+			<Marca>Palitos Peps</Marca>
+			<Cantidad>2</Cantidad>
+
+		</RestriccionMarca>
+
+		<BonificacionMarca>
+			<Marca>Palitos Peps de queso</Marca>
+			<Cantidad>1</Cantidad>
+			<Porcentaje>15</Porcentaje>
+		</BonificacionMarca>
+	</oferta>	
+</ofertas>
