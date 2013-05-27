@@ -1,17 +1,24 @@
 package tp_supermarket.tests;
 
-import tp_supermarket.restriccion.*;
-import tp_supermarket.producto.*;
-import tp_supermarket.promocion.*;
-import tp_supermarket.fecha.*;
-import tp_supermarket.bonificacion.*;
-
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import org.junit.Test;
+
+import tp_supermarket.bonificacion.Bonificacion;
+import tp_supermarket.bonificacion.BonificacionDescuentoCategoria;
+import tp_supermarket.bonificacion.BonificacionDescuentoMarca;
+import tp_supermarket.bonificacion.BonificacionDescuentoNombre;
+import tp_supermarket.fecha.Fecha;
+import tp_supermarket.producto.Producto;
+import tp_supermarket.promocion.Promocion;
+import tp_supermarket.restriccion.Restriccion;
+import tp_supermarket.restriccion.RestriccionCantidad;
+import tp_supermarket.restriccion.RestriccionCategoria;
+import tp_supermarket.restriccion.RestriccionMarca;
+import tp_supermarket.restriccion.RestriccionNombreProducto;
 
 public class TestPromociones {
 
@@ -236,6 +243,46 @@ public class TestPromociones {
 		miPromo.verificarSiPromocionEstaActivaPorFecha();
 		//-----------------------------------
 		assertEquals(true, miPromo.isActivaPorFecha());
-	}	
+	}
+	
+	@Test
+	public void testPromoNombreDescuento() {
+		RestriccionNombreProducto rNombre = new RestriccionNombreProducto("Pepsi");
+		BonificacionDescuentoNombre bDescuento = new BonificacionDescuentoNombre("Pepsi",1,50);
+		ArrayList<Restriccion> restricciones= new ArrayList<Restriccion>();
+		restricciones.add(rNombre);
+		
+		ArrayList<Restriccion> excepciones =new ArrayList<Restriccion>();
+		ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();
+		bonificaciones.add(bDescuento);
+		Promocion miPromo =new Promocion(restricciones,excepciones,bonificaciones);
+		Producto miProd = new Producto(1,"Pepsi",100,"Alimentos","","");
+		ArrayList<Producto> misproducts = new ArrayList<Producto>();
+		misproducts.add(miProd);
+		for (int j=0;j<misproducts.size();j++){
+			miPromo.checkProducto(misproducts.get(j));
+		}
+//		miPromo.checkProductos(misproducts);
+		float totalEsperado =0;
+		for (int i=0; i<misproducts.size();i++){
+			totalEsperado+=misproducts.get(i).getCosto();			
+		}
+		totalEsperado -= (50 * miProd.getCosto())/100;
+		if (miPromo.isActiva()){
+			ArrayList<Producto> misDescuentos = miPromo.aplicarBonificaciones(misproducts);
+			//Agregar descuentos
+			for (int i=0;i<misDescuentos.size();i++){
+				misproducts.add(misDescuentos.get(i));
+			}
+			
+		}
+		float total=0;
+		for (int i=0; i<misproducts.size();i++){
+			total+=misproducts.get(i).getCosto();			
+		}		
+		assertEquals(totalEsperado, total, 0.0001);
+	}
+	
+	
 	
 }
