@@ -1,15 +1,22 @@
 package tp_supermarket.compra;
 
 import java.util.ArrayList;
-import tp_supermarket.producto.*;
-import tp_supermarket.promocion.*;
+
+import tp_supermarket.producto.Producto;
+import tp_supermarket.promocion.Promocion;
 
 public class Compra {
 
+	private String medioDePago;
 	private final ArrayList<Producto> vectorProductos;
 	
 	public Compra() {	
 		vectorProductos = new ArrayList<Producto>();
+	}
+	
+	public Compra(String medP) {	
+		vectorProductos = new ArrayList<Producto>();
+		this.setMedioDePago(medP);
 	}
 	
 	public void agregarProducto(Producto unProducto) {
@@ -65,11 +72,21 @@ public class Compra {
 		for (int i=0;i<promociones.size();i++){
 //			promociones.get(i).checkProductos(this.vectorProductos);
 			for (int j=0;j<this.vectorProductos.size();j++){
+				this.vectorProductos.get(j).setMedioDePago(this.medioDePago);
 				promociones.get(i).checkProducto(this.vectorProductos.get(j));
 				
 			}
 		}
+		
 		return promociones;
+	}
+
+	public String getMedioDePago() {
+		return medioDePago;
+	}
+
+	public void setMedioDePago(String medioDePago) {
+		this.medioDePago = medioDePago;
 	}
 
 	
