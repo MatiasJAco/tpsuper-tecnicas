@@ -6,6 +6,7 @@ import java.util.Date;
 import tp_supermarket.producto.*;
 import tp_supermarket.fecha.*;
 import tp_supermarket.bonificacion.*;
+import tp_supermarket.caja.MedioDePago;
 import tp_supermarket.restriccion.*;
 
 public class Promocion {
@@ -13,6 +14,7 @@ public class Promocion {
 	private final ArrayList<Bonificacion> bonificaciones;
 	private final ArrayList<Restriccion> excepciones;
 	private final ArrayList<Restriccion> restricciones;
+	private ArrayList<MedioDePago> medioDePago;
 	private boolean activa;
 	private boolean promocionActivaPorFecha = true;
 	private int vecesActivada;
@@ -30,6 +32,8 @@ public class Promocion {
 		bonificaciones = new ArrayList<Bonificacion>();
 		activa = false;
 		vecesActivada = 0;
+		this.medioDePago=new ArrayList<MedioDePago>();
+		this.medioDePago.add(new MedioDePago("Efectivo",""));
 	}
 
 	public Promocion(ArrayList<Restriccion> r, ArrayList<Restriccion> e,
@@ -39,6 +43,8 @@ public class Promocion {
 		bonificaciones = b;
 		activa = false;
 		vecesActivada = 0;
+		this.medioDePago=new ArrayList<MedioDePago>();
+		this.medioDePago.add(new MedioDePago("Efectivo",""));
 	}
 
 	public Promocion(ArrayList<Restriccion> r, ArrayList<Bonificacion> b) {
@@ -47,7 +53,20 @@ public class Promocion {
 		bonificaciones = b;
 		activa = false;
 		vecesActivada = 0;
+		this.medioDePago=new ArrayList<MedioDePago>();
+		this.medioDePago.add(new MedioDePago("Efectivo",""));
 	}
+	
+	public Promocion(ArrayList<Restriccion> r, ArrayList<Restriccion> e, ArrayList<Bonificacion> b, String medio, String entidad) {
+		restricciones = r;
+		excepciones = e;
+		bonificaciones = b;
+		activa = false;
+		vecesActivada = 0;
+		this.medioDePago=new ArrayList<MedioDePago>();
+		this.medioDePago.add(new MedioDePago(medio,entidad));
+	}
+
 
 	public void checkProductos(ArrayList<Producto> p) {
 		if (!isActiva() && promocionActivaPorFecha) {
@@ -138,7 +157,6 @@ public class Promocion {
 		if (isActiva()) {
 			this.activa = false;
 		}
-		;
 		updateRestricciones(producto);
 		updateExcepciones(producto);
 		if (checkRestricciones() && !checkExcepciones()) {
@@ -167,6 +185,21 @@ public class Promocion {
 				this.promocionActivaPorFecha = false;
 			}
 		}
+	}
+	
+	public int getVecesActivada(){
+		return this.vecesActivada;
+	}
+	
+	public boolean validarMedioPago(MedioDePago medioDePago){
+		int i = 0;
+		while(i < this.medioDePago.size() && !this.medioDePago.get(i).equals(medioDePago)){
+			i++;			
+		}
+		if(i == this.medioDePago.size()){
+			return false;
+		}
+		return true;
 	}
 
 	private void resetRestricciones() {
