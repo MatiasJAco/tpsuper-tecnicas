@@ -39,5 +39,10 @@ public class MedioDePago {
 			return true;
 		return false;
 	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.medio+" "+this.entidadFinanciera;
+	}
 
 }
