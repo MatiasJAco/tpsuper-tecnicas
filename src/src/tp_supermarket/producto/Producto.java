@@ -88,5 +88,11 @@ public class Producto {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		String foo = String.format("%2d %2s %15f",this.id,this.nombre,this.precio);
+		return foo;
+	}
 }
