@@ -23,7 +23,7 @@ public class Caja {
 	
 	private final ArrayList<Compra> compras;
 	
-	private final ArrayList<Promocion> promociones;
+	private ArrayList<Promocion> promociones;
 	
 
 	public Caja(int numero) {
@@ -56,6 +56,10 @@ public class Caja {
 
 	public void setIdentificacionCaja(int identificacionCaja) {
 		this.identificacionCaja = identificacionCaja;
+	}
+	
+	public void setPromociones(ArrayList<Promocion> p) {
+		this.promociones = p;
 	}
 
 
@@ -139,7 +143,7 @@ public class Caja {
 	public void terminarCompraActual(MedioDePago medioDePago)
 	{
 		
-		this.compraActual.setMedioDePago(medioDePago);		
+		this.compraActual.setMedioDePago(medioDePago);	
 		this.compraActual.aplicarPromociones(this.promociones);
 		this.compraActual.generarFactura();
 		

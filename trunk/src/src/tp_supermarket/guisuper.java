@@ -94,47 +94,18 @@ public class guisuper {
 		frmSuperTecnicasGui.setIconImage(new ImageIcon("src/tp_supermarket/recursos/shop.png").getImage()); 
 		frmSuperTecnicasGui.getContentPane().setBackground(SystemColor.activeCaption);
 		frmSuperTecnicasGui.setTitle("Super Tecnicas");
-		frmSuperTecnicasGui.setBounds(100, 100, 753, 516);
+		frmSuperTecnicasGui.setBounds(100, 100, 753, 590);
 		frmSuperTecnicasGui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmSuperTecnicasGui.getContentPane().setLayout(null);
 		
+		final Controlador miControlador = new Controlador();
+		
+		
+		
+		
 		//Medio de pago
 		final MedioDePago med = new MedioDePago();
-		
-		//PRODUCTOS
-	     final Producto art1 = new Producto(1,"Galletas",100);
-	     final Producto art2 = new Producto(2,"Manteca",100);
-	     final Producto art3 = new Producto(3,"Carne Fresca",100);
-	     final Producto art4 = new Producto(4,"Coca cola 1lt",100);
-	     final Producto art5 = new Producto(5,"Mcallan 24 years",100);
-
-	     RestriccionMarca res1 = new RestriccionMarca("Coca cola 1lt", 1);
-	     RestriccionMarca res2 = new RestriccionMarca("Galletas", 2);
-	     BonificacionDescuentoMarca bon1 = new BonificacionDescuentoMarca("Galletas", 2, 30);
-				
-						
-	     ArrayList<Promocion> misPromociones = new ArrayList<Promocion>();	
-	     Promocion promo1 = new Promocion();
-	     promo1.addRestriccion(res1);		
-	     promo1.addRestriccion(res2);
-	     promo1.addBonificacion(bon1);
-	     misPromociones.add(promo1);
-
-			/*
-			 * Excepciones
-			 */
-	     ArrayList<Restriccion> restricciones = new ArrayList<Restriccion>();
-			ArrayList<Restriccion> excepciones = new ArrayList<Restriccion>();
-					ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();;
-
-			Promocion promo2 = new Promocion(restricciones, excepciones,
-					bonificaciones, "Visa", "Galicia");
-
-
-			misPromociones.add(promo2);
-	     
-	    //CREO CAJA 
-		final Caja cajaprincipal = new Caja(1234,misPromociones);
+	
 		
 		
 		//ABRO CAJA
@@ -142,9 +113,9 @@ public class guisuper {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				cajaprincipal.abrirCaja();
+				miControlador.abrirCaja();
 				
-				System.out.println("Caja: "+cajaprincipal.getIdentificacionCaja()+" ahora esta ABIERTA");
+				System.out.println("Caja: "+miControlador.getNombreCaja()+" ahora esta ABIERTA");
 				
 				System.out.println("Pulse Iniciar Compra para comenzar una nueva compra ");
 				
@@ -158,15 +129,7 @@ public class guisuper {
 		JButton btnNewButton_1 = new JButton("Iniciar Compra");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					cajaprincipal.iniciarCompra();
-				} catch (ExceptionIniciarCompraConCajaCerrada e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (ExceptionIniciarCompraConCompraEnCurso e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				miControlador.abrirCaja();
 				System.out.println("Nueva Compra en curso, seleccion los productos de la lista");
 				System.out.println("Doble click para agregar producto");
 			}
@@ -178,7 +141,7 @@ public class guisuper {
 		JButton btnFinalizarCompra = new JButton("Finalizar Compra");
 		btnFinalizarCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cajaprincipal.terminarCompraActual(med);
+				miControlador.terminarCompra();
 				  try
 		           {
 		               Clip clip = AudioSystem.getClip();
@@ -203,15 +166,15 @@ public class guisuper {
 		           }
 			}
 		});
-		btnFinalizarCompra.setBounds(598, 432, 123, 23);
+		btnFinalizarCompra.setBounds(595, 502, 123, 23);
 		frmSuperTecnicasGui.getContentPane().add(btnFinalizarCompra);
 		
 		JLabel lblSeleccionarMedioDe = new JLabel("Seleccionar Medio de Pago");
-		lblSeleccionarMedioDe.setBounds(346, 374, 159, 14);
+		lblSeleccionarMedioDe.setBounds(343, 483, 159, 14);
 		frmSuperTecnicasGui.getContentPane().add(lblSeleccionarMedioDe);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(346, 8, 375, 355);
+		scrollPane.setBounds(343, 125, 375, 355);
 		frmSuperTecnicasGui.getContentPane().add(scrollPane);
 		
 		JTextArea textArea = new JTextArea();
@@ -223,17 +186,17 @@ public class guisuper {
 		final DefaultListModel model = new DefaultListModel();
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 84, 159, 207);
+		scrollPane_1.setBounds(10, 138, 237, 207);
 		frmSuperTecnicasGui.getContentPane().add(scrollPane_1);
 		final JList list = new JList(model);
 		scrollPane_1.setViewportView(list);
 		
 		
+		for (int i=0; i<miControlador.listadoProductos().size();i++){
 		
-		model.addElement(art1);
-		model.addElement(art2);
-		model.addElement(art3);
-		model.addElement(art4);
+			model.addElement(miControlador.listadoProductos().get(i));
+			
+		}
 		
 		
 		MouseListener mouseListener = new MouseAdapter() {
@@ -243,7 +206,7 @@ public class guisuper {
 
 		           Producto selectedItem = (Producto) list.getSelectedValue();
 		           // add selectedItem to your second list.
-		           cajaprincipal.agregarProducto(selectedItem);
+		           miControlador.agregarProducto(selectedItem);
 		           
 		           
 		           try
@@ -263,21 +226,49 @@ public class guisuper {
 		         }
 		    }
 		};
-	
 		list.addMouseListener(mouseListener);
-		
 		
 		MedioDePago[] choices= {new MedioDePago("Efectivo",""),new MedioDePago("Visa","Galicia"),new MedioDePago("Vale Super","")};
 		
 		JComboBox comboBox = new JComboBox(choices);
-		comboBox.setBounds(346, 391, 140, 20);
+		comboBox.setBounds(344, 503, 140, 20);
 		frmSuperTecnicasGui.getContentPane().add(comboBox);
 		
+		JButton btnCerrarCaja = new JButton("Cerrar Caja");
+		btnCerrarCaja.setBounds(187, 11, 117, 23);
+		frmSuperTecnicasGui.getContentPane().add(btnCerrarCaja);
+		
+		JButton btnTotalVentas = new JButton("Total Ventas");
+		btnTotalVentas.setBounds(11, 437, 133, 23);
+		frmSuperTecnicasGui.getContentPane().add(btnTotalVentas);
+		
+		JButton btnTotalDescuentos = new JButton("Total Descuentos");
+		btnTotalDescuentos.setBounds(10, 468, 134, 23);
+		frmSuperTecnicasGui.getContentPane().add(btnTotalDescuentos);
+		
+		JButton btnTotalMedioPago = new JButton("Total Medio Pago");
+		btnTotalMedioPago.setBounds(10, 502, 134, 23);
+		frmSuperTecnicasGui.getContentPane().add(btnTotalMedioPago);
+		
 		JLabel lblImagen = new JLabel();
-		lblImagen.setBounds(49, 338, 146, 128);
+		lblImagen.setBounds(175, 412, 146, 128);
 		lblImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("recursos/invoice-icon.png")));
-
-		frmSuperTecnicasGui.getContentPane().add(lblImagen);
+		
+				frmSuperTecnicasGui.getContentPane().add(lblImagen);
+				
+				JLabel lblEstadisticasTotales = new JLabel("Estadisticas / Totales");
+				lblEstadisticasTotales.setBounds(10, 412, 134, 14);
+				frmSuperTecnicasGui.getContentPane().add(lblEstadisticasTotales);
+				
+				JButton btnActualizarPromociones = new JButton("Actualizar Promociones");
+				btnActualizarPromociones.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						miControlador.cargarPromocionesYBonificaciones();
+						System.out.println("Bonificaciones Cargados");
+					}
+				});
+				btnActualizarPromociones.setBounds(10, 78, 169, 23);
+				frmSuperTecnicasGui.getContentPane().add(btnActualizarPromociones);
 		
 		comboBox.addItemListener(new ItemListener(){
 	            @Override
@@ -289,6 +280,8 @@ public class guisuper {
 	                if (e.getStateChange() == ItemEvent.SELECTED)
 	                {
 	                	System.out.println("El Pago con "+item.toString() + " fue seleccionado.");
+	                	
+	                	miControlador.setMedioPago(item.getBanco(), item.getMedio());
 	                	
 	                	med.setBanco(item.getBanco());
 	                	med.setMedio(item.getMedio());
