@@ -32,10 +32,10 @@ public class BonificacionDescuentoMedioDePago extends Bonificacion {
 				}
 			}
 			aplicada = true;
+			nuevoDescuento = new Producto(0, "Descuento de "
+					+ porcentaje + " % con su medio de pago", total);
+			descuentos.add(nuevoDescuento);
 		}
-		nuevoDescuento = new Producto(0, "Descuento de "
-				+ porcentaje + " % con su medio de pago", total);
-		descuentos.add(nuevoDescuento);
 		return descuentos;
 	}
 
