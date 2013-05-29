@@ -32,6 +32,7 @@ import javax.swing.JTextField;
 import tp_supermarket.bonificacion.Bonificacion;
 import tp_supermarket.bonificacion.BonificacionDescuentoMarca;
 import tp_supermarket.caja.Caja;
+import tp_supermarket.caja.ExceptionAbrirCajaConCajaAbierta;
 import tp_supermarket.caja.MedioDePago;
 import tp_supermarket.caja.exceptions.ExceptionIniciarCompraConCajaCerrada;
 import tp_supermarket.caja.exceptions.ExceptionIniciarCompraConCompraEnCurso;
@@ -113,7 +114,12 @@ public class guisuper {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				miControlador.abrirCaja();
+				try {
+					miControlador.abrirCaja();
+				} catch (ExceptionAbrirCajaConCajaAbierta e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				System.out.println("Caja: "+miControlador.getNombreCaja()+" ahora esta ABIERTA");
 				
