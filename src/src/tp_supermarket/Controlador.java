@@ -83,8 +83,13 @@ public class Controlador {
 		 */
 		ArrayList<Restriccion> excepciones = new ArrayList<Restriccion>();
 
+		/*
+		 * Nueva promo
+		 */
+		ArrayList<MedioDePago> mDePagos = new ArrayList<MedioDePago>();
+		mDePagos.add(new MedioDePago("Visa","Galicia"));
 		Promocion promo1 = new Promocion(restricciones, excepciones,
-				bonificaciones, "Visa", "Galicia");
+				bonificaciones, mDePagos);
 
 		ArrayList<Promocion> misPromociones = new ArrayList<Promocion>();
 

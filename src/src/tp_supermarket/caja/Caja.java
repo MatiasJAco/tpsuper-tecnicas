@@ -11,20 +11,19 @@ import tp_supermarket.producto.Producto;
 import tp_supermarket.promocion.Promocion;
 
 public class Caja {
-	
+
 	private int identificacionCaja;
-	
+
 	// Abierta o cerrada
 	private boolean cajaCerrada;
-	
+
 	private boolean compraEnCurso;
-	
+
 	private Compra compraActual;
-	
+
 	private final ArrayList<Compra> compras;
-	
+
 	private ArrayList<Promocion> promociones;
-	
 
 	public Caja(int numero) {
 		// TODO Auto-generated constructor stub
@@ -45,118 +44,87 @@ public class Caja {
 		compras = new ArrayList<Compra>();
 		promociones = p;
 	}
-	
-
 
 	public int getIdentificacionCaja() {
 		return identificacionCaja;
 	}
 
-
-
 	public void setIdentificacionCaja(int identificacionCaja) {
 		this.identificacionCaja = identificacionCaja;
 	}
-	
+
 	public void setPromociones(ArrayList<Promocion> p) {
 		this.promociones = p;
 	}
-
-
 
 	public boolean isEstadoCaja() {
 		return cajaCerrada;
 	}
 
-
-
 	public void setEstadoCaja(boolean estadoCaja) {
 		this.cajaCerrada = estadoCaja;
 	}
-
-
 
 	public boolean isCompraEnCurso() {
 		return compraEnCurso;
 	}
 
-
-
 	public void setCompraEnCurso(boolean compraEnCurso) {
 		this.compraEnCurso = compraEnCurso;
 	}
-
-
 
 	public Compra getCompraActual() {
 		return compraActual;
 	}
 
-
-
 	public void setCompraActual(Compra compraActual) {
 		this.compraActual = compraActual;
 	}
-	
-	
+
 	public void abrirCaja() {
-		cajaCerrada=false;
+		cajaCerrada = false;
 	}
-	
-	public void cerrarCaja() throws ExceptionCerrarCajaConCompraEnCurso, ExceptionCerrarCajaConCajaCerrada {
+
+	public void cerrarCaja() throws ExceptionCerrarCajaConCompraEnCurso,
+			ExceptionCerrarCajaConCajaCerrada {
 		if (this.cajaCerrada) {
 			throw new ExceptionCerrarCajaConCajaCerrada();
-		}		
-		
+		}
+
 		if (this.compraEnCurso) {
 			throw new ExceptionCerrarCajaConCompraEnCurso();
 		}
-		
-		cajaCerrada=true;
+
+		cajaCerrada = true;
 	}
-	
-	
-	public void iniciarCompra() throws ExceptionIniciarCompraConCajaCerrada, ExceptionIniciarCompraConCompraEnCurso{
-		
+
+	public void iniciarCompra() throws ExceptionIniciarCompraConCajaCerrada,
+			ExceptionIniciarCompraConCompraEnCurso {
 		if (this.cajaCerrada) {
 			throw new ExceptionIniciarCompraConCajaCerrada();
-		}		
-		
+		}
 		if (this.compraEnCurso) {
 			throw new ExceptionIniciarCompraConCompraEnCurso();
-		}		
-		
-		
+		}
 		this.compraActual = new Compra();
-		this.compraEnCurso= true;
-		
+		this.compraEnCurso = true;
 	}
-	
-	
-	public void agregarProducto(Producto unProducto){
-		
+
+	public void agregarProducto(Producto unProducto) {
+
 		this.compraActual.agregarProducto(unProducto);
 	}
 
-	//TODO: CONFIRMAR COMPRA
-	
-	public void terminarCompraActual(MedioDePago medioDePago)
-	{
-		
-		this.compraActual.setMedioDePago(medioDePago);	
+	// TODO: CONFIRMAR COMPRA
+
+	public void terminarCompraActual(MedioDePago medioDePago) {
+		this.compraActual.setMedioDePago(medioDePago);
 		this.compraActual.aplicarPromociones(this.promociones);
 		this.compraActual.generarFactura();
-		
-		//TODO:GUARDAR FACTURA GENERADA PARA ESTADISTICAS
+		// TODO:GUARDAR FACTURA GENERADA PARA ESTADISTICAS
 		// CHEQUEAR SI ESTA OK EL CONCEPTO COMPRA, FACTURA, ETC.
 		this.compras.add(compraActual);
-		
-		
-		
-		this.compraEnCurso=false;
-		
-		
+		this.compraEnCurso = false;
 	}
-	
-	
+
 }

@@ -23,8 +23,7 @@ public class Promocion {
 	 * La promocion tiene una fecha de validez
 	 */
 
-	private Fecha fechaInicioValidez = null;
-	private Fecha fechaFinValidez = null;
+	private PeriodoValidez periodoValidez = null;
 
 	public Promocion() {
 		restricciones = new ArrayList<Restriccion>();
@@ -57,14 +56,13 @@ public class Promocion {
 		this.medioDePago.add(new MedioDePago("Efectivo",""));
 	}
 	
-	public Promocion(ArrayList<Restriccion> r, ArrayList<Restriccion> e, ArrayList<Bonificacion> b, String medio, String entidad) {
+	public Promocion(ArrayList<Restriccion> r, ArrayList<Restriccion> e, ArrayList<Bonificacion> b, ArrayList<MedioDePago> mDePagos) {
 		restricciones = r;
 		excepciones = e;
 		bonificaciones = b;
 		activa = false;
 		vecesActivada = 0;
-		this.medioDePago=new ArrayList<MedioDePago>();
-		this.medioDePago.add(new MedioDePago(medio,entidad));
+		this.medioDePago = mDePagos;
 	}
 
 
@@ -166,25 +164,15 @@ public class Promocion {
 		}
 	}
 
-	public void setPeriodoValidezPromocion(Fecha fechaI, Fecha fechaF) {
-		this.fechaInicioValidez = fechaI;
-		this.fechaFinValidez = fechaF;
-		this.verificarSiPromocionEstaActivaPorFecha();
+	public void setPeriodoValidezPromocion(PeriodoValidez pValidez) {
+		this.periodoValidez = pValidez;
 	}
 	
 	/*
 	 * Este metodo debe ser invocado siempre antes de intentar aplicar la promocion
 	 */
 	public void verificarSiPromocionEstaActivaPorFecha() {
-		if (this.fechaInicioValidez != null && this.fechaFinValidez != null) {
-			Date fechaActual = Calendar.getInstance().getTime();
-			if (fechaActual.after(this.fechaInicioValidez.getFecha().getTime())
-					&& fechaActual.before(this.fechaFinValidez.getFecha().getTime())) {
-				this.promocionActivaPorFecha = true;
-			} else {
-				this.promocionActivaPorFecha = false;
-			}
-		}
+		this.promocionActivaPorFecha = this.periodoValidez.cumplePeriodoValidez();
 	}
 	
 	public int getVecesActivada(){
@@ -200,6 +188,10 @@ public class Promocion {
 			return false;
 		}
 		return true;
+	}
+	
+	public void agregarMedioDePago(MedioDePago mDePago){
+		this.medioDePago.add(mDePago);
 	}
 
 	private void resetRestricciones() {
