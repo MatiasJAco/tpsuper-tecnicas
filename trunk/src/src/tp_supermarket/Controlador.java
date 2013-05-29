@@ -1,20 +1,27 @@
 package tp_supermarket;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import tp_supermarket.bonificacion.Bonificacion;
 import tp_supermarket.bonificacion.BonificacionDescuentoCategoria;
 import tp_supermarket.bonificacion.BonificacionDescuentoMarca;
 import tp_supermarket.bonificacion.BonificacionDescuentoMedioDePago;
+import tp_supermarket.bonificacion.BonificacionDescuentoNombre;
 import tp_supermarket.caja.Caja;
+import tp_supermarket.caja.ExceptionAbrirCajaConCajaAbierta;
 import tp_supermarket.caja.MedioDePago;
 import tp_supermarket.caja.exceptions.ExceptionIniciarCompraConCajaCerrada;
 import tp_supermarket.caja.exceptions.ExceptionIniciarCompraConCompraEnCurso;
+import tp_supermarket.fecha.PeriodoValidezDiasSemana;
+import tp_supermarket.fecha.PeriodoValidezEntreFechaYFecha;
 import tp_supermarket.producto.Producto;
 import tp_supermarket.promocion.Promocion;
 import tp_supermarket.restriccion.Restriccion;
+import tp_supermarket.restriccion.RestriccionCantidad;
 import tp_supermarket.restriccion.RestriccionCategoria;
 import tp_supermarket.restriccion.RestriccionMarca;
+import tp_supermarket.restriccion.RestriccionNombreProducto;
 
 public class Controlador {
 	
@@ -51,32 +58,39 @@ public class Controlador {
 	
 	public void cargarPromocionesYBonificaciones(){
 		/*
+		 * Restricciones DIA
+		 */
+		ArrayList<Integer> diasPromo = new ArrayList<Integer>();
+		diasPromo.add(Calendar.THURSDAY);
+		PeriodoValidezDiasSemana promodiaJueves = new PeriodoValidezDiasSemana(diasPromo);
+		
+		/*
 		 * Restricciones
 		 */
-		RestriccionMarca res1 = new RestriccionMarca("CocaCola", 2);
-		RestriccionCategoria res2 = new RestriccionCategoria("Alimentos", 2);
-		RestriccionCategoria res3 = new RestriccionCategoria("Bebidas", 2);
+		RestriccionNombreProducto res1 = new RestriccionNombreProducto("Coca cola 1lt", 2);
 		ArrayList<Restriccion> restricciones = new ArrayList<Restriccion>();
-		//restricciones.add(res1);
+		restricciones.add(res1);
 		//restricciones.add(res2);
 		//restricciones.add(res3);
+		
+		/*
+		 * Definicion de los medios de pagos para la promocion
+		 */
+		ArrayList<MedioDePago> mediosDePagosPromo = new ArrayList<MedioDePago>();
+		MedioDePago medioDePago1 = new MedioDePago("Visa", "Galicia");
+		mediosDePagosPromo.add(medioDePago1);
 
 		/*
 		 * Bonificaciones
 		 */
-		BonificacionDescuentoCategoria bon1 = new BonificacionDescuentoCategoria(
-				"Alimentos", 30);
-		BonificacionDescuentoCategoria bon2 = new BonificacionDescuentoCategoria(
-				"Bebidas", 20);
-		BonificacionDescuentoMarca bon3 = new BonificacionDescuentoMarca(
-				"CocaCola", 1, 15);
-		BonificacionDescuentoMedioDePago bon4 = new BonificacionDescuentoMedioDePago(
-				25);
+		BonificacionDescuentoNombre bon1 = new BonificacionDescuentoNombre("Coca cola 1lt", 1, 100);
+		BonificacionDescuentoMedioDePago bon2 = new BonificacionDescuentoMedioDePago(
+				10);
 		ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();
-		//bonificaciones.add(bon1);
-		//bonificaciones.add(bon2);
+		bonificaciones.add(bon1);
+		bonificaciones.add(bon2);
 		//bonificaciones.add(bon3);
-		bonificaciones.add(bon4);
+		//bonificaciones.add(bon4);
 
 		/*
 		 * Excepciones
@@ -86,22 +100,23 @@ public class Controlador {
 		/*
 		 * Nueva promo
 		 */
-		ArrayList<MedioDePago> mDePagos = new ArrayList<MedioDePago>();
-		mDePagos.add(new MedioDePago("Visa","Galicia"));
 		Promocion promo1 = new Promocion(restricciones, excepciones,
-				bonificaciones, mDePagos);
+				bonificaciones, mediosDePagosPromo);
+		promo1.setPeriodoValidezPromocion(promodiaJueves);
 
 		ArrayList<Promocion> misPromociones = new ArrayList<Promocion>();
-
-		
 		
 		misPromociones.add(promo1);
 		cajaprincipal.setPromociones(misPromociones);
 	}
 	
-	public void abrirCaja(){
+	public void abrirCaja() throws ExceptionAbrirCajaConCajaAbierta{
 		
+		try {
 		cajaprincipal.abrirCaja();
+		} catch (ExceptionAbrirCajaConCajaAbierta e) {
+			System.out.println("La caja ya esta abierta");
+		}
 		
 		
 	}
@@ -159,7 +174,9 @@ public class Controlador {
 			cajaprincipal.iniciarCompra();
 
 		} catch (ExceptionIniciarCompraConCajaCerrada e) {
+			System.out.println("No se puede iniciar una compra con la caja cerrada");
 		} catch (ExceptionIniciarCompraConCompraEnCurso e) {
+			System.out.print("Ya hay una compra en curso");
 		}
 		
 	}

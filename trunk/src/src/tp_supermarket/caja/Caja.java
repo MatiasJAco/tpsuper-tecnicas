@@ -81,7 +81,11 @@ public class Caja {
 		this.compraActual = compraActual;
 	}
 
-	public void abrirCaja() {
+	public void abrirCaja() throws ExceptionAbrirCajaConCajaAbierta {
+		
+		if (!this.cajaCerrada) {
+			throw new ExceptionAbrirCajaConCajaAbierta();
+		}
 		cajaCerrada = false;
 	}
 
