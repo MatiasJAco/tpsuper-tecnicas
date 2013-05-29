@@ -144,6 +144,14 @@ public class Controlador {
 		this.cajaprincipal.imprimirTotalMedioDePago();
 		
 	}
+	
+	public void getTotalSinDescuento(){
+		this.cajaprincipal.imprimirTotalSinDescuento();
+	}
+	
+	public void getTotalDescuentos(){
+		this.cajaprincipal.imprimirTotalDescuentos();
+	}
 
 	public void iniciarCompra() {
 		// TODO Auto-generated method stub

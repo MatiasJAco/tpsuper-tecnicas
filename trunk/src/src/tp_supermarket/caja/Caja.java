@@ -141,4 +141,30 @@ public class Caja {
 			System.out.println("");
 		}
 	}
+	
+	public void imprimirTotalSinDescuento(){
+		float totalsindescuento=0;
+		for (int i=0; i< this.compras.size(); i++){
+			totalsindescuento+=this.compras.get(i).getTotalSD();
+		}
+		System.out.print("Nro de compras: "+this.compras.size());
+		System.out.print(" ");
+		System.out.print("Total Ventas Sin Descuento: ");
+		System.out.print(totalsindescuento);
+		System.out.println("");
+	}
+	
+	public void imprimirTotalDescuentos(){
+		float totaldescuentos=0;
+		for (int i=0; i< this.compras.size(); i++){
+			totaldescuentos+=this.compras.get(i).getTotalDesc();
+		}
+		System.out.print("Nro de compras: "+this.compras.size());
+		System.out.print(" ");
+		System.out.print("Total Descuentos: ");
+		System.out.print(totaldescuentos);
+		System.out.println("");
+	}
+	
+	
 }

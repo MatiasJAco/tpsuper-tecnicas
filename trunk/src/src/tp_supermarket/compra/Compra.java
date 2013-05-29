@@ -14,6 +14,7 @@ public class Compra {
 	private final ArrayList<Producto> productosAplicanPromo;
 	private float totalSD;
 	private float totalCD;
+	private float totalDesc;
 	
 	
 	public Compra() {	
@@ -87,6 +88,7 @@ public class Compra {
 		
 		this.totalSD=totalSinDescuento;
 		this.totalCD=total;
+		this.totalDesc=(totalSinDescuento-total);
 		
 		System.out.println("TOTAL SIN DESCUENTO: $ " + totalSinDescuento);
 		System.out.println("TOTAL CON DESCUENTO: $ " + total);
@@ -147,6 +149,14 @@ public class Compra {
 
 	public void setTotalCD(float totalCD) {
 		this.totalCD = totalCD;
+	}
+
+	public float getTotalDesc() {
+		return totalDesc;
+	}
+
+	public void setTotalDesc(float totalDesc) {
+		this.totalDesc = totalDesc;
 	}
 	
 }
