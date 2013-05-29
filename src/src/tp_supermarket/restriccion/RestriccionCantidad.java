@@ -31,5 +31,9 @@ public class RestriccionCantidad extends Restriccion{
 		this.contabilizados=0;
 		
 	}
+	
+	public int getCantidad(){
+		return this.cantidad;
+	}
 
 }

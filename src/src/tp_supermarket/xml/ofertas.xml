@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ofertas>
-	<oferta id="Promo1">
+<promociones>
+	<promocion id="Promo1">
 		<RestriccionNombreProducto>
 			<Nombre>Coca cola 1,5 lts</Nombre>
 			<Cantidad>1</Cantidad>
@@ -18,8 +18,8 @@
 			<Cantidad>1</Cantidad>
 			<Porcentaje>30</Porcentaje>
 		</BonificacionMarca>
-	</oferta>
-	<oferta id="Promo2">
+	</promocion>
+	<promocion id="Promo2">
 		<RestriccionNombreProducto>
 			<Nombre>Pepsi 1,5 lts</Nombre>
 			<Cantidad>2</Cantidad>
@@ -37,8 +37,8 @@
 			<Cantidad>1</Cantidad>
 			<Porcentaje>25</Porcentaje>
 		</BonificacionMarca>
-	</oferta>
-	<oferta id="Promo3">
+	</promocion>
+	<promocion id="Promo3">
 		<RestriccionNombreProducto>
 			<Nombre>Fanta 1,5 lts</Nombre>
 			<Cantidad>5</Cantidad>
@@ -56,5 +56,5 @@
 			<Cantidad>1</Cantidad>
 			<Porcentaje>15</Porcentaje>
 		</BonificacionMarca>
-	</oferta>	
-</ofertas>
+	</promocion>	
+</promociones>

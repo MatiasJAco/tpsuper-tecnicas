@@ -220,4 +220,12 @@ public class Promocion {
 
 	}
 
+	public ArrayList<Restriccion> getRestricciones() {
+		return restricciones;
+	}
+
+	public ArrayList<Bonificacion> getBonificaciones() {
+		return bonificaciones;
+	}
+
 }
