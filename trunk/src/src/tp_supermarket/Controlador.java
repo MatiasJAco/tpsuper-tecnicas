@@ -102,12 +102,7 @@ public class Controlador {
 	public void abrirCaja(){
 		
 		cajaprincipal.abrirCaja();
-		try {
-			cajaprincipal.iniciarCompra();
-
-		} catch (ExceptionIniciarCompraConCajaCerrada e) {
-		} catch (ExceptionIniciarCompraConCompraEnCurso e) {
-		}
+		
 		
 	}
 	
@@ -120,8 +115,8 @@ public class Controlador {
 	}
 	
 	public void setMedioPago(String banco, String medio){
-		med.setBanco(banco);
-		med.setMedio(medio);
+		this.med = new MedioDePago(medio,banco);
+		
 	}
 	
 	public void terminarCompra(){
@@ -143,6 +138,22 @@ public class Controlador {
 	public int getNombreCaja(){
 		
 		return this.cajaprincipal.getIdentificacionCaja();
+	}
+	
+	public void getTotalMedioPagoPorCaja(){
+		this.cajaprincipal.imprimirTotalMedioDePago();
+		
+	}
+
+	public void iniciarCompra() {
+		// TODO Auto-generated method stub
+		try {
+			cajaprincipal.iniciarCompra();
+
+		} catch (ExceptionIniciarCompraConCajaCerrada e) {
+		} catch (ExceptionIniciarCompraConCompraEnCurso e) {
+		}
+		
 	}
 	
 }

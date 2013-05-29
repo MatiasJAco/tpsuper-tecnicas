@@ -12,14 +12,21 @@ public class Compra {
 	private MedioDePago medioDePago;
 	private final ArrayList<Producto> productos;
 	private final ArrayList<Producto> productosAplicanPromo;
+	private float totalSD;
+	private float totalCD;
+	
 	
 	public Compra() {	
+		this.totalSD=0;
+		this.totalCD=0;
 		productos = new ArrayList<Producto>();
 		productosAplicanPromo = new ArrayList<Producto>();
 		this.medioDePago=new MedioDePago("Efectivo","");
 	}
 	
 	public Compra(String medP, String entidad) {	
+		this.totalSD=0;
+		this.totalCD=0;
 		productos = new ArrayList<Producto>();
 		productosAplicanPromo = new ArrayList<Producto>();
 		this.medioDePago=new MedioDePago(medP,entidad);
@@ -78,6 +85,9 @@ public class Compra {
 			
 		}
 		
+		this.totalSD=totalSinDescuento;
+		this.totalCD=total;
+		
 		System.out.println("TOTAL SIN DESCUENTO: $ " + totalSinDescuento);
 		System.out.println("TOTAL CON DESCUENTO: $ " + total);
 		System.out.println("USTED AHORRO UN " + df.format(100-(total/totalSinDescuento)*100) + "% EN SU COMPRA");
@@ -121,6 +131,22 @@ public class Compra {
 
 	public void setMedioDePago(MedioDePago medioDePago) {
 		this.medioDePago = medioDePago;
+	}
+
+	public float getTotalSD() {
+		return totalSD;
+	}
+
+	public void setTotalSD(float totalSD) {
+		this.totalSD = totalSD;
+	}
+
+	public float getTotalCD() {
+		return totalCD;
+	}
+
+	public void setTotalCD(float totalCD) {
+		this.totalCD = totalCD;
 	}
 	
 }

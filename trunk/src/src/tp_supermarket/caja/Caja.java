@@ -127,4 +127,18 @@ public class Caja {
 		this.compraEnCurso = false;
 	}
 
+	
+	public void imprimirTotalMedioDePago(){
+		for (int i=0; i< this.compras.size(); i++){
+			System.out.print("Compra: "+i);
+			System.out.print("\t");
+			System.out.print(this.compras.get(i).getMedioDePago().getMedio());
+			System.out.print(" ");
+			System.out.print(this.compras.get(i).getMedioDePago().getBanco());
+			System.out.print("\t");
+			System.out.print("Total Sin Descuento: ");
+			System.out.print(this.compras.get(i).getTotalSD());
+			System.out.println("");
+		}
+	}
 }
