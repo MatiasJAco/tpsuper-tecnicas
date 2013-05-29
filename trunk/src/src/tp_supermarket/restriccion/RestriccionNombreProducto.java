@@ -59,4 +59,12 @@ public class RestriccionNombreProducto extends Restriccion{
 		
 	}
 
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public int getCantidad() {
+		return this.rCant.getCantidad();
+	}
+
 }

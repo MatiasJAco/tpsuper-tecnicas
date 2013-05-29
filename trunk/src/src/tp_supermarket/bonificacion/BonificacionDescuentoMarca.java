@@ -30,9 +30,8 @@ public class BonificacionDescuentoMarca extends Bonificacion {
 		ArrayList<Producto> descuentos = new ArrayList<Producto>();
 		float costo = buscarPrecio(marca, misproducts);
 		float descuento = ((costo * porcentaje) / 100) * -1;
-		Producto nuevoDescuento = new Producto(0, porcentaje
-				+ " % " + "a " + this.cant + " uni. de " + marca,
-				descuento * this.cant);
+		Producto nuevoDescuento = new Producto(0, porcentaje + " % " + "a "
+				+ this.cant + " uni. de " + marca, descuento * this.cant);
 		descuentos.add(nuevoDescuento);
 		return descuentos;
 	}
@@ -47,6 +46,18 @@ public class BonificacionDescuentoMarca extends Bonificacion {
 
 		}
 		return result;
+	}
+
+	public String getMarca() {
+		return this.marca;
+	}
+
+	public int getCantidad() {
+		return this.cant;
+	}
+
+	public float getPorcentajeDescuento() {
+		return this.porcentaje;
 	}
 
 }

@@ -58,5 +58,13 @@ public class RestriccionMarca extends Restriccion{
 		this.rCant.reset();
 		
 	}
+	
+	public String getMarca(){
+		return this.marca;
+	}
+	
+	public int getCantidad() {
+		return this.rCant.getCantidad();
+	}
 
 }

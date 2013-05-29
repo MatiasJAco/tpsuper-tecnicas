@@ -84,16 +84,16 @@ public class ParserXml {
 			RestriccionMarca restriccionM = (RestriccionMarca) promocion.getRestricciones().get(1);
 			System.out.println("RestriccionNombreProducto:");
 			System.out.println("Nombre: " + restriccionNP.getNombre());
-			System.out.println("Cantidad: " + restriccionNP.getrCant().getCantidad());
+			System.out.println("Cantidad: " + restriccionNP.getCantidad());
 
 			System.out.println("\nRestriccionMarca:");
 			System.out.println("Marca: " + restriccionM.getMarca());
-			System.out.println("Cantidad: " + restriccionM.getrCant().getCantidad());
+			System.out.println("Cantidad: " + restriccionM.getCantidad());
 			
 			System.out.println("\nBonificacionMarca:");
 			System.out.println("Marca: " + bonificacion.getMarca());
-			System.out.println("Cantidad: " + bonificacion.getCant());
-			System.out.println("Porcentaje: " + bonificacion.getPorcentaje());
+			System.out.println("Cantidad: " + bonificacion.getCantidad());
+			System.out.println("Porcentaje: " + bonificacion.getPorcentajeDescuento());
 		}
 	}
 }
