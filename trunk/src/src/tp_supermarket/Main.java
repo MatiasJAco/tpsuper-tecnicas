@@ -1,6 +1,8 @@
 package tp_supermarket;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+
 import tp_supermarket.restriccion.*;
 import tp_supermarket.producto.*;
 import tp_supermarket.promocion.*;
@@ -518,8 +520,13 @@ public class Main {
 		 */
 		ArrayList<Restriccion> excepciones = new ArrayList<Restriccion>();
 
+		/*
+		 * Nueva promo
+		 */
+		ArrayList<MedioDePago> mDePagos = new ArrayList<MedioDePago>();
+		mDePagos.add(new MedioDePago("Visa","Galicia"));
 		Promocion promo1 = new Promocion(restricciones, excepciones,
-				bonificaciones, "Visa", "Galicia");
+				bonificaciones, mDePagos);
 
 		ArrayList<Promocion> misPromociones = new ArrayList<Promocion>();
 		;

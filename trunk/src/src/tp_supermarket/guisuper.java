@@ -6,7 +6,6 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 import javax.swing.JButton;
-import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
@@ -14,45 +13,22 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.GridLayout;
 import java.io.File;
-import java.io.InputStream;
 import java.io.PrintStream;
-import java.net.URL;
-import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
-import javax.swing.JSplitPane;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-import javax.swing.JTextField;
 
-import tp_supermarket.bonificacion.Bonificacion;
-import tp_supermarket.bonificacion.BonificacionDescuentoMarca;
-import tp_supermarket.caja.Caja;
 import tp_supermarket.caja.MedioDePago;
 import tp_supermarket.caja.exceptions.ExceptionIniciarCompraConCajaCerrada;
 import tp_supermarket.caja.exceptions.ExceptionIniciarCompraConCompraEnCurso;
 import tp_supermarket.producto.Producto;
-import tp_supermarket.promocion.Promocion;
-import tp_supermarket.restriccion.Restriccion;
-import tp_supermarket.restriccion.RestriccionMarca;
-import javax.swing.DropMode;
 import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import javax.swing.JList;
-import javax.swing.JScrollBar;
 import java.awt.SystemColor;
-
-
-import tp_supermarket.restriccion.*;
-import tp_supermarket.producto.*;
-import tp_supermarket.promocion.*;
-import tp_supermarket.bonificacion.*;
-import java.awt.Toolkit;
-
 
 public class guisuper {
 
@@ -293,8 +269,7 @@ public class guisuper {
 	            }
 	        });
 		
-		 PrintStream standardOut = System.out;
-		 System.setOut(printStream);
+		System.setOut(printStream);
 	     System.setErr(printStream);
 	     System.out.println("Bienvenido USUARIO (Pulse Abrir caja para iniciar)");
 	
