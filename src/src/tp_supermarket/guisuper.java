@@ -239,10 +239,20 @@ public class guisuper {
 		frmSuperTecnicasGui.getContentPane().add(btnCerrarCaja);
 		
 		JButton btnTotalVentas = new JButton("Total Ventas");
+		btnTotalVentas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				miControlador.getTotalSinDescuento();
+			}
+		});
 		btnTotalVentas.setBounds(11, 437, 133, 23);
 		frmSuperTecnicasGui.getContentPane().add(btnTotalVentas);
 		
 		JButton btnTotalDescuentos = new JButton("Total Descuentos");
+		btnTotalDescuentos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				miControlador.getTotalDescuentos();
+			}
+		});
 		btnTotalDescuentos.setBounds(10, 468, 134, 23);
 		frmSuperTecnicasGui.getContentPane().add(btnTotalDescuentos);
 		
