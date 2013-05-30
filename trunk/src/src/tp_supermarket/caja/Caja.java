@@ -159,6 +159,7 @@ public class Caja {
 			
 		}
 		this.compraEnCurso = false;
+		this.resetPromociones();
 	}
 
 	//TODO:VER
@@ -245,6 +246,17 @@ public class Caja {
 		System.out.print(totaldescuentos);
 		System.out.println("");
 	}
+	
+	private void resetPromociones(){
+		for(Promocion promo : this.promociones){
+			promo.reset();
+		}
+	}
+
+	public ArrayList<Compra> getCompras() {
+		return compras;
+	}
+	
 	
 	
 }
