@@ -1,5 +1,6 @@
 package tp_supermarket;
 
+import java.awt.Font;
 import java.io.IOException;
 import java.io.OutputStream;
  
@@ -23,5 +24,6 @@ public class CustomOutputStream extends OutputStream {
         textArea.append(String.valueOf((char)b));
         // scrolls the text area to the end of data
         textArea.setCaretPosition(textArea.getDocument().getLength());
+        textArea.setFont(new Font("Courier New", Font.PLAIN, 12));
     }
 }

@@ -10,6 +10,11 @@ import tp_supermarket.bonificacion.BonificacionDescuentoMedioDePago;
 import tp_supermarket.bonificacion.BonificacionDescuentoNombre;
 import tp_supermarket.caja.Caja;
 import tp_supermarket.caja.ExceptionAbrirCajaConCajaAbierta;
+import tp_supermarket.caja.ExceptionActualizarPromosConCajaCerrada;
+import tp_supermarket.caja.ExceptionCajaCerrada;
+import tp_supermarket.caja.ExceptionCompraIniciada;
+import tp_supermarket.caja.ExceptionTerminarCompraConCajaCerrada;
+import tp_supermarket.caja.ExceptionTerminarCompraConCompraNoIniciada;
 import tp_supermarket.caja.MedioDePago;
 import tp_supermarket.caja.exceptions.ExceptionIniciarCompraConCajaCerrada;
 import tp_supermarket.caja.exceptions.ExceptionIniciarCompraConCompraEnCurso;
@@ -56,7 +61,8 @@ public class Controlador {
 		return this.listadoProductos;
 	}
 	
-	public void cargarPromocionesYBonificaciones(){
+	public void cargarPromocionesYBonificaciones() throws ExceptionActualizarPromosConCajaCerrada{
+		try {
 		/*
 		 * Restricciones DIA
 		 */
@@ -108,14 +114,23 @@ public class Controlador {
 		
 		misPromociones.add(promo1);
 		cajaprincipal.setPromociones(misPromociones);
+		
+		System.out.println("Promociones y Bonificaciones Actualizadas");
+		} catch (ExceptionActualizarPromosConCajaCerrada e) {
+			System.out.println("ERROR: No se puede actualizar: Caja CERRADA");
+		}
 	}
 	
 	public void abrirCaja() throws ExceptionAbrirCajaConCajaAbierta{
 		
 		try {
 		cajaprincipal.abrirCaja();
+		
+		System.out.println("Caja: "+cajaprincipal.getIdentificacionCaja()+" ahora esta ABIERTA");	
+		System.out.println("Pulse Iniciar Compra para comenzar una nueva compra ");
+		
 		} catch (ExceptionAbrirCajaConCajaAbierta e) {
-			System.out.println("La caja ya esta abierta");
+			System.out.println("ERROR: La caja ya esta abierta!");
 		}
 		
 		
@@ -134,18 +149,16 @@ public class Controlador {
 		
 	}
 	
-	public void terminarCompra(){
-		if (!cajaprincipal.isEstadoCaja()){
-		if (cajaprincipal.isCompraEnCurso()){
-		
+	public void terminarCompra() throws ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada{
+			
+		try {
 			cajaprincipal.terminarCompraActual(med);
+
+		} catch (ExceptionTerminarCompraConCajaCerrada e) {
+			System.out.println("ERROR:No se puede terminar compra: caja CERRADA");
+		} catch (ExceptionTerminarCompraConCompraNoIniciada e) {
+			System.out.println("ERROR:No hay una compra iniciada!");
 		}
-			
-		}
-		
-		//ERROR CAJA NO INICIADA O COMPRA NO INICIADA
-			
-			
 			
 		
 	}
@@ -156,27 +169,47 @@ public class Controlador {
 	}
 	
 	public void getTotalMedioPagoPorCaja(){
-		this.cajaprincipal.imprimirTotalMedioDePago();
+		try {
+			this.cajaprincipal.imprimirTotalMedioDePago();
+		} catch (ExceptionCajaCerrada e) {
+			System.out.println("ERROR:No se puede mostrar: caja CERRADA");
+		} catch (ExceptionCompraIniciada e) {
+			System.out.println("ERROR:No se puede mostrar: compra en curso");
+		}
 		
 	}
 	
 	public void getTotalSinDescuento(){
-		this.cajaprincipal.imprimirTotalSinDescuento();
+		try {
+			this.cajaprincipal.imprimirTotalSinDescuento();
+		} catch (ExceptionCajaCerrada e) {
+			System.out.println("ERROR:No se puede mostrar: caja CERRADA");
+		} catch (ExceptionCompraIniciada e) {
+			System.out.println("ERROR:No se puede mostrar: compra en curso");
+		}
 	}
 	
 	public void getTotalDescuentos(){
-		this.cajaprincipal.imprimirTotalDescuentos();
+		try {
+			this.cajaprincipal.imprimirTotalDescuentos();
+		} catch (ExceptionCajaCerrada e) {
+			System.out.println("ERROR:No se puede mostrar: caja CERRADA");
+		} catch (ExceptionCompraIniciada e) {
+			System.out.println("ERROR:No se puede mostrar: compra en curso");
+		}
 	}
 
 	public void iniciarCompra() {
 		// TODO Auto-generated method stub
 		try {
 			cajaprincipal.iniciarCompra();
+			System.out.println("Nueva Compra en curso, seleccione los productos de la lista");
+			System.out.println("Doble click para agregar producto");
 
 		} catch (ExceptionIniciarCompraConCajaCerrada e) {
-			System.out.println("No se puede iniciar una compra con la caja cerrada");
+			System.out.println("ERROR:No se puede iniciar compra: caja CERRADA");
 		} catch (ExceptionIniciarCompraConCompraEnCurso e) {
-			System.out.print("Ya hay una compra en curso");
+			System.out.println("ERROR:Ya hay una compra en curso!");
 		}
 		
 	}
