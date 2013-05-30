@@ -151,6 +151,7 @@ public class Caja {
 			medioDePago.setTotales(this.compraActual.getTotalSD());
 		}
 		this.compraEnCurso = false;
+		this.compraActual = null;
 	}
 
 	//TODO:VER
@@ -243,6 +244,10 @@ public class Caja {
 		System.out.print("Total Descuentos: ");
 		System.out.print(totaldescuentos);
 		System.out.println("");
+	}
+
+	public ArrayList<Compra> getCompras() {
+		return compras;
 	}
 	
 	
