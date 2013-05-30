@@ -265,7 +265,7 @@ public class TestPromociones {
 		 */
 		ArrayList<Integer> diasPromo = new ArrayList<Integer>();
 		diasPromo.add(Calendar.MONDAY);		
-		diasPromo.add(Calendar.WEDNESDAY);
+		diasPromo.add(Calendar.THURSDAY);
 		PeriodoValidez pValidez = new PeriodoValidezDiasSemana(diasPromo);
 		miPromo.setPeriodoValidezPromocion(pValidez);
 		miPromo.verificarSiPromocionEstaActivaPorFecha();

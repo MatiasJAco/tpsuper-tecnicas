@@ -23,7 +23,7 @@ public class BonificacionDescuentoCategoria extends Bonificacion {
 		float result = 0;
 		if (!aplicada) {
 			for (int i = 0; i < misproducts.size(); i++) {
-				if (misproducts.get(i).getCategoria() == categoria
+				if (misproducts.get(i).getCategoria().equals(categoria)
 						&& !isInExcepciones(excepciones, misproducts.get(i))) {
 					result = misproducts.get(i).getCosto();
 					float costo = result;

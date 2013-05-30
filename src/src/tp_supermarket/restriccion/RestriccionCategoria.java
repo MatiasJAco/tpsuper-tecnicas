@@ -30,7 +30,7 @@ public class RestriccionCategoria extends Restriccion {
 	@Override
 	public boolean cumpleRestriccion(Producto p) {
 		boolean result= activa;
-		if (p.getCategoria() == this.categoria && !activa){			
+		if (p.getCategoria().equals(this.categoria) && !activa){			
 				this.activa=checkCantidad(p);
 				result=activa;
 				

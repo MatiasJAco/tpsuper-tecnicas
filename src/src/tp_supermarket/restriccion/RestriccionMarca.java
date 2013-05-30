@@ -30,15 +30,11 @@ public class RestriccionMarca extends Restriccion{
 	@Override
 	public boolean cumpleRestriccion(Producto p) {
 		boolean result;
-		if (p.getMarca() == this.marca){
-				
-				
+		if (p.getMarca().equals(this.marca)){
 				this.activa=checkCantidad(p);
 				result = this.activa;
 		}else
 			result = false;
-		
-		
 		return result;
 	}
 

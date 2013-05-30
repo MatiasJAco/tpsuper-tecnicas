@@ -29,7 +29,7 @@ public class BonificacionDescuentoMarca extends Bonificacion {
 			ArrayList<Restriccion> excepciones) {
 		ArrayList<Producto> descuentos = new ArrayList<Producto>();
 		float costo = buscarPrecio(marca, misproducts);
-		float descuento = ((costo * porcentaje) / 100) * -1;
+		float descuento = ((costo * porcentaje) / 100.0f) * -1.0f;
 		Producto nuevoDescuento = new Producto(0, porcentaje + " % " + "a "
 				+ this.cant + " uni. de " + marca, descuento * this.cant);
 		descuentos.add(nuevoDescuento);
@@ -39,11 +39,10 @@ public class BonificacionDescuentoMarca extends Bonificacion {
 	private float buscarPrecio(String marca2, ArrayList<Producto> misproducts) {
 		float result = 0;
 		for (int i = 0; i < misproducts.size(); i++) {
-			if (misproducts.get(i).getMarca() == marca) {
+			if (misproducts.get(i).getMarca().equals(marca)) {
 				result = misproducts.get(i).getCosto();
 				i = misproducts.size();
 			}
-
 		}
 		return result;
 	}

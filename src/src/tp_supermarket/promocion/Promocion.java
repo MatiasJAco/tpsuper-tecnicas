@@ -142,6 +142,11 @@ public class Promocion {
 		this.excepciones.add(exc);
 
 	}
+	
+	public void reset(){
+		activa = false;
+		vecesActivada = 0;
+	}
 
 	public void addBonificacion(BonificacionDescuentoMarca bon) {
 		this.bonificaciones.add(bon);
