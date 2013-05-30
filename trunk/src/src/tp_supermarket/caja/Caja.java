@@ -186,7 +186,9 @@ public class Caja {
 		if (this.compraEnCurso) {
 			throw new ExceptionCompraIniciada();
 		}
-	
+		
+		System.out.println("");
+		System.out.println("TOTALES POR MEDIO DE PAGO");
 		
 		for (int i=0; i< this.medio.size(); i++){
 			System.out.print(this.medio.get(i).getMedio());
@@ -213,6 +215,8 @@ public class Caja {
 		for (int i=0; i< this.compras.size(); i++){
 			totalsindescuento+=this.compras.get(i).getTotalSD();
 		}
+		System.out.println("");
+		System.out.println("SUMA TOTAL DE VENTAS");
 		System.out.print("Nro de compras: "+this.compras.size());
 		System.out.print(" ");
 		System.out.print("Total Ventas Sin Descuento: ");
@@ -229,6 +233,8 @@ public class Caja {
 			throw new ExceptionCompraIniciada();
 		}
 		
+		System.out.println("");
+		System.out.println("SUMA TOTAL DE DESCUENTOS");
 		float totaldescuentos=0;
 		for (int i=0; i< this.compras.size(); i++){
 			totaldescuentos+=this.compras.get(i).getTotalDesc();

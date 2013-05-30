@@ -1,6 +1,7 @@
 package tp_supermarket;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -156,6 +157,7 @@ public class guisuper {
 		final JTextArea textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
 		textArea.setEditable(false);
+		textArea.setFont(new Font("Courier New", Font.PLAIN, 12));
 
 		PrintStream printStream = new PrintStream(new CustomOutputStream(
 				textArea));
@@ -167,7 +169,7 @@ public class guisuper {
 		frmSuperTecnicasGui.getContentPane().add(scrollPane_1);
 		final JList list = new JList(model);
 		scrollPane_1.setViewportView(list);
-
+		list.setFont(new Font("Courier New", Font.PLAIN, 12));
 		for (int i = 0; i < miControlador.listadoProductos().size(); i++) {
 
 			model.addElement(miControlador.listadoProductos().get(i));
@@ -209,7 +211,7 @@ public class guisuper {
 						exc.printStackTrace(System.out);
 					}
 
-					System.out.printf("%1$-5d %2$-20s %3$-10s $%4$-10.2f\n",
+					System.out.printf("%1$-5d %2$-20s %3$-20s $%4$-10.2f\n",
 							selectedItem.getId(), selectedItem.getNombre(),
 							selectedItem.getMarca(), selectedItem.getCosto());
 

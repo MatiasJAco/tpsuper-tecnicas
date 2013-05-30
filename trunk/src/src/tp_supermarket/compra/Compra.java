@@ -78,14 +78,7 @@ public class Compra {
 		//TODO: REEMPLAZAR POR UN ITERADOR
 		for (int i=0; i< this.productos.size(); i++){
 			// id me da codigo de barra o algo asi y me da el descuento
-			
-			System.out.print(this.productos.get(i).getId());
-			System.out.print("\t");
-			System.out.print(this.productos.get(i).getNombre());
-			System.out.print("\t\t");
-			System.out.print(this.productos.get(i).getCosto());
-			System.out.println();
-			
+			System.out.printf("%1$-2d %2$-30s $%3$-10.2f\n",this.productos.get(i).getId(),this.productos.get(i).getNombre(),this.productos.get(i).getCosto());
 			total+=this.productos.get(i).getCosto();
 			
 		}
@@ -97,7 +90,7 @@ public class Compra {
 		System.out.println("########################################");
 		
 		for (int i=0; i< this.productosAplicanPromo.size(); i++){
-
+			
 			System.out.print(this.productosAplicanPromo.get(i).getNombre());
 			System.out.print("\t\t");
 			System.out.print(this.productosAplicanPromo.get(i).getCosto());
