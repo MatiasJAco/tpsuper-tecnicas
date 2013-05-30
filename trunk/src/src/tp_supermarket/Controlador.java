@@ -1,5 +1,6 @@
 package tp_supermarket;
 
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -33,19 +34,23 @@ import tp_supermarket.xml.ParserXml;
 
 public class Controlador {
 	
-	private final String path = "src/tp_supermarket/xml/ofertas.xml";
+	private final String path = "src/tp_supermarket/xml/Ofertas.xml";
 
 	private ArrayList<Producto> listadoProductos;
 	private Caja cajaprincipal;
 	ArrayList<Promocion> misPromociones;
 	MedioDePago med;
+	ArrayList<MedioDePago> mediosDePagoDisponibles;
+	
 
 	public Controlador() {
 		this.listadoProductos = new ArrayList<Producto>();
 		this.misPromociones = new ArrayList<Promocion>();
+		this.mediosDePagoDisponibles = new ArrayList<MedioDePago>();
 		this.cajaprincipal = new Caja(5000, misPromociones);
 		this.med = new MedioDePago();
 		cargarBaseDeDatosProductos();
+		cargarMediosDePagoDisponibles();
 	}
 
 	public void cargarBaseDeDatosProductos() {
@@ -60,7 +65,7 @@ public class Controlador {
 		listadoProductos.add(new Producto(3, "Carne Fresca", 100, "Carnes",
 				"Las lilas", ""));
 		listadoProductos.add(new Producto(4, "Coca cola 1,5 lts", 100, "Bebidas",
-				"CocaCola", ""));
+				"Coca cola 1,5 lts", ""));
 		listadoProductos.add(new Producto(5, "Mcallan 24 years", 100,
 				"Bebidas", "Mcallan", ""));
 		listadoProductos.add(new Producto(6, "Lays", 15,
@@ -69,6 +74,20 @@ public class Controlador {
 
 	}
 
+	public void cargarMediosDePagoDisponibles(){
+		this.mediosDePagoDisponibles.add(new MedioDePago("Efectivo", ""));
+		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Galicia"));
+		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco Provincia"));
+		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco HSBC"));
+		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco Itau"));
+		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco Patagonia"));
+		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco ICBS"));
+		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco Piano"));
+		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco Nacio"));
+		this.mediosDePagoDisponibles.add(	new MedioDePago("Vale Super", ""));
+		
+	}
+	
 	public ArrayList<Producto> listadoProductos() {
 		return this.listadoProductos;
 	}
@@ -80,8 +99,7 @@ public class Controlador {
 			System.out.println("Promociones y Bonificaciones Actualizadas");
 		} catch (ExceptionActualizarPromosConCajaCerrada e) {
 			System.out.println("ERROR: No se puede actualizar: Caja CERRADA");
-		}	
-		
+		}		
 //		try {
 //			/*
 //			 * Restricciones DIA
@@ -255,4 +273,9 @@ public class Controlador {
 		return ret;
 	}
 
+	public ArrayList<MedioDePago> getMediosDePagosDisponibles(){
+	return this.mediosDePagoDisponibles;
+}
+	
+	
 }
