@@ -16,6 +16,8 @@ import tp_supermarket.caja.ExceptionCompraIniciada;
 import tp_supermarket.caja.ExceptionTerminarCompraConCajaCerrada;
 import tp_supermarket.caja.ExceptionTerminarCompraConCompraNoIniciada;
 import tp_supermarket.caja.MedioDePago;
+import tp_supermarket.caja.exceptions.ExceptionCerrarCajaConCajaCerrada;
+import tp_supermarket.caja.exceptions.ExceptionCerrarCajaConCompraEnCurso;
 import tp_supermarket.caja.exceptions.ExceptionIniciarCompraConCajaCerrada;
 import tp_supermarket.caja.exceptions.ExceptionIniciarCompraConCompraEnCurso;
 import tp_supermarket.fecha.PeriodoValidezDiasSemana;
@@ -212,6 +214,16 @@ public class Controlador {
 			System.out.println("ERROR:Ya hay una compra en curso!");
 		}
 		
+	}
+
+	public void cerrarCaja() {
+		try {
+			cajaprincipal.cerrarCaja();
+		} catch (ExceptionCerrarCajaConCompraEnCurso e) {
+			System.out.println("ERROR:No se puede cerrar: compra en curso");
+		} catch (ExceptionCerrarCajaConCajaCerrada e) {
+			System.out.println("ERROR:No se puede cerrar: caja CERRADA");
+		}
 	}
 	
 }

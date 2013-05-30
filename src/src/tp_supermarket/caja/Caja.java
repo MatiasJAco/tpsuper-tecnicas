@@ -22,6 +22,8 @@ public class Caja {
 	private Compra compraActual;
 
 	private final ArrayList<Compra> compras;
+	
+	private final ArrayList<MedioDePago> medio;
 
 	private ArrayList<Promocion> promociones;
 
@@ -33,6 +35,7 @@ public class Caja {
 		this.identificacionCaja = numero;
 		compras = new ArrayList<Compra>();
 		promociones = new ArrayList<Promocion>();
+		medio = new ArrayList<MedioDePago>();
 	}
 
 	public Caja(int numero, ArrayList<Promocion> p) {
@@ -43,6 +46,7 @@ public class Caja {
 		this.identificacionCaja = numero;
 		compras = new ArrayList<Compra>();
 		promociones = p;
+		medio = new ArrayList<MedioDePago>();
 	}
 
 	public int getIdentificacionCaja() {
@@ -139,9 +143,32 @@ public class Caja {
 		// TODO:GUARDAR FACTURA GENERADA PARA ESTADISTICAS
 		// CHEQUEAR SI ESTA OK EL CONCEPTO COMPRA, FACTURA, ETC.
 		this.compras.add(compraActual);
+		//TODO:VER
+		
+		
+		if(!this.searchMedioDePago(medioDePago,this.compraActual.getTotalSD())){
+			this.medio.add(medioDePago);
+			medioDePago.setTotales(this.compraActual.getTotalSD());
+		}
 		this.compraEnCurso = false;
 	}
 
+	//TODO:VER
+	public boolean searchMedioDePago(MedioDePago m,float t)
+	{
+
+	    for(int i = 0; i < this.medio.size(); i++)
+	    {
+	         if(this.medio.get(i).compareTo(m) == 1)
+	         {  
+	        	 float nuevoTotal=this.medio.get(i).getTotales()+t;
+	        	 this.medio.get(i).setTotales(nuevoTotal);
+	        	 return true;
+	         } 
+	        	 
+	    }
+	    return false;
+	}
 	
 	public void imprimirTotalMedioDePago() throws ExceptionCajaCerrada, ExceptionCompraIniciada{
 		
@@ -151,7 +178,20 @@ public class Caja {
 		if (this.compraEnCurso) {
 			throw new ExceptionCompraIniciada();
 		}
+	
 		
+		for (int i=0; i< this.medio.size(); i++){
+			System.out.print(this.medio.get(i).getMedio());
+			System.out.print(" ");
+			System.out.print(this.medio.get(i).getBanco());
+			System.out.print(" ");
+			System.out.print(this.medio.get(i).getTotales());
+			System.out.println("");
+		}
+			
+
+		
+			/*
 		for (int i=0; i< this.compras.size(); i++){
 			System.out.print("Compra: "+i);
 			System.out.print("\t");
@@ -162,7 +202,7 @@ public class Caja {
 			System.out.print("Total Sin Descuento: ");
 			System.out.print(this.compras.get(i).getTotalSD());
 			System.out.println("");
-		}
+		}*/
 	}
 	
 	public void imprimirTotalSinDescuento() throws ExceptionCajaCerrada, ExceptionCompraIniciada{
