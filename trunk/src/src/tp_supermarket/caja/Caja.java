@@ -53,7 +53,10 @@ public class Caja {
 		this.identificacionCaja = identificacionCaja;
 	}
 
-	public void setPromociones(ArrayList<Promocion> p) {
+	public void setPromociones(ArrayList<Promocion> p) throws ExceptionActualizarPromosConCajaCerrada {
+		if (this.cajaCerrada) {
+			throw new ExceptionActualizarPromosConCajaCerrada();
+		}
 		this.promociones = p;
 	}
 
@@ -121,7 +124,15 @@ public class Caja {
 
 	// TODO: CONFIRMAR COMPRA
 
-	public void terminarCompraActual(MedioDePago medioDePago) {
+	public void terminarCompraActual(MedioDePago medioDePago) throws ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada {
+		
+		if (this.cajaCerrada) {
+			throw new ExceptionTerminarCompraConCajaCerrada();
+		}
+		if (!this.compraEnCurso) {
+			throw new ExceptionTerminarCompraConCompraNoIniciada();
+		}
+		
 		this.compraActual.setMedioDePago(medioDePago);
 		this.compraActual.aplicarPromociones(this.promociones);
 		this.compraActual.generarFactura();
@@ -132,7 +143,15 @@ public class Caja {
 	}
 
 	
-	public void imprimirTotalMedioDePago(){
+	public void imprimirTotalMedioDePago() throws ExceptionCajaCerrada, ExceptionCompraIniciada{
+		
+		if (this.cajaCerrada) {
+			throw new ExceptionCajaCerrada();
+		}
+		if (this.compraEnCurso) {
+			throw new ExceptionCompraIniciada();
+		}
+		
 		for (int i=0; i< this.compras.size(); i++){
 			System.out.print("Compra: "+i);
 			System.out.print("\t");
@@ -146,7 +165,15 @@ public class Caja {
 		}
 	}
 	
-	public void imprimirTotalSinDescuento(){
+	public void imprimirTotalSinDescuento() throws ExceptionCajaCerrada, ExceptionCompraIniciada{
+		
+		if (this.cajaCerrada) {
+			throw new ExceptionCajaCerrada();
+		}
+		if (this.compraEnCurso) {
+			throw new ExceptionCompraIniciada();
+		}
+		
 		float totalsindescuento=0;
 		for (int i=0; i< this.compras.size(); i++){
 			totalsindescuento+=this.compras.get(i).getTotalSD();
@@ -158,7 +185,15 @@ public class Caja {
 		System.out.println("");
 	}
 	
-	public void imprimirTotalDescuentos(){
+	public void imprimirTotalDescuentos() throws ExceptionCajaCerrada, ExceptionCompraIniciada{
+		
+		if (this.cajaCerrada) {
+			throw new ExceptionCajaCerrada();
+		}
+		if (this.compraEnCurso) {
+			throw new ExceptionCompraIniciada();
+		}
+		
 		float totaldescuentos=0;
 		for (int i=0; i< this.compras.size(); i++){
 			totaldescuentos+=this.compras.get(i).getTotalDesc();
