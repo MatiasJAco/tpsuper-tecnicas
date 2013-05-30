@@ -23,7 +23,9 @@ public class Caja {
 
 	private final ArrayList<Compra> compras;
 	
-	private final ArrayList<MedioDePago> medio;
+	//private final ArrayList<MedioDePago> medio;
+	
+	private final ArrayList<MedioDePagoStats> medio;
 
 	private ArrayList<Promocion> promociones;
 
@@ -35,7 +37,7 @@ public class Caja {
 		this.identificacionCaja = numero;
 		compras = new ArrayList<Compra>();
 		promociones = new ArrayList<Promocion>();
-		medio = new ArrayList<MedioDePago>();
+		medio = new ArrayList<MedioDePagoStats>();
 	}
 
 	public Caja(int numero, ArrayList<Promocion> p) {
@@ -46,7 +48,7 @@ public class Caja {
 		this.identificacionCaja = numero;
 		compras = new ArrayList<Compra>();
 		promociones = p;
-		medio = new ArrayList<MedioDePago>();
+		medio = new ArrayList<MedioDePagoStats>();
 	}
 
 	public int getIdentificacionCaja() {
@@ -139,6 +141,8 @@ public class Caja {
 		
 		this.compraActual.setMedioDePago(medioDePago);
 		this.compraActual.aplicarPromociones(this.promociones);
+		this.compraActual.setNroCompra(this.compras.size());
+		this.compraActual.setCaja(this.identificacionCaja);
 		this.compraActual.generarFactura();
 		// TODO:GUARDAR FACTURA GENERADA PARA ESTADISTICAS
 		// CHEQUEAR SI ESTA OK EL CONCEPTO COMPRA, FACTURA, ETC.
@@ -147,11 +151,14 @@ public class Caja {
 		
 		
 		if(!this.searchMedioDePago(medioDePago,this.compraActual.getTotalSD())){
-			this.medio.add(medioDePago);
-			medioDePago.setTotales(this.compraActual.getTotalSD());
+			MedioDePagoStats nuevoMedioStats = new MedioDePagoStats();
+			nuevoMedioStats.setBanco(medioDePago.getBanco());
+			nuevoMedioStats.setMedio(medioDePago.getMedio());
+			nuevoMedioStats.setTotales(this.compraActual.getTotalSD());
+			this.medio.add(nuevoMedioStats);
+			
 		}
 		this.compraEnCurso = false;
-		this.compraActual = null;
 	}
 
 	//TODO:VER
@@ -191,19 +198,6 @@ public class Caja {
 		}
 			
 
-		
-			/*
-		for (int i=0; i< this.compras.size(); i++){
-			System.out.print("Compra: "+i);
-			System.out.print("\t");
-			System.out.print(this.compras.get(i).getMedioDePago().getMedio());
-			System.out.print(" ");
-			System.out.print(this.compras.get(i).getMedioDePago().getBanco());
-			System.out.print("\t");
-			System.out.print("Total Sin Descuento: ");
-			System.out.print(this.compras.get(i).getTotalSD());
-			System.out.println("");
-		}*/
 	}
 	
 	public void imprimirTotalSinDescuento() throws ExceptionCajaCerrada, ExceptionCompraIniciada{
@@ -245,10 +239,7 @@ public class Caja {
 		System.out.print(totaldescuentos);
 		System.out.println("");
 	}
-
-	public ArrayList<Compra> getCompras() {
-		return compras;
-	}
 	
 	
 }
+
