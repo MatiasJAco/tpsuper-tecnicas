@@ -266,24 +266,41 @@ public class guisuper {
 		comboBox.setBounds(344, 530, 140, 20);
 		frmSuperTecnicasGui.getContentPane().add(comboBox);
 		
+		
+		   final ActionListener taskCerrar= new ActionListener() {
+		       public void actionPerformed(ActionEvent evt) {
+		    	 textArea.setText("");
+		    	 System.out.println("Bienvenido USUARIO (Pulse Abrir Caja para iniciar)");
+		       }
+		   };
+		   final Timer timerClose = new Timer(2500, taskCerrar);
+		   
+		
 		JButton btnCerrarCaja = new JButton("Cerrar Caja");
 		btnCerrarCaja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
 				miControlador.cerrarCaja();
-
+				
+				System.out.println("Cerrando Caja...");
+				timerClose.start();
+				
 				
 				}
 			     catch (Exception exc)
 		           {
 		               exc.printStackTrace(System.out);
 		           }
-				//textArea.setText("");
-				//System.out.println("La caja fue cerrada.");
-				//System.out.println("Bienvenido USUARIO (Pulse Abrir Caja para iniciar)");
 				
+				
+				
+			
 			}
 		});
+		
+
+		
+		
 		btnCerrarCaja.setBounds(538, 20, 117, 23);
 		frmSuperTecnicasGui.getContentPane().add(btnCerrarCaja);
 		
