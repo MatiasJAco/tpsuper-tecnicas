@@ -91,8 +91,8 @@ public class Producto {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub System.out.printf("%1$-5d %2$-20s %3$-10s $%4$-10.2f\n",
-		String prod = String.format("%1$-2d %2$-20s $%3$-10.2f\n",this.id,this.nombre,this.precio);
-		return prod;
+		// TODO Auto-generated method stub
+		String foo = String.format("%2d %2s %15f",this.id,this.nombre,this.precio);
+		return foo;
 	}
 }

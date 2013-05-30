@@ -31,7 +31,7 @@ public class BonificacionDescuento extends Bonificacion {
 	private float buscarPrecio(String marca2, Vector<Producto> misproducts) {
 		float result=0 ;
 		for (int i=0;i<misproducts.size();i++){			
-			if(misproducts.get(i).getNombre()== marca){
+			if(misproducts.get(i).getNombre().equals(marca)){
 				result=misproducts.get(i).getCosto();
 				i=misproducts.size();
 			}

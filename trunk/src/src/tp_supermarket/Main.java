@@ -8,6 +8,9 @@ import tp_supermarket.producto.*;
 import tp_supermarket.promocion.*;
 import tp_supermarket.bonificacion.*;
 import tp_supermarket.caja.Caja;
+import tp_supermarket.caja.ExceptionAbrirCajaConCajaAbierta;
+import tp_supermarket.caja.ExceptionTerminarCompraConCajaCerrada;
+import tp_supermarket.caja.ExceptionTerminarCompraConCompraNoIniciada;
 import tp_supermarket.caja.MedioDePago;
 import tp_supermarket.caja.exceptions.ExceptionIniciarCompraConCajaCerrada;
 import tp_supermarket.caja.exceptions.ExceptionIniciarCompraConCompraEnCurso;
@@ -18,28 +21,28 @@ public class Main {
 	 * @param args
 	 * @throws ExceptionIniciarCompraConCompraEnCurso
 	 * @throws ExceptionIniciarCompraConCajaCerrada
+	 * @throws ExceptionTerminarCompraConCompraNoIniciada 
+	 * @throws ExceptionTerminarCompraConCajaCerrada 
+	 * @throws ExceptionAbrirCajaConCajaAbierta 
 	 * @throws exepcionCajaCerradaoCompraEnCurso
 	 */
 	public static void main(String[] args)
 			throws ExceptionIniciarCompraConCajaCerrada,
-			ExceptionIniciarCompraConCompraEnCurso {
+			ExceptionIniciarCompraConCompraEnCurso, ExceptionAbrirCajaConCajaAbierta, ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada {
 
 		System.out.println("-----------------------------------");
 		System.out.println("PRUEBA1");
 		System.out.println("-----------------------------------");
-		prueba1();
 		System.out.println("-----------------------------------");
 		System.out.println();
 		System.out.println("-----------------------------------");
 		System.out.println("PRUEBA2");
 		System.out.println("-----------------------------------");
-		prueba2();
 		System.out.println("-----------------------------------");
 		System.out.println();
 		System.out.println("-----------------------------------");
 		System.out.println("PRUEBA3");
 		System.out.println("-----------------------------------");
-		prueba3();
 		System.out.println("-----------------------------------");
 		System.out.println();
 		System.out.println("-----------------------------------");
@@ -62,7 +65,7 @@ public class Main {
 		System.out.println();
 	}
 
-	public static void prueba1() {
+	public static void prueba1() throws ExceptionAbrirCajaConCajaAbierta, ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada {
 
 		/*
 		 * Productos
@@ -137,7 +140,7 @@ public class Main {
 
 	}
 
-	public static void prueba2() {
+	public static void prueba2() throws ExceptionAbrirCajaConCajaAbierta, ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada {
 
 		/*
 		 * Productos
@@ -214,7 +217,7 @@ public class Main {
 
 	}
 
-	public static void prueba3() {
+	public static void prueba3() throws ExceptionAbrirCajaConCajaAbierta, ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada {
 
 		/*
 		 * Productos
@@ -293,7 +296,7 @@ public class Main {
 
 	}
 
-	public static void prueba4() {
+	public static void prueba4() throws ExceptionAbrirCajaConCajaAbierta, ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada {
 
 		/*
 		 * Productos
@@ -381,7 +384,7 @@ public class Main {
 
 	}
 
-	public static void prueba5() {
+	public static void prueba5() throws ExceptionAbrirCajaConCajaAbierta, ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada {
 
 		/*
 		 * Productos
@@ -465,7 +468,7 @@ public class Main {
 
 	}
 
-	public static void prueba6() {
+	public static void prueba6() throws ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada, ExceptionAbrirCajaConCajaAbierta {
 
 		/*
 		 * Productos
