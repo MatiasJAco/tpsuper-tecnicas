@@ -194,7 +194,7 @@ public class guisuper {
 		scrollPane.setBounds(343, 138, 375, 355);
 		frmSuperTecnicasGui.getContentPane().add(scrollPane);
 		
-		JTextArea textArea = new JTextArea();
+		final JTextArea textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
 		textArea.setEditable(false);
 		
@@ -267,6 +267,23 @@ public class guisuper {
 		frmSuperTecnicasGui.getContentPane().add(comboBox);
 		
 		JButton btnCerrarCaja = new JButton("Cerrar Caja");
+		btnCerrarCaja.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+				miControlador.cerrarCaja();
+
+				
+				}
+			     catch (Exception exc)
+		           {
+		               exc.printStackTrace(System.out);
+		           }
+				//textArea.setText("");
+				//System.out.println("La caja fue cerrada.");
+				//System.out.println("Bienvenido USUARIO (Pulse Abrir Caja para iniciar)");
+				
+			}
+		});
 		btnCerrarCaja.setBounds(538, 20, 117, 23);
 		frmSuperTecnicasGui.getContentPane().add(btnCerrarCaja);
 		

@@ -4,6 +4,8 @@ public class MedioDePago {
 
 	private String medio;
 	private String entidadFinanciera;
+	//TODO:VER
+	private float totales;
 	
 	public MedioDePago(){
 		this.medio = "Efectivo";
@@ -43,6 +45,24 @@ public class MedioDePago {
 	public String toString() {
 		// TODO Auto-generated method stub
 		return this.medio+" "+this.entidadFinanciera;
+	}
+	
+	//TODO:VER
+
+	public int compareTo(MedioDePago m) {
+		    if(this.entidadFinanciera.equals(m.getBanco())&&this.medio.equals(m.getMedio()))
+		       return 1;
+		    else
+		       return 0;
+	}
+
+	//TODO:VER
+	public float getTotales() {
+		return totales;
+	}
+
+	public void setTotales(float totales) {
+		this.totales = totales;
 	}
 
 }
