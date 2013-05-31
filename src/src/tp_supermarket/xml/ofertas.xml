@@ -56,5 +56,24 @@
 			<Cantidad>1</Cantidad>
 			<Porcentaje>15</Porcentaje>
 		</BonificacionMarca>
-	</promocion>	
+	</promocion>
+	<promocion id="Promo4">
+		<RestriccionNombreProducto>
+			<Nombre>Fanta 1,5 lt.</Nombre>
+			<Cantidad>2</Cantidad>
+		</RestriccionNombreProducto>
+
+		<RestriccionMarca>
+
+			<Marca>La Serenisima</Marca>
+			<Cantidad>3</Cantidad>
+
+		</RestriccionMarca>
+
+		<BonificacionMarca>
+			<Marca>La Serenisima</Marca>
+			<Cantidad>1</Cantidad>
+			<Porcentaje>25</Porcentaje>
+		</BonificacionMarca>
+	</promocion>
 </promociones>

@@ -84,7 +84,7 @@ public class guisuper {
 		frmSuperTecnicasGui.getContentPane().setBackground(
 				SystemColor.activeCaption);
 		frmSuperTecnicasGui.setTitle("Super Tecnicas");
-		frmSuperTecnicasGui.setBounds(100, 100, 753, 650);
+		frmSuperTecnicasGui.setBounds(100, 100, 753, 678);
 		frmSuperTecnicasGui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmSuperTecnicasGui.getContentPane().setLayout(null);
 
@@ -120,24 +120,24 @@ public class guisuper {
 
 				miControlador.terminarCompra();
 
-				try {
-					Clip clip = AudioSystem.getClip();
-
-					clip.open(AudioSystem.getAudioInputStream(new File(
-							"src/tp_supermarket/recursos/chaching.wav")));
-					clip.start();
-				} catch (Exception exc) {
-					exc.printStackTrace(System.out);
-				}
-				try {
-					Clip clipw = AudioSystem.getClip();
-
-					clipw.open(AudioSystem.getAudioInputStream(new File(
-							"src/tp_supermarket/recursos/printer.wav")));
-					clipw.start();
-				} catch (Exception exc) {
-					exc.printStackTrace(System.out);
-				}
+//				try {
+//					Clip clip = AudioSystem.getClip();
+//
+//					clip.open(AudioSystem.getAudioInputStream(new File(
+//							"src/tp_supermarket/recursos/chaching.wav")));
+//					clip.start();
+//				} catch (Exception exc) {
+//					exc.printStackTrace(System.out);
+//				}
+//				try {
+//					Clip clipw = AudioSystem.getClip();
+//
+//					clipw.open(AudioSystem.getAudioInputStream(new File(
+//							"src/tp_supermarket/recursos/printer.wav")));
+//					clipw.start();
+//				} catch (Exception exc) {
+//					exc.printStackTrace(System.out);
+//				}
 			}
 		});
 		btnFinalizarCompra.setBounds(578, 529, 140, 23);
@@ -201,15 +201,15 @@ public class guisuper {
 
 					lblImagen3.setVisible(true);
 					timer.start();
-					try {
-						Clip clip = AudioSystem.getClip();
-
-						clip.open(AudioSystem.getAudioInputStream(new File(
-								"src/tp_supermarket/recursos/beep.wav")));
-						clip.start();
-					} catch (Exception exc) {
-						exc.printStackTrace(System.out);
-					}
+//					try {
+//						Clip clip = AudioSystem.getClip();
+//
+//						clip.open(AudioSystem.getAudioInputStream(new File(
+//								"src/tp_supermarket/recursos/beep.wav")));
+//						clip.start();
+//					} catch (Exception exc) {
+//						exc.printStackTrace(System.out);
+//					}
 
 					System.out.printf("%1$-5d %2$-20s %3$-20s $%4$-10.2f\n",
 							selectedItem.getId(), selectedItem.getNombre(),
@@ -320,6 +320,15 @@ public class guisuper {
 				"recursos/supertecnicas.png")));
 		frmSuperTecnicasGui.getContentPane().add(lblImagen1);
 
+		JButton btnRankingVentas = new JButton("Ranking Ventas");
+		btnRankingVentas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				miControlador.verRanking();
+			}
+		});
+		btnRankingVentas.setBounds(10, 597, 135, 23);
+		frmSuperTecnicasGui.getContentPane().add(btnRankingVentas);
+		
 		comboBox.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {

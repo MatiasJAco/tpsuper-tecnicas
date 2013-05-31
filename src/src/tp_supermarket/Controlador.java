@@ -34,7 +34,7 @@ import tp_supermarket.xml.ParserXml;
 
 public class Controlador {
 	
-	private final String path = "src/tp_supermarket/xml/Ofertas.xml";
+	private final String path = "src/tp_supermarket/xml/ofertas.xml";
 
 	private ArrayList<Producto> listadoProductos;
 	private Caja cajaprincipal;
@@ -70,6 +70,62 @@ public class Controlador {
 				"Bebidas", "Mcallan", ""));
 		listadoProductos.add(new Producto(6, "Lays", 15,
 				"Alimentos", "Lays", ""));
+		listadoProductos.add(new Producto(997, "CocaCola", 100, "Bebidas","CocaCola", ""));
+		listadoProductos.add(new Producto(998,"Cepillos de Dientes",3,"Salud","Sin Marca", ""));
+		listadoProductos.add(new Producto(999,"Maceta",10,"Jardin","Sin Marca", ""));
+		listadoProductos.add(new Producto(1000,"Coca Cola 1,5 lt.",10,"Bebidas","Coca Cola", ""));
+		listadoProductos.add(new Producto(1001,"Fanta 1,5 lt.",11,"Bebidas","Coca Cola", ""));
+		listadoProductos.add(new Producto(1002,"Sprite 1,5 lt.",9,"Bebidas","Coca Cola", ""));
+		listadoProductos.add(new Producto(1003,"Agua Mineral Bon 1,5lt",8,"Bebidas","Coca Cola", ""));
+		listadoProductos.add(new Producto(1004,"Jugo Cepita 1,5 lt.",8,"Bebidas","Coca Cola", ""));
+		listadoProductos.add(new Producto(1005,"Pepsi Cola 1,5 lt.",9,"Bebidas","Pepsi", ""));
+		listadoProductos.add(new Producto(1006,"Seven Up 1,5 lt.",9,"Bebidas","Pepsi", ""));
+		listadoProductos.add(new Producto(1007,"Leche Sancor 1 lt.",6,"Lacteos","Sancor", ""));
+		listadoProductos.add(new Producto(1008,"Leche La Serenisima 1lt.",8,"Lacteos","La Serenisima", ""));
+		listadoProductos.add(new Producto(1009,"Manteca Sancor 200 gr ",8,"Lacteos","Sancor", ""));
+		listadoProductos.add(new Producto(1010,"Manteca La Serenisima 200 gr ",9,"Lacteos","La Serenisima", ""));
+		listadoProductos.add(new Producto(1011,"Queso Pategras 500 gr Sancor",25,"Lacteos","Sancor", ""));
+		listadoProductos.add(new Producto(1012,"Queso Azul 500 gr Sancor",20,"Lacteos","Sancor", ""));
+		listadoProductos.add(new Producto(1013,"Queso Blanco 500 gr Sancor",18,"Lacteos","Sancor", ""));
+		listadoProductos.add(new Producto(1014,"Queso Mozzarella 500 gr Sancor",30,"Lacteos","Sancor", ""));
+		listadoProductos.add(new Producto(1015,"Queso Cremoso 500 gr Sancor",30,"Lacteos","Sancor", ""));
+		listadoProductos.add(new Producto(1016,"Queso PortSalut 500 gr Sancor",28,"Lacteos","Sancor", ""));
+		listadoProductos.add(new Producto(1017,"Queso Pategras 500 gr La Serenisima",35,"Lacteos","La Serenisima", ""));
+		listadoProductos.add(new Producto(1018,"Queso Azul 500 gr La Serenisima",33,"Lacteos","La Serenisima", ""));
+		listadoProductos.add(new Producto(1019,"Queso Blanco 500 gr La Serenisima",30,"Lacteos","La Serenisima", ""));
+		listadoProductos.add(new Producto(1020,"Queso Mozzarella 500 gr La Serenisima",24,"Lacteos","La Serenisima", ""));
+		listadoProductos.add(new Producto(1021,"Queso Cremoso 500 gr La Serenisima",50,"Lacteos","La Serenisima", ""));
+		listadoProductos.add(new Producto(1022,"Queso PortSalut 500 gr La Serenisima",25,"Lacteos","La Serenisima", ""));
+		listadoProductos.add(new Producto(1023,"Banana 1kg",20,"Verduleria","Sin Marca", ""));
+		listadoProductos.add(new Producto(1024,"Manzana 1kg",30,"Verduleria","Sin Marca", ""));
+		listadoProductos.add(new Producto(1025,"Apio 1kg",10,"Verduleria","Sin Marca", ""));
+		listadoProductos.add(new Producto(1026,"Lechuga 1kg",12,"Verduleria","Sin Marca", ""));
+		listadoProductos.add(new Producto(1027,"Tomate 1kg",25,"Verduleria","Sin Marca", ""));
+		listadoProductos.add(new Producto(1028,"Dolares 100",870,"Varios","Sin Marca", ""));
+		listadoProductos.add(new Producto(1029,"Aceitunas Verdes",15,"Almacen","Nucete", ""));
+		listadoProductos.add(new Producto(1030,"Aceitunas Negras",12,"Almacen","Nucete", ""));
+		listadoProductos.add(new Producto(1031,"Lays Papas",15,"Almacen","Coca Cola", ""));
+		listadoProductos.add(new Producto(1032,"Palmitos",20,"Enlatados","La Banda", ""));
+		listadoProductos.add(new Producto(1033,"Sardinas",50,"Enlatados","La Campanola", ""));
+		listadoProductos.add(new Producto(1034,"Atun",40,"Enlatados","La Campanola", ""));
+		listadoProductos.add(new Producto(1035,"Arvejas",10,"Enlatados","La Campanola", ""));
+		listadoProductos.add(new Producto(1036,"Galletitas Oreo",10,"Panaderia","Arcor", ""));
+		listadoProductos.add(new Producto(1037,"Galletitas Pepitos",5,"Panaderia","Arcor", ""));
+		listadoProductos.add(new Producto(1038,"Pan 1 Kg",10,"Panaderia","Sin Marca", ""));
+		listadoProductos.add(new Producto(1039,"Aceite Girasol 1lt",25,"Almacen","Cocinero", ""));
+		listadoProductos.add(new Producto(1040,"Aceite Oliva 1 lt",40,"Almacen","Cocinero", ""));
+		listadoProductos.add(new Producto(1041,"Vino Tinto Don Alfredo",40,"Vineria","Don Alfredo", ""));
+		listadoProductos.add(new Producto(1042,"Vino Tinto EL Chaquenio",12,"Vineria","El Chaquenio", ""));
+		listadoProductos.add(new Producto(1043,"Vino Tinto Patero",10,"Vineria","Patero", ""));
+		listadoProductos.add(new Producto(1044,"Vino Tinto UXMAL",40,"Vineria","Uxmal", ""));
+		listadoProductos.add(new Producto(1045,"Vino Tinto Valmont",30,"Vineria","Chandon", ""));
+		listadoProductos.add(new Producto(1046,"Vino Tinto Trapiche",55,"Vineria","Trapiche", ""));
+		listadoProductos.add(new Producto(1047,"Vino Tinto Don Bosco",69,"Vineria","Don Bosco", ""));
+		listadoProductos.add(new Producto(1048,"Vino Tinto Trumpeter",80,"Vineria","Las Rosas", ""));
+		listadoProductos.add(new Producto(1049,"Vino Tinto Especial",100,"Vineria","Chandon", ""));
+		listadoProductos.add(new Producto(1050,"Espumante Chandon",85,"Vineria","Chandon", ""));
+		listadoProductos.add(new Producto(1051,"Espumante Generico",5,"Vineria","Generico", ""));
+
 
 
 	}
@@ -77,13 +133,15 @@ public class Controlador {
 	public void cargarMediosDePagoDisponibles(){
 		this.mediosDePagoDisponibles.add(new MedioDePago("Efectivo", ""));
 		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Galicia"));
+		this.mediosDePagoDisponibles.add(	new MedioDePago("Descuento Jubilados 10%", ""));
+		this.mediosDePagoDisponibles.add(	new MedioDePago("XYZ", ""));
 		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco Provincia"));
 		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco HSBC"));
 		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco Itau"));
 		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco Patagonia"));
 		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco ICBS"));
 		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco Piano"));
-		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco Nacio"));
+		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco Nacion"));
 		this.mediosDePagoDisponibles.add(	new MedioDePago("Vale Super", ""));
 		
 	}
@@ -94,6 +152,13 @@ public class Controlador {
 
 	public void cargarPromocionesYBonificaciones() {	
 		ArrayList<Promocion> misPromociones = ParserXml.getPromocionesFromXml(this.path);
+		for (int i=0; i<misPromociones.size();i++){
+		
+			BonificacionDescuentoMedioDePago bonJub = new BonificacionDescuentoMedioDePago(10);
+			misPromociones.get(i).addBonificaciones(bonJub);
+			misPromociones.get(i).agregarMedioDePago(new MedioDePago("Descuento Jubilados 10%",""));
+
+		}
 		try {
 			cajaprincipal.setPromociones(misPromociones);
 			System.out.println("Promociones y Bonificaciones Actualizadas");
@@ -243,6 +308,10 @@ public class Controlador {
 		}
 	}
 
+	public void mostrarRank() {
+	this.cajaprincipal.mostrarrankingProductos();
+	}
+
 	public void iniciarCompra() {
 		// TODO Auto-generated method stub
 		try {
@@ -274,8 +343,10 @@ public class Controlador {
 	}
 
 	public ArrayList<MedioDePago> getMediosDePagosDisponibles(){
-	return this.mediosDePagoDisponibles;
-}
-	
+		return this.mediosDePagoDisponibles;
+	}
+	public void verRanking(){
+		cajaprincipal.mostrarrankingProductos();
+	}
 	
 }

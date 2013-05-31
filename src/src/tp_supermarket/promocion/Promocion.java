@@ -153,6 +153,11 @@ public class Promocion {
 
 	}
 
+	public void addBonificaciones(Bonificacion bon) {
+		this.bonificaciones.add(bon);
+
+	}
+
 	public void checkProducto(Producto producto) {
 		if(!promocionActivaPorFecha){
 			return;			

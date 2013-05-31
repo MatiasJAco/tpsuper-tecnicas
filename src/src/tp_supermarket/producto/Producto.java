@@ -8,7 +8,8 @@ public class Producto {
 	private float precio;
 	private String categoria;
 	private String marca;
-	
+	private int cantidadVendidas;
+
 	private String descripcion;
 	
 	
@@ -94,5 +95,20 @@ public class Producto {
 		// TODO Auto-generated method stub System.out.printf("%1$-5d %2$-20s %3$-10s $%4$-10.2f\n",
 		String prod = String.format("%1$-2d %2$-20s $%3$-10.2f\n",this.id,this.nombre,this.precio);
 		return prod;
+	}
+
+	public int compareTo(Producto p) {
+		 if(this.nombre.equals(p.getNombre()))
+		       return 1;
+		    else
+		       return 0;
+	}
+
+	public int getCantidadVendidas() {
+		return cantidadVendidas;
+	}
+
+	public void setCantidadVendidas(int cantidadVendidas) {
+		this.cantidadVendidas = cantidadVendidas;
 	}
 }
