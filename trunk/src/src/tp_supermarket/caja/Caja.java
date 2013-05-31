@@ -1,6 +1,8 @@
 package tp_supermarket.caja;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import tp_supermarket.caja.exceptions.ExceptionCerrarCajaConCajaCerrada;
 import tp_supermarket.caja.exceptions.ExceptionCerrarCajaConCompraEnCurso;
@@ -23,9 +25,9 @@ public class Caja {
 
 	private final ArrayList<Compra> compras;
 	
-	//private final ArrayList<MedioDePago> medio;
-	
 	private final ArrayList<MedioDePagoStats> medio;
+
+	private final ArrayList<Producto> rank;
 
 	private ArrayList<Promocion> promociones;
 
@@ -38,6 +40,8 @@ public class Caja {
 		compras = new ArrayList<Compra>();
 		promociones = new ArrayList<Promocion>();
 		medio = new ArrayList<MedioDePagoStats>();
+		rank = new ArrayList<Producto>();
+
 	}
 
 	public Caja(int numero, ArrayList<Promocion> p) {
@@ -49,6 +53,8 @@ public class Caja {
 		compras = new ArrayList<Compra>();
 		promociones = p;
 		medio = new ArrayList<MedioDePagoStats>();
+		rank = new ArrayList<Producto>();
+
 	}
 
 	public int getIdentificacionCaja() {
@@ -158,6 +164,7 @@ public class Caja {
 			this.medio.add(nuevoMedioStats);
 			
 		}
+		this.rankingProductos();
 		this.compraEnCurso = false;
 		this.resetPromociones();
 	}
@@ -179,6 +186,59 @@ public class Caja {
 	    return false;
 	}
 	
+	public void mostrarrankingProductos(){
+		System.out.println("RANKING PRODUCTOS");
+		
+		// DE ultima comentar esto
+		Collections.sort(rank, new Comparator<Producto>(){
+		     public int compare(Producto o1, Producto o2){
+		         if(o1.getCantidadVendidas() == o2.getCantidadVendidas())
+		             return 0;
+		         return o1.getCantidadVendidas() > o2.getCantidadVendidas() ? -1 : 1;
+		     }
+		});
+	
+		for(int i = 0; i < this.rank.size(); i++)
+	    {
+			System.out.print("Nombre: ");
+			System.out.print(this.rank.get(i).getNombre());
+			System.out.print(" ");
+			System.out.print("Cant: ");
+			System.out.print(this.rank.get(i).getCantidadVendidas());
+			System.out.println("");
+			}
+			
+	    }
+	
+	
+	public void rankingProductos(){
+		for(int i = 0; i < this.compraActual.verProductos().size(); i++)
+	    {
+			if (!this.searchRank(this.compraActual.verProductos().get(i)) ){
+				Producto nuevoProdRank = new Producto(this.compraActual.verProductos().get(i).getId(),this.compraActual.verProductos().get(i).getNombre(),this.compraActual.verProductos().get(i).getCosto());
+				nuevoProdRank.setCantidadVendidas(1);
+				this.rank.add(nuevoProdRank);
+
+			}
+			
+	    }
+	}
+	
+	public boolean searchRank(Producto p)
+	{
+
+	    for(int i = 0; i < this.rank.size(); i++)
+	    {
+	         if(this.rank.get(i).compareTo(p) == 1)
+	         {  
+	        	 int cantidadVendidas = this.rank.get(i).getCantidadVendidas() +1;
+	        	 this.rank.get(i).setCantidadVendidas(cantidadVendidas);
+	        	 return true;
+	         } 
+	        	 
+	    }
+	    return false;
+	}
 	public void imprimirTotalMedioDePago() throws ExceptionCajaCerrada, ExceptionCompraIniciada{
 		
 		if (this.cajaCerrada) {

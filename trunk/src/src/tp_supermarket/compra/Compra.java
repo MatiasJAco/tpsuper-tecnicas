@@ -193,5 +193,8 @@ public class Compra {
 	public void setCaja(int caja) {
 		this.caja= caja;
 	}
-	
+
+	public ArrayList<Producto> verProductos(){
+		return this.productos;
+	}	
 }
