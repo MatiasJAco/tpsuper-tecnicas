@@ -18,7 +18,8 @@ public abstract class  Bonificacion {
 		boolean result = false;
 		for (int i=0;i<excepciones.size();i++){
 			if(excepciones.get(i).cumpleRestriccion(producto))
-				result=true;			
+				result=true;
+			excepciones.get(i).reset();
 		};		
 		return result;
 	}

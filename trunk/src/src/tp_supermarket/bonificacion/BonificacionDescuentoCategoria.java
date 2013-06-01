@@ -9,11 +9,20 @@ public class BonificacionDescuentoCategoria extends Bonificacion {
 	private final String categoria;
 	private final float porcentaje;
 	private boolean aplicada;
-
+	private RestriccionCantidad cant;
+	
 	public BonificacionDescuentoCategoria(String cat, float p) {
 		this.categoria = cat;
 		this.porcentaje = p;
 		this.aplicada = false;
+		this.cant = new RestriccionCantidad(10000000);
+	}
+
+	public BonificacionDescuentoCategoria(String cat, float p, int cant) {
+		this.categoria = cat;
+		this.porcentaje = p;
+		this.aplicada = false;
+		this.cant = new RestriccionCantidad(cant);
 	}
 
 	@Override
@@ -22,7 +31,7 @@ public class BonificacionDescuentoCategoria extends Bonificacion {
 		ArrayList<Producto> descuentos = new ArrayList<Producto>();
 		float result = 0;
 		if (!aplicada) {
-			for (int i = 0; i < misproducts.size(); i++) {
+			for (int i = 0, j = 0; i < misproducts.size() && j < this.cant.getCantidad(); i++) {
 				if (misproducts.get(i).getCategoria().equals(categoria)
 						&& !isInExcepciones(excepciones, misproducts.get(i))) {
 					result = misproducts.get(i).getCosto();
@@ -32,6 +41,7 @@ public class BonificacionDescuentoCategoria extends Bonificacion {
 							+ " % en " + categoria + " prod: "
 							+ misproducts.get(i).getNombre(), descuento);
 					descuentos.add(nuevoDescuento);
+					j++;
 				}
 			}
 			aplicada = true;

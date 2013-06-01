@@ -125,9 +125,6 @@ public class Controlador {
 		listadoProductos.add(new Producto(1049,"Vino Tinto Especial",100,"Vineria","Chandon", ""));
 		listadoProductos.add(new Producto(1050,"Espumante Chandon",85,"Vineria","Chandon", ""));
 		listadoProductos.add(new Producto(1051,"Espumante Generico",5,"Vineria","Generico", ""));
-
-
-
 	}
 
 	public void cargarMediosDePagoDisponibles(){

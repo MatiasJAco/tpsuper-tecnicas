@@ -90,7 +90,7 @@ public class Compra {
 		System.out.println("########################################");
 		
 		for (int i=0; i< this.productosAplicanPromo.size(); i++){
-			
+
 			System.out.print(this.productosAplicanPromo.get(i).getNombre());
 			System.out.print("\t\t");
 			System.out.print(this.productosAplicanPromo.get(i).getCosto());

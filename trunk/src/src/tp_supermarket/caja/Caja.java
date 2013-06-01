@@ -317,7 +317,5 @@ public class Caja {
 		return compras;
 	}
 	
-	
-	
 }
 
