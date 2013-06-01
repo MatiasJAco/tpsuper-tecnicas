@@ -56,7 +56,7 @@ public class RestriccionCategoria extends Restriccion {
 	@Override
 	public void reset() {
 //		this.activa=false;
-//		this.rCant.reset();		
+		this.rCant.reset();		
 	}
 
 }
