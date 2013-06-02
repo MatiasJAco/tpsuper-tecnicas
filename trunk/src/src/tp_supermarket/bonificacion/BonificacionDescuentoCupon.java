@@ -14,6 +14,7 @@ public class BonificacionDescuentoCupon extends Bonificacion {
 	private String marca;
 	private int numerador;
 	private int denominador;
+	private float valorCuponGenerado;
 	
 	 
 	
@@ -76,7 +77,14 @@ public class BonificacionDescuentoCupon extends Bonificacion {
 					+ porcentaje + " % con su cupon", total);
 			descuentos.add(nuevoDescuento);
 		}
+		this.valorCuponGenerado=(totalAcumulado- acum) ;
 		return descuentos;
+	}
+	
+	
+
+	public BonificacionDescuentoCupon getCuponGenerado() {
+		return new BonificacionDescuentoCupon(this.porcentaje,this.valorCuponGenerado,this.numerador,this.denominador,this.marca);	
 	}
 
 }
