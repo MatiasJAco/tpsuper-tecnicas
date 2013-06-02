@@ -31,7 +31,7 @@ public class BonificacionDescuentoCupon extends Bonificacion {
 		this.aplicada = false;
 		this.valor = v;
 		this.marca=m;
-		
+		this.valorCuponGenerado=0;
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class BonificacionDescuentoCupon extends Bonificacion {
 					if (misproducts.get(i).getMarca().equals(marca)){
 						cont++;
 						result = misproducts.get(i).getCosto();
-						if ( cont <= this.denominador){						
+						if ( cont < this.denominador){						
 						acum +=result;
 						}else
 							cont=0;
@@ -76,8 +76,9 @@ public class BonificacionDescuentoCupon extends Bonificacion {
 			nuevoDescuento = new Producto(0, "Descuento de "
 					+ porcentaje + " % con su cupon", total);
 			descuentos.add(nuevoDescuento);
+			this.valorCuponGenerado=(totalAcumulado- acum) ;
 		}
-		this.valorCuponGenerado=(totalAcumulado- acum) ;
+		
 		return descuentos;
 	}
 	
@@ -85,6 +86,10 @@ public class BonificacionDescuentoCupon extends Bonificacion {
 
 	public BonificacionDescuentoCupon getCuponGenerado() {
 		return new BonificacionDescuentoCupon(this.porcentaje,this.valorCuponGenerado,this.numerador,this.denominador,this.marca);	
+	}
+
+	public double getValor() {
+		return this.valor;	
 	}
 
 }
