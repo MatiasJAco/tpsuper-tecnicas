@@ -1,9 +1,13 @@
 package tp_supermarket.caja;
 
+import tp_supermarket.fecha.PeriodoValidez;
+
 public class MedioDePago {
 
 	private String medio;
 	private String entidadFinanciera;
+	private float descuento;
+	private PeriodoValidez pValidez;
 	//TODO:VER
 	private float totales;
 	
@@ -20,6 +24,15 @@ public class MedioDePago {
 
 	}
 
+	public MedioDePago(String medio, String entidadFinanciera, float descuento, PeriodoValidez periodo) {
+		//Medio es Efectivo, Tarjeta Credito, Tarjeta Debito, Vales, Voucher
+		this.setMedio(medio);
+		//Banco es Entidad Financiera: Columbia, HSBC....
+		this.setBanco(entidadFinanciera);
+		this.descuento = descuento;
+		this.pValidez = periodo;
+
+	}
 	public String getMedio() {
 		return medio;
 	}
@@ -65,4 +78,11 @@ public class MedioDePago {
 		this.totales = totales;
 	}
 
+	public float getDescuento() {
+		return descuento;
+	}
+
+	public PeriodoValidez getpValidez() {
+		return pValidez;
+	}
 }

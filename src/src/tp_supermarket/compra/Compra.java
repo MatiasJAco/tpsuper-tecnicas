@@ -21,39 +21,38 @@ public class Compra {
 	private int nroCompra;
 	private int caja;
 	private Date fechayhora;
-	
-	
-	public Compra() {	
-		this.totalSD=0;
-		this.totalCD=0;
+
+	public Compra() {
+		this.totalSD = 0;
+		this.totalCD = 0;
 		productos = new ArrayList<Producto>();
 		productosAplicanPromo = new ArrayList<Producto>();
-		this.medioDePago=new MedioDePago("Efectivo","");
+		this.medioDePago = new MedioDePago("Efectivo", "");
 	}
-	
-	public Compra(String medP, String entidad) {	
-		this.totalSD=0;
-		this.totalCD=0;
+
+	public Compra(String medP, String entidad) {
+		this.totalSD = 0;
+		this.totalCD = 0;
 		productos = new ArrayList<Producto>();
 		productosAplicanPromo = new ArrayList<Producto>();
-		this.medioDePago=new MedioDePago(medP,entidad);
+		this.medioDePago = new MedioDePago(medP, entidad);
 	}
-	
+
 	public void agregarProducto(Producto unProducto) {
 		this.productos.add(unProducto);
-		
+
 	}
-	
-	//TODO: CONFIRMAR COMPRA
+
+	// TODO: CONFIRMAR COMPRA
 	// CLASE FACTURA o COMPRA?
 
-	public void generarFactura(){
-		
+	public void generarFactura() {
+
 		float total = 0;
 		float totalSinDescuento = 0;
-        DecimalFormat df = new DecimalFormat("#.##");
-        
-        System.out.println("");
+		DecimalFormat df = new DecimalFormat("#.##");
+
+		System.out.println("");
 		System.out.println("#############SUPER TECNICAS#############");
 		System.out.println("");
 		System.out.println("Av. Paseo Colon 850 - 4Piso");
@@ -62,53 +61,57 @@ public class Compra {
 		System.out.println("");
 		System.out.println("Ticket No valido como factura");
 		System.out.println("");
-		
+
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-		this.fechayhora=date;
-		System.out.println("Caja nro:"+this.caja);
-		System.out.print("Fecha: "+dateFormat.format(this.fechayhora));
+		this.fechayhora = date;
+		System.out.println("Caja nro:" + this.caja);
+		System.out.print("Fecha: " + dateFormat.format(this.fechayhora));
 		System.out.println("");
-		System.out.println("Nro compra:"+this.nroCompra);
+		System.out.println("Nro compra:" + this.nroCompra);
 		System.out.println("");
 		System.out.println("########################################");
 		System.out.println("Productos Comprados");
 		System.out.println("########################################");
-		
-		//TODO: REEMPLAZAR POR UN ITERADOR
-		for (int i=0; i< this.productos.size(); i++){
+
+		// TODO: REEMPLAZAR POR UN ITERADOR
+		for (int i = 0; i < this.productos.size(); i++) {
 			// id me da codigo de barra o algo asi y me da el descuento
-			System.out.printf("%1$-2d %2$-30s $%3$-10.2f\n",this.productos.get(i).getId(),this.productos.get(i).getNombre(),this.productos.get(i).getCosto());
-			total+=this.productos.get(i).getCosto();
-			
+			System.out.printf("%1$-2d %2$-30s $%3$-10.2f\n", this.productos
+					.get(i).getId(), this.productos.get(i).getNombre(),
+					this.productos.get(i).getCosto());
+			total += this.productos.get(i).getCosto();
+
 		}
-			
+
 		totalSinDescuento = total;
 		System.out.println("");
 		System.out.println("########################################");
 		System.out.println("Descuentos aplicados");
 		System.out.println("########################################");
-		
-		for (int i=0; i< this.productosAplicanPromo.size(); i++){
+
+		for (int i = 0; i < this.productosAplicanPromo.size(); i++) {
 
 			System.out.print(this.productosAplicanPromo.get(i).getNombre());
 			System.out.print("\t\t");
 			System.out.print(this.productosAplicanPromo.get(i).getCosto());
 			System.out.println();
-			
-			total+=this.productosAplicanPromo.get(i).getCosto();
-			
+
+			total += this.productosAplicanPromo.get(i).getCosto();
+
 		}
-		
-		this.totalSD=totalSinDescuento;
-		this.totalCD=total;
-		this.totalDesc=(totalSinDescuento-total);
+
+		this.totalSD = totalSinDescuento;
+		this.totalCD = total;
+		this.totalDesc = (totalSinDescuento - total);
 		System.out.println("");
 		System.out.println("TOTAL SIN DESCUENTO: $ " + totalSinDescuento);
 		System.out.println("TOTAL CON DESCUENTO: $ " + total);
-		System.out.println("USTED AHORRO UN " + df.format(100-(total/totalSinDescuento)*100) + "% EN SU COMPRA");
-		
-		//System.out.println("TOTAL CON DESCUENTO ESPECIAL: $ "+total*(1-(25*Math.random())/100));
+		System.out.println("USTED AHORRO UN "
+				+ df.format(100 - (total / totalSinDescuento) * 100)
+				+ "% EN SU COMPRA");
+
+		// System.out.println("TOTAL CON DESCUENTO ESPECIAL: $ "+total*(1-(25*Math.random())/100));
 		System.out.println("");
 		System.out.println("########################################");
 		System.out.println("Orientacion Cons. B.A. 0800-222-9042");
@@ -116,33 +119,35 @@ public class Compra {
 		System.out.println("DGI");
 		System.out.println("########################################");
 		System.out.println("         Gracias Por su compra");
-		
+
 	}
 
 	public void aplicarPromociones(ArrayList<Promocion> promociones) {
-		promociones=validarPromociones(promociones);
-		for (int i=0;i<promociones.size();i++){
-			if(promociones.get(i).getVecesActivada()>0){
-				ArrayList<Producto> descuentos = promociones.get(i).aplicarBonificaciones(this.productos);
-				for (int j=0;j<descuentos.size();j++){
+		promociones = validarPromociones(promociones);
+		for (int i = 0; i < promociones.size(); i++) {
+			if (promociones.get(i).getVecesActivada() > 0) {
+				ArrayList<Producto> descuentos = promociones.get(i)
+						.aplicarBonificaciones(this.productos);
+				for (int j = 0; j < descuentos.size(); j++) {
 					this.productosAplicanPromo.add(descuentos.get(j));
-				}			
-			}			
+				}
+			}
 		}
-		
+
 	}
 
-	private ArrayList<Promocion> validarPromociones(ArrayList<Promocion> promociones) {
-		for (int i=0;i<promociones.size();i++){
-			if(promociones.get(i).validarMedioPago(this.medioDePago)){
-	//			promociones.get(i).checkProductos(this.vectorProductos);
-				for (int j=0;j<this.productos.size();j++){
-					//this.productos.get(j).setMedioDePago(this.medioDePago);
+	private ArrayList<Promocion> validarPromociones(
+			ArrayList<Promocion> promociones) {
+		for (int i = 0; i < promociones.size(); i++) {
+			if (promociones.get(i).validarMedioPago(this.medioDePago)) {
+				// promociones.get(i).checkProductos(this.vectorProductos);
+				for (int j = 0; j < this.productos.size(); j++) {
+					// this.productos.get(j).setMedioDePago(this.medioDePago);
 					promociones.get(i).checkProducto(this.productos.get(j));
 				}
 			}
 		}
-		
+
 		return promociones;
 	}
 
@@ -185,16 +190,37 @@ public class Compra {
 	public void setNroCompra(int nroCompra) {
 		this.nroCompra = nroCompra;
 	}
-	
+
 	public int getCaja() {
 		return caja;
 	}
 
 	public void setCaja(int caja) {
-		this.caja= caja;
+		this.caja = caja;
 	}
 
-	public ArrayList<Producto> verProductos(){
+	public ArrayList<Producto> verProductos() {
 		return this.productos;
-	}	
+	}
+
+	public void descuentoMedioDePago() {
+		if (this.medioDePago.getpValidez() != null && this.medioDePago.getpValidez().cumplePeriodoValidez()) {
+			float precioTotal = 0;
+			for (int i = 0; i < this.productos.size(); i++) {
+				precioTotal += this.productos.get(i).getCosto();
+			}
+			for (int i = 0; i < this.productosAplicanPromo.size(); i++) {
+				precioTotal += this.productosAplicanPromo.get(i).getCosto();
+			}
+
+			float precioConDescuento = (precioTotal
+					* this.medioDePago.getDescuento() / 100)
+					* -1;
+
+			Producto descuentoMDP = new Producto(0, "Descuento de "
+					+ this.medioDePago.getDescuento()
+					+ " % con su medio de pago", precioConDescuento);
+			this.productosAplicanPromo.add(descuentoMDP);
+		}
+	}
 }

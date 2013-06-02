@@ -149,6 +149,7 @@ public class Caja {
 		this.compraActual.aplicarPromociones(this.promociones);
 		this.compraActual.setNroCompra(this.compras.size());
 		this.compraActual.setCaja(this.identificacionCaja);
+		this.compraActual.descuentoMedioDePago();
 		this.compraActual.generarFactura();
 		// TODO:GUARDAR FACTURA GENERADA PARA ESTADISTICAS
 		// CHEQUEAR SI ESTA OK EL CONCEPTO COMPRA, FACTURA, ETC.
