@@ -66,11 +66,8 @@ public class mainTest {
 		 */
 		BonificacionDescuentoMarca bon1 = new BonificacionDescuentoMarca(
 				"CocaCola", 100);
-		BonificacionDescuentoMedioDePago bDescuento = new BonificacionDescuentoMedioDePago(
-				10);
 		ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();
 		bonificaciones.add(bon1);
-		bonificaciones.add(bDescuento);
 		/*
 		 * Excepciones
 		 */
@@ -91,7 +88,7 @@ public class mainTest {
 		 * Seteo de la fecha de vigencia de la promocion
 		 */
 		ArrayList<Integer> diasPromo = new ArrayList<Integer>();		
-		diasPromo.add(Calendar.THURSDAY);
+		diasPromo.add(Calendar.SUNDAY);
 		PeriodoValidez pValidez = new PeriodoValidezDiasSemana(diasPromo);
 		promo1.setPeriodoValidezPromocion(pValidez);
 
@@ -110,17 +107,17 @@ public class mainTest {
 			cajaprincipal.agregarProducto(art2);
 			cajaprincipal.agregarProducto(art3);
 
-			MedioDePago med = new MedioDePago("XYZ", "");
+			MedioDePago med = new MedioDePago("XYZ", "", 10, pValidez);
 			cajaprincipal.terminarCompraActual(med);
 
 		} catch (ExceptionIniciarCompraConCajaCerrada e) {
 		} catch (ExceptionIniciarCompraConCompraEnCurso e) {
 		}
 
-		assertEquals(12.4f,cajaprincipal.getCompras().get(0).getTotalCD(),0.00001);
+		assertEquals(12.6f,cajaprincipal.getCompras().get(0).getTotalCD(),0.00001);
 	}
 	
-	@Test
+//	@Test
 	public void test2() throws ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada, ExceptionAbrirCajaConCajaAbierta {
 
 		/*
