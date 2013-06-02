@@ -10,10 +10,10 @@ public class BonificacionDescuentoCupon extends Bonificacion {
 	private final float porcentaje;
 	private boolean aplicada;
 	private float valor;
-	private float ratio;
+	
 	private String marca;
-	private float numerador;
-	private float denominador;
+	private int numerador;
+	private int denominador;
 	
 	 
 	
@@ -23,7 +23,7 @@ public class BonificacionDescuentoCupon extends Bonificacion {
 		
 	}
 	
-	public BonificacionDescuentoCupon(float p, float v, float nu,float deno, String m) {
+	public BonificacionDescuentoCupon(float p, float v, int nu,int deno, String m) {
 		this.porcentaje = p;
 		this.numerador=nu;
 		this.denominador=deno;
@@ -40,31 +40,37 @@ public class BonificacionDescuentoCupon extends Bonificacion {
 		Producto nuevoDescuento;
 		float result = 0;
 		float total = 0;
-		
+		float totalAcumulado=0;
+		float acum=0;
+		int cont = 0;
 		if (!aplicada) {
 			for (int i = 0; i < misproducts.size(); i++) {
 				if (!isInExcepciones(excepciones, misproducts.get(i))) {
-					float totalAcumulado=0;
-					float acum=0;
-					int cont = 0;
+					
 					if (misproducts.get(i).getMarca().equals(marca)){
 						cont++;
 						result = misproducts.get(i).getCosto();
-						if (this.denominador <= (float)cont){						
+						if ( cont <= this.denominador){						
 						acum +=result;
 						}else
 							cont=0;
 						totalAcumulado+=result;					
-					float descuento;
-					float acumCompra = totalAcumulado/acum;
-					if (valor > acumCompra *0.2)
-						descuento =(float) ((acumCompra) *0.2);
-					else 
-						descuento = valor;
-					total += descuento;
+					
 					}
 				}
 			}
+			float descuento;
+			float acumCompra = acum  /totalAcumulado;
+			
+			if( acumCompra > (this.porcentaje/100)){
+				descuento= totalAcumulado*(this.porcentaje/100); 
+			}else{	
+				descuento=totalAcumulado - acum;						
+			}
+			if (descuento > valor){
+				descuento= valor;
+			};
+			total += (descuento * -1);
 			aplicada = true;
 			nuevoDescuento = new Producto(0, "Descuento de "
 					+ porcentaje + " % con su cupon", total);
