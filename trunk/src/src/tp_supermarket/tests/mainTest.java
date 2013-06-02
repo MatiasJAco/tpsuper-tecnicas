@@ -13,6 +13,7 @@ import tp_supermarket.bonificacion.Bonificacion;
 import tp_supermarket.bonificacion.BonificacionDescuentoCategoria;
 import tp_supermarket.bonificacion.BonificacionDescuentoMarca;
 import tp_supermarket.bonificacion.BonificacionDescuentoMedioDePago;
+import tp_supermarket.bonificacion.BonificacionDescuentoNombre;
 import tp_supermarket.caja.Caja;
 import tp_supermarket.caja.ExceptionAbrirCajaConCajaAbierta;
 import tp_supermarket.caja.ExceptionTerminarCompraConCajaCerrada;
@@ -39,7 +40,7 @@ public class mainTest {
 	}
 
 	@Test
-	public void test1() throws ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada, ExceptionAbrirCajaConCajaAbierta{
+	public void testDescuentoPor2por1YMedioDepago() throws ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada, ExceptionAbrirCajaConCajaAbierta{
 		/*
 		 * Productos
 		 */
@@ -115,7 +116,7 @@ public class mainTest {
 	}
 	
 	@Test
-	public void test2() throws ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada, ExceptionAbrirCajaConCajaAbierta {
+	public void testDescuento2daUnidadYMedioDePago() throws ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada, ExceptionAbrirCajaConCajaAbierta {
 
 		/*
 		 * Productos
@@ -210,7 +211,7 @@ public class mainTest {
 	}
 	
 	@Test
-	public void test3()  throws ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada, ExceptionAbrirCajaConCajaAbierta {
+	public void testDescuentoPorCategoriaConExcepcion()  throws ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada, ExceptionAbrirCajaConCajaAbierta {
 
 		/*
 		 * Productos
@@ -282,6 +283,102 @@ public class mainTest {
 		}
 
 	assertEquals(98f,cajaprincipal.getCompras().get(0).getTotalCD(),0.00001);
+	}
+	
+	@Test
+	public void testDescuentoJubilados() throws ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada, ExceptionAbrirCajaConCajaAbierta {
+
+		assertEquals(true,false);
+	}
+	
+	@Test
+	public void testRakingMasVendidos() throws ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada, ExceptionAbrirCajaConCajaAbierta {
+
+		Producto art1 = new Producto(1, "CocaCola", 10, "Bebidas",
+				"CocaCola", "");
+		Producto art2 = new Producto(2, "Maceta", 10, "Jardineria", "Maceta",
+				"");
+		Producto art3 = new Producto(1002,"Sprite 1,5 lt.",10,"Bebidas","CocaCola", "");
+
+		ArrayList<Producto> misproducts = new ArrayList<Producto>();
+		misproducts.add(art1);
+		misproducts.add(art2);
+		misproducts.add(art3);
+
+		/*
+		 * Restricciones
+		 */
+		RestriccionMarca res1 = new RestriccionMarca("CocaCola"); // ojo que tienen nombre de marca distinto
+		ArrayList<Restriccion> restricciones = new ArrayList<Restriccion>();
+		restricciones.add(res1);
+
+		/*
+		 * Bonificaciones
+		 */
+		BonificacionDescuentoNombre bon1 = new BonificacionDescuentoNombre(
+				"Sprite 1,5 lt.", 1,30);
+		ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();
+
+		bonificaciones.add(bon1);
+		
+		/*
+		 * Nueva promo
+		 */
+		Promocion promo1 = new Promocion(restricciones, bonificaciones);
+		
+		
+		ArrayList<Promocion> misPromociones = new ArrayList<Promocion>();
+		misPromociones.add(promo1);
+		// Caja cajaprincipal = new Caja(1234);
+
+		Caja cajaprincipal = new Caja(1234, misPromociones);
+		cajaprincipal.abrirCaja();
+		ArrayList<Producto> rankProductos = null;
+		try {
+			cajaprincipal.iniciarCompra();
+
+			cajaprincipal.agregarProducto(art1);
+			cajaprincipal.agregarProducto(art1);
+			cajaprincipal.agregarProducto(art1);
+			cajaprincipal.agregarProducto(art1);
+
+			cajaprincipal.agregarProducto(art2);
+			cajaprincipal.agregarProducto(art2);
+			cajaprincipal.agregarProducto(art2);
+			cajaprincipal.agregarProducto(art2);
+			cajaprincipal.agregarProducto(art2);
+
+			cajaprincipal.agregarProducto(art3);
+			cajaprincipal.agregarProducto(art3);
+			cajaprincipal.agregarProducto(art3);
+			cajaprincipal.agregarProducto(art3);
+			cajaprincipal.agregarProducto(art3);
+			cajaprincipal.agregarProducto(art3);
+
+			MedioDePago med = new MedioDePago("Efectivo", "");
+			cajaprincipal.terminarCompraActual(med);
+			rankProductos = cajaprincipal.getRankinProductos();
+			//verifico que esten bien los productos
+
+		} catch (ExceptionIniciarCompraConCajaCerrada e) {
+		} catch (ExceptionIniciarCompraConCompraEnCurso e) {
+		}
+		
+		Producto sprite = rankProductos.get(2);
+		Producto maceta = rankProductos.get(1);
+		Producto cocaCola = rankProductos.get(0);
+		
+		assertEquals(6,sprite.getCantidadVendidas());
+		assertEquals(5,maceta.getCantidadVendidas());
+		assertEquals(4,cocaCola.getCantidadVendidas());
+
+	}
+	
+	@Test
+	public void testCuponDescuento() {
+
+
+		assertEquals(true,false);
 	}
 }
 

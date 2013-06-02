@@ -317,6 +317,11 @@ public class Caja {
 	public ArrayList<Compra> getCompras() {
 		return compras;
 	}
+
+	public ArrayList<Producto> getRankinProductos() {
+		return this.rank;
+		
+	}
 	
 }
 
