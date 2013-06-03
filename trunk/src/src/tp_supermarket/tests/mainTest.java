@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import tp_supermarket.bonificacion.Bonificacion;
 import tp_supermarket.bonificacion.BonificacionDescuentoCategoria;
+import tp_supermarket.bonificacion.BonificacionDescuentoCupon;
 import tp_supermarket.bonificacion.BonificacionDescuentoMarca;
 import tp_supermarket.bonificacion.BonificacionDescuentoMedioDePago;
 import tp_supermarket.bonificacion.BonificacionDescuentoNombre;
@@ -86,7 +87,7 @@ public class mainTest {
 		 * Seteo de la fecha de vigencia de la promocion
 		 */
 		ArrayList<Integer> diasPromo = new ArrayList<Integer>();		
-		diasPromo.add(Calendar.SUNDAY);
+		diasPromo.add(Calendar.MONDAY);
 		PeriodoValidez pValidez = new PeriodoValidezDiasSemana(diasPromo);
 		promo1.setPeriodoValidezPromocion(pValidez);
 
@@ -168,7 +169,7 @@ public class mainTest {
 				bonificaciones,mDePagos);
 		
 		ArrayList<Integer> diasPromo = new ArrayList<Integer>();		
-		diasPromo.add(Calendar.SUNDAY);
+		diasPromo.add(Calendar.MONDAY);
 		PeriodoValidez pValidez = new PeriodoValidezDiasSemana(diasPromo);
 		promo1.setPeriodoValidezPromocion(pValidez);
 		
@@ -179,7 +180,7 @@ public class mainTest {
 		 * Seteo de la fecha de vigencia de la promocion
 		 */
 		ArrayList<Integer> diasPromo1 = new ArrayList<Integer>();		
-		diasPromo1.add(Calendar.SUNDAY);
+		diasPromo1.add(Calendar.MONDAY);
 		PeriodoValidez pValidez1 = new PeriodoValidezDiasSemana(diasPromo1);
 		promo1.setPeriodoValidezPromocion(pValidez1);
 
@@ -375,10 +376,79 @@ public class mainTest {
 	}
 	
 	@Test
-	public void testCuponDescuento() {
+	public void testPromoCuponDescuentoGeneracionDeCupon() {
+		float DESCUENTO_POR_MEDIO_DE_PAGO = 0.50f;
+		float valorDeCuponEsperado = 0;
+		float aux;
+		/*
+		 * Definicion de los medios de pagos para la promocion
+		 */
+		ArrayList<MedioDePago> mediosDePagosPromo = new ArrayList<MedioDePago>();
+		MedioDePago medioDePago1 = new MedioDePago("Cupon", "Super");
+		mediosDePagosPromo.add(medioDePago1);
+		
+		/*
+		 * Bonificacion por medio de pago
+		 */
+		ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();
+		BonificacionDescuentoCupon bDescuento = new BonificacionDescuentoCupon(20,10,1,2,"Coca Cola");
+		bonificaciones.add(bDescuento);
+		/*
+		 * Restricciones de la promo
+		 */
+		ArrayList<Restriccion> restricciones = new ArrayList<Restriccion>();
+		/*
+		 * Excepciones de la promo
+		 */
+		ArrayList<Restriccion> excepciones = new ArrayList<Restriccion>();
+		/*
+		 * Nueva promo
+		 */
+		Promocion miPromo = new Promocion(restricciones, excepciones,
+				bonificaciones, mediosDePagosPromo);
+		/*
+		 * Lista de productos
+		 */
+		Producto miProd1 = new Producto(1, "Coca Cola", 1, "Gaseosas",
+				"Coca Cola", "");
+		ArrayList<Producto> misproducts = new ArrayList<Producto>();
+		misproducts.add(miProd1);
+		misproducts.add(miProd1);
+		misproducts.add(miProd1);
+		misproducts.add(miProd1);
+		misproducts.add(miProd1);
+		misproducts.add(miProd1);
+		misproducts.add(miProd1);
+		misproducts.add(miProd1);
+		misproducts.add(miProd1);
+		misproducts.add(miProd1);
+		/*
+		 * Se aplica la promo
+		 */
+		for (int j = 0; j < misproducts.size(); j++) {
+			miPromo.checkProducto(misproducts.get(j));
+		}
+		miPromo.checkProductos(misproducts);
+//		for (int i = 0; i < misproducts.size(); i++) {
+//			aux = misproducts.get(i).getCosto();
+//			totalEsperado += (aux - (DESCUENTO_POR_MEDIO_DE_PAGO * aux));
+//		}
+		valorDeCuponEsperado=5;
+		if (miPromo.isActiva()) {
+			ArrayList<Producto> misDescuentos = miPromo
+					.aplicarBonificaciones(misproducts);
+			// Agregar descuentos
+			for (int i = 0; i < misDescuentos.size(); i++) {
+				misproducts.add(misDescuentos.get(i));
+			}
 
-
-		assertEquals(true,false);
+		}
+		float total = 0;
+		for (int i = 0; i < misproducts.size(); i++) {
+			total += misproducts.get(i).getCosto();
+		}
+		
+		assertEquals(valorDeCuponEsperado,((BonificacionDescuentoCupon) miPromo.getBonificaciones().get(0)).getCuponGenerado().getValor() , 0.0001);
 	}
 }
 
