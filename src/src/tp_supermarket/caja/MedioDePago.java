@@ -6,8 +6,8 @@ public class MedioDePago {
 
 	private String medio;
 	private String entidadFinanciera;
-	private float descuento;
-	private PeriodoValidez pValidez;
+	private float descuento = 0.0f;
+	private PeriodoValidez pValidez = null;
 	//TODO:VER
 	private float totales;
 	

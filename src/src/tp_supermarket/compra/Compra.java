@@ -211,6 +211,7 @@ public class Compra {
 					+ this.medioDePago.getDescuento()
 					+ " % con su medio de pago", precioConDescuento);
 			this.productosAplicanPromo.add(descuentoMDP);
+			this.totalCD = this.calcularTotalCD();
 		}
 	}
 	

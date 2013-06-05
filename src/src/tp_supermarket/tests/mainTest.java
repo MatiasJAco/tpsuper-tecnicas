@@ -89,7 +89,7 @@ public class mainTest {
 		 * Seteo de la fecha de vigencia de la promocion
 		 */
 		ArrayList<Integer> diasPromo = new ArrayList<Integer>();		
-		diasPromo.add(Calendar.MONDAY);
+		diasPromo.add(Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
 		PeriodoValidez pValidez = new PeriodoValidezDiasSemana(diasPromo);
 		promo1.setPeriodoValidezPromocion(pValidez);
 
@@ -181,7 +181,7 @@ public class mainTest {
 		 * Seteo de la fecha de vigencia de la promocion
 		 */
 		ArrayList<Integer> diasPromo1 = new ArrayList<Integer>();		
-		diasPromo1.add(Calendar.MONDAY);
+		diasPromo1.add(Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
 		PeriodoValidez pValidez1 = new PeriodoValidezDiasSemana(diasPromo1);
 		promo1.setPeriodoValidezPromocion(pValidez1);
 
@@ -209,7 +209,7 @@ public class mainTest {
 		} catch (ExceptionIniciarCompraConCompraEnCurso e) {
 		}
 
-		assertEquals(VALOR_ESPERADO,cajaprincipal.getCompras().get(0).getTotalCD(),0.00001);
+		assertEquals(VALOR_ESPERADO,cajaprincipal.getCompras().get(0).getTotalCD(),0.001);
 	}
 	
 	@Test
