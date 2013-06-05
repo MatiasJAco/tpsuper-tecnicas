@@ -29,6 +29,7 @@ import tp_supermarket.promocion.Promocion;
 import tp_supermarket.restriccion.Restriccion;
 import tp_supermarket.restriccion.RestriccionCategoria;
 import tp_supermarket.restriccion.RestriccionMarca;
+import tp_supermarket.restriccion.RestriccionTipoCliente;
 
 public class mainTest {
 
@@ -42,6 +43,7 @@ public class mainTest {
 
 	@Test
 	public void testDescuentoPor2por1YMedioDepago() throws ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada, ExceptionAbrirCajaConCajaAbierta{
+		float VALOR_ESPERADO = 12.6f;		
 		/*
 		 * Productos
 		 */
@@ -92,7 +94,6 @@ public class mainTest {
 		promo1.setPeriodoValidezPromocion(pValidez);
 
 		ArrayList<Promocion> misPromociones = new ArrayList<Promocion>();
-		;
 		misPromociones.add(promo1);
 		// Caja cajaprincipal = new Caja(1234);
 
@@ -113,12 +114,12 @@ public class mainTest {
 		} catch (ExceptionIniciarCompraConCompraEnCurso e) {
 		}
 
-		assertEquals(12.6f,cajaprincipal.getCompras().get(0).getTotalCD(),0.00001);
+		assertEquals(VALOR_ESPERADO,cajaprincipal.getCompras().get(0).getTotalCD(),0.00001);
 	}
 	
 	@Test
 	public void testDescuento2daUnidadYMedioDePago() throws ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada, ExceptionAbrirCajaConCajaAbierta {
-
+		float VALOR_ESPERADO = 259.2f;
 		/*
 		 * Productos
 		 */
@@ -208,7 +209,7 @@ public class mainTest {
 		} catch (ExceptionIniciarCompraConCompraEnCurso e) {
 		}
 
-		assertEquals(259.2f,cajaprincipal.getCompras().get(0).getTotalCD(),0.00001);
+		assertEquals(VALOR_ESPERADO,cajaprincipal.getCompras().get(0).getTotalCD(),0.00001);
 	}
 	
 	@Test
@@ -288,8 +289,71 @@ public class mainTest {
 	
 	@Test
 	public void testDescuentoJubilados() throws ExceptionTerminarCompraConCajaCerrada, ExceptionTerminarCompraConCompraNoIniciada, ExceptionAbrirCajaConCajaAbierta {
+		
+		float TOTAL_ESPERADO = (2*15 + 10)*(0.9f);
 
-		assertEquals(true,false);
+		Producto art1 = new Producto(1, "Lamparita", 15, "Luminaria",
+				"Philips", "");
+		Producto art2 = new Producto(2, "Maceta", 10, "Jardineria", "Maceta",
+				"");
+
+		ArrayList<Producto> misproducts = new ArrayList<Producto>();
+		misproducts.add(art1);
+		misproducts.add(art2);
+
+		/*
+		 * Restricciones
+		 */
+		ArrayList<Restriccion> restricciones = new ArrayList<Restriccion>();
+
+		/*
+		 * Bonificaciones
+		 */
+		
+		ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();
+		
+		/*
+		 * Restriccion de tipos de clientes
+		 */
+
+		ArrayList<RestriccionTipoCliente> cli = new ArrayList<RestriccionTipoCliente>();
+		cli.add(new RestriccionTipoCliente("Jubilados", 10.0f));
+		
+		
+		/*
+		 * Nueva promo
+		 */
+		Promocion promo1 = new Promocion(restricciones, bonificaciones);
+		promo1.setTiposClientesAplicanPromo(cli);
+		
+		
+		ArrayList<Promocion> misPromociones = new ArrayList<Promocion>();
+		misPromociones.add(promo1);
+		// Caja cajaprincipal = new Caja(1234);
+
+		Caja cajaprincipal = new Caja(1234, misPromociones);
+		cajaprincipal.abrirCaja();
+
+		try {
+			cajaprincipal.iniciarCompra();
+			cajaprincipal.getCompraActual().setTipoCliente("Jubilados");
+
+			cajaprincipal.agregarProducto(art1);
+			cajaprincipal.agregarProducto(art1);
+			cajaprincipal.agregarProducto(art2);
+			
+			MedioDePago med = new MedioDePago("Efectivo", "");
+			cajaprincipal.terminarCompraActual(med);
+			//verifico que esten bien los productos
+
+		} catch (ExceptionIniciarCompraConCajaCerrada e) {
+		} catch (ExceptionIniciarCompraConCompraEnCurso e) {
+		}
+		
+		
+		
+		assertEquals(TOTAL_ESPERADO,cajaprincipal.getCompraActual().getTotalCD(),0.00001);
+		
 	}
 	
 	@Test
@@ -380,6 +444,7 @@ public class mainTest {
 		float DESCUENTO_POR_MEDIO_DE_PAGO = 0.50f;
 		float valorDeCuponEsperado = 0;
 		float aux;
+		float total = 0;
 		/*
 		 * Definicion de los medios de pagos para la promocion
 		 */
@@ -442,8 +507,7 @@ public class mainTest {
 				misproducts.add(misDescuentos.get(i));
 			}
 
-		}
-		float total = 0;
+		}		
 		for (int i = 0; i < misproducts.size(); i++) {
 			total += misproducts.get(i).getCosto();
 		}

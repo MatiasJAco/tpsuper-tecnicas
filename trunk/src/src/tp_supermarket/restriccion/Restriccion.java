@@ -17,7 +17,4 @@ public abstract class Restriccion {
 
 	public abstract void reset();
 	
-	
-	
-	
 }

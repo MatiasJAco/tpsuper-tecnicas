@@ -1,8 +1,6 @@
 package tp_supermarket.promocion;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import tp_supermarket.producto.*;
 import tp_supermarket.fecha.*;
 import tp_supermarket.bonificacion.*;
@@ -11,9 +9,10 @@ import tp_supermarket.restriccion.*;
 
 public class Promocion {
 
-	private final ArrayList<Bonificacion> bonificaciones;
-	private final ArrayList<Restriccion> excepciones;
-	private final ArrayList<Restriccion> restricciones;
+	private ArrayList<Bonificacion> bonificaciones;
+	private ArrayList<Restriccion> excepciones;
+	private ArrayList<Restriccion> restricciones;
+	private ArrayList<RestriccionTipoCliente> clientesValidos;
 	private ArrayList<MedioDePago> medioDePago;
 	private boolean activa;
 	private boolean promocionActivaPorFecha = true;
@@ -33,6 +32,7 @@ public class Promocion {
 		vecesActivada = 0;
 		this.medioDePago=new ArrayList<MedioDePago>();
 		this.medioDePago.add(new MedioDePago("Efectivo",""));
+		this.clientesValidos = new ArrayList<RestriccionTipoCliente>();
 	}
 
 	public Promocion(ArrayList<Restriccion> r, ArrayList<Restriccion> e,
@@ -44,6 +44,7 @@ public class Promocion {
 		vecesActivada = 0;
 		this.medioDePago=new ArrayList<MedioDePago>();
 		this.medioDePago.add(new MedioDePago("Efectivo",""));
+		this.clientesValidos = new ArrayList<RestriccionTipoCliente>();
 	}
 
 	public Promocion(ArrayList<Restriccion> r, ArrayList<Bonificacion> b) {
@@ -54,17 +55,19 @@ public class Promocion {
 		vecesActivada = 0;
 		this.medioDePago=new ArrayList<MedioDePago>();
 		this.medioDePago.add(new MedioDePago("Efectivo",""));
+		this.clientesValidos = new ArrayList<RestriccionTipoCliente>();
 	}
 	
-	public Promocion(ArrayList<Restriccion> r, ArrayList<Restriccion> e, ArrayList<Bonificacion> b, ArrayList<MedioDePago> mDePagos) {
+	public Promocion(ArrayList<Restriccion> r, ArrayList<Restriccion> e, 
+			ArrayList<Bonificacion> b, ArrayList<MedioDePago> mDePagos) {
 		restricciones = r;
 		excepciones = e;
 		bonificaciones = b;
 		activa = false;
 		vecesActivada = 0;
 		this.medioDePago = mDePagos;
+		this.clientesValidos = new ArrayList<RestriccionTipoCliente>();
 	}
-
 
 	public void checkProductos(ArrayList<Producto> p) {
 		if (!isActiva() && promocionActivaPorFecha) {
@@ -200,6 +203,27 @@ public class Promocion {
 		return true;
 	}
 	
+	public boolean isClienteValido(String tipoCliente){
+		if(this.clientesValidos.size()==0){
+			return true;
+		}
+		for (RestriccionTipoCliente cl : this.clientesValidos) {
+			if(cl.cumpleRestriccion(tipoCliente)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public float aplicarBonificacionPorTipoCliente(float total){
+		float ret = total;
+		for (RestriccionTipoCliente cl : this.clientesValidos) {
+			if(cl.isActiva())
+				return cl.aplicarBonificacion(total);
+		}
+		return ret;
+	}
+	
 	public void agregarMedioDePago(MedioDePago mDePago){
 		this.medioDePago.add(mDePago);
 	}
@@ -215,6 +239,10 @@ public class Promocion {
 			if (!restricciones.get(j).isActiva())
 				restricciones.get(j).cumpleRestriccion(producto);
 		}
+	}
+	
+	public void setTiposClientesAplicanPromo(ArrayList<RestriccionTipoCliente> cli){
+		this.clientesValidos = cli;		
 	}
 
 	private void updateExcepciones(Producto producto) {

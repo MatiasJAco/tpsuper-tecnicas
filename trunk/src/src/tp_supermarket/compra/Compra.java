@@ -9,6 +9,8 @@ import java.util.Date;
 import tp_supermarket.caja.MedioDePago;
 import tp_supermarket.producto.Producto;
 import tp_supermarket.promocion.Promocion;
+import tp_supermarket.restriccion.Restriccion;
+import tp_supermarket.restriccion.RestriccionTipoCliente;
 
 public class Compra {
 
@@ -21,6 +23,7 @@ public class Compra {
 	private int nroCompra;
 	private int caja;
 	private Date fechayhora;
+	private String tipoCliente = "ALL";
 
 	public Compra() {
 		this.totalSD = 0;
@@ -74,36 +77,12 @@ public class Compra {
 		System.out.println("Productos Comprados");
 		System.out.println("########################################");
 
-		// TODO: REEMPLAZAR POR UN ITERADOR
-		for (int i = 0; i < this.productos.size(); i++) {
-			// id me da codigo de barra o algo asi y me da el descuento
-			System.out.printf("%1$-2d %2$-30s $%3$-10.2f\n", this.productos
-					.get(i).getId(), this.productos.get(i).getNombre(),
-					this.productos.get(i).getCosto());
-			total += this.productos.get(i).getCosto();
-
-		}
-
-		totalSinDescuento = total;
 		System.out.println("");
 		System.out.println("########################################");
 		System.out.println("Descuentos aplicados");
 		System.out.println("########################################");
 
-		for (int i = 0; i < this.productosAplicanPromo.size(); i++) {
-
-			System.out.print(this.productosAplicanPromo.get(i).getNombre());
-			System.out.print("\t\t");
-			System.out.print(this.productosAplicanPromo.get(i).getCosto());
-			System.out.println();
-
-			total += this.productosAplicanPromo.get(i).getCosto();
-
-		}
-
-		this.totalSD = totalSinDescuento;
-		this.totalCD = total;
-		this.totalDesc = (totalSinDescuento - total);
+		this.totalDesc = (this.totalSD - this.totalCD);
 		System.out.println("");
 		System.out.println("TOTAL SIN DESCUENTO: $ " + totalSinDescuento);
 		System.out.println("TOTAL CON DESCUENTO: $ " + total);
@@ -133,13 +112,20 @@ public class Compra {
 				}
 			}
 		}
-
+		//Se aplican las bonificaciones por tipo de cliente
+		for (int i = 0; i < promociones.size(); i++) {
+			if(promociones.get(i).isActiva()){
+				this.totalCD = promociones.get(i).aplicarBonificacionPorTipoCliente(this.calcularTotalCD());
+				return;
+			}
+		}
 	}
 
 	private ArrayList<Promocion> validarPromociones(
 			ArrayList<Promocion> promociones) {
 		for (int i = 0; i < promociones.size(); i++) {
-			if (promociones.get(i).validarMedioPago(this.medioDePago)) {
+			if (promociones.get(i).validarMedioPago(this.medioDePago) &&
+					promociones.get(i).isClienteValido(tipoCliente)) {
 				// promociones.get(i).checkProductos(this.vectorProductos);
 				for (int j = 0; j < this.productos.size(); j++) {
 					// this.productos.get(j).setMedioDePago(this.medioDePago);
@@ -203,6 +189,10 @@ public class Compra {
 		return this.productos;
 	}
 
+	public void setTipoCliente(String tCli){
+		this.tipoCliente = tCli;
+	}
+	
 	public void descuentoMedioDePago() {
 		if (this.medioDePago.getpValidez() != null && this.medioDePago.getpValidez().cumplePeriodoValidez()) {
 			float precioTotal = 0;
@@ -223,4 +213,17 @@ public class Compra {
 			this.productosAplicanPromo.add(descuentoMDP);
 		}
 	}
+	
+	private float calcularTotalCD(){
+		float total = 0;
+		for (int i = 0; i < this.productos.size(); i++) {
+			total += this.productos.get(i).getCosto();
+		}
+		for (int i = 0; i < this.productosAplicanPromo.size(); i++) {
+			total += this.productosAplicanPromo.get(i).getCosto();
+
+		}
+		return total;
+	}
+	
 }
