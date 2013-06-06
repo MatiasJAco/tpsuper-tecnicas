@@ -38,9 +38,11 @@ public class Controlador {
 
 	private ArrayList<Producto> listadoProductos;
 	private Caja cajaprincipal;
-	ArrayList<Promocion> misPromociones;
-	MedioDePago med;
-	ArrayList<MedioDePago> mediosDePagoDisponibles;
+	private ArrayList<Promocion> misPromociones;
+	private MedioDePago med;
+	private ArrayList<MedioDePago> mediosDePagoDisponibles;
+	private ArrayList<String> tipoDeCliente;
+	private ArrayList<String> tipoDesc;
 	
 
 	public Controlador() {
@@ -49,8 +51,12 @@ public class Controlador {
 		this.mediosDePagoDisponibles = new ArrayList<MedioDePago>();
 		this.cajaprincipal = new Caja(5000, misPromociones);
 		this.med = new MedioDePago();
+		this.tipoDeCliente = new ArrayList<String>();
+		this.tipoDesc=new ArrayList<String>();
 		cargarBaseDeDatosProductos();
 		cargarMediosDePagoDisponibles();
+		cargarTipoDeClientes();
+		cargarTipoDesc();
 	}
 
 	public void cargarBaseDeDatosProductos() {
@@ -141,6 +147,22 @@ public class Controlador {
 		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco Nacion"));
 		this.mediosDePagoDisponibles.add(	new MedioDePago("Vale Super", ""));
 		
+	}
+	
+	public void cargarTipoDeClientes(){
+		this.tipoDeCliente.add("Normal");
+		this.tipoDeCliente.add("Estudiante");
+		this.tipoDeCliente.add("Jubilados");
+		this.tipoDeCliente.add("Cocinero");
+		this.tipoDeCliente.add("Profesional");
+	}
+	
+	
+	public void cargarTipoDesc(){
+		this.tipoDesc.add("Sin Cupon");
+		this.tipoDesc.add("Cupon 10%");
+		this.tipoDesc.add("Cupon 15%");
+		this.tipoDesc.add("Cupon T1");
 	}
 	
 	public ArrayList<Producto> listadoProductos() {
@@ -342,8 +364,26 @@ public class Controlador {
 	public ArrayList<MedioDePago> getMediosDePagosDisponibles(){
 		return this.mediosDePagoDisponibles;
 	}
+	
+	public  ArrayList<String> getTiposDeClientes(){
+		return this.tipoDeCliente;
+	}
+	
 	public void verRanking(){
 		cajaprincipal.mostrarrankingProductos();
+	}
+	
+	public void setTipoCliente(String tipoCliente){
+		cajaprincipal.getCompraActual().setTipoCliente(tipoCliente);
+	}
+
+	public ArrayList<String> getTipoDesc() {
+		return tipoDesc;
+	}
+
+	public void setTipoDesc(String tipoDesc) {
+		//TODO:Implementar
+	//cajaprincipal.getCompraActual().setTipoDesc(tipoDesc);
 	}
 	
 }
