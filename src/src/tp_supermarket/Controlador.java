@@ -136,7 +136,6 @@ public class Controlador {
 	public void cargarMediosDePagoDisponibles(){
 		this.mediosDePagoDisponibles.add(new MedioDePago("Efectivo", ""));
 		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Galicia"));
-		this.mediosDePagoDisponibles.add(	new MedioDePago("Descuento Jubilados 10%", ""));
 		this.mediosDePagoDisponibles.add(	new MedioDePago("XYZ", ""));
 		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco Provincia"));
 		this.mediosDePagoDisponibles.add(	new MedioDePago("Visa", "Banco HSBC"));
