@@ -30,6 +30,7 @@ import tp_supermarket.restriccion.RestriccionCantidad;
 import tp_supermarket.restriccion.RestriccionCategoria;
 import tp_supermarket.restriccion.RestriccionMarca;
 import tp_supermarket.restriccion.RestriccionNombreProducto;
+import tp_supermarket.restriccion.RestriccionTipoCliente;
 import tp_supermarket.xml.ParserXml;
 
 public class Controlador {
@@ -170,13 +171,25 @@ public class Controlador {
 
 	public void cargarPromocionesYBonificaciones() {	
 		ArrayList<Promocion> misPromociones = ParserXml.getPromocionesFromXml(this.path);
-		for (int i=0; i<misPromociones.size();i++){
 		
-			BonificacionDescuentoMedioDePago bonJub = new BonificacionDescuentoMedioDePago(10);
-			misPromociones.get(i).addBonificaciones(bonJub);
-			misPromociones.get(i).agregarMedioDePago(new MedioDePago("Descuento Jubilados 10%",""));
-
-		}
+		
+		ArrayList<Restriccion> restricciones = new ArrayList<Restriccion>();
+		ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();
+		ArrayList<RestriccionTipoCliente> cli = new ArrayList<RestriccionTipoCliente>();
+		cli.add(new RestriccionTipoCliente("Jubilados", 10.0f));
+		
+		Promocion promoJubilados = new Promocion(restricciones, bonificaciones);
+		promoJubilados.setTiposClientesAplicanPromo(cli);
+		//misPromociones.add(promoJubilados);
+		for (int i=0; i<misPromociones.size();i++){
+//		
+//
+//		BonificacionDescuentoMedioDePago bonJub = new BonificacionDescuentoMedioDePago(10);
+			misPromociones.get(i).setTiposClientesAplicanPromo(cli);
+//		misPromociones.get(i).agregarMedioDePago(new MedioDePago("Descuento Jubilados 10%",""));
+//			
+//			
+	}
 		try {
 			cajaprincipal.setPromociones(misPromociones);
 			System.out.println("Promociones y Bonificaciones Actualizadas");
@@ -373,6 +386,7 @@ public class Controlador {
 	}
 	
 	public void setTipoCliente(String tipoCliente){
+		
 		cajaprincipal.getCompraActual().setTipoCliente(tipoCliente);
 	}
 
