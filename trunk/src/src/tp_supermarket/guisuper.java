@@ -368,8 +368,6 @@ public class guisuper {
 		comboBox.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				// getItem returns an object so it gets cast
-				// as a String to retrieve the item value
 				MedioDePago item = (MedioDePago) e.getItem();
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					System.out.println("El Pago con " + item.toString()
@@ -389,8 +387,6 @@ public class guisuper {
 		comboBox_1.addItemListener(new ItemListener() {
 				@Override
 				public void itemStateChanged(ItemEvent e) {
-					// getItem returns an object so it gets cast
-					// as a String to retrieve the item value
 					String item = (String) e.getItem();
 					if (e.getStateChange() == ItemEvent.SELECTED) {
 						System.out.println("Tipo de cliente " + item.toString()
@@ -411,8 +407,6 @@ public class guisuper {
 		comboBox_2.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				// getItem returns an object so it gets cast
-				// as a String to retrieve the item value
 				String item = (String) e.getItem();
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					System.out.println("Cupon " + item.toString()
