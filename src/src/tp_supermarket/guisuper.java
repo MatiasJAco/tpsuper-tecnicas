@@ -405,13 +405,13 @@ public class guisuper {
 		comboBox_2.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				String item = (String) e.getItem();
+				Cupon item = (Cupon) e.getItem();
 				if (e.getStateChange() == ItemEvent.SELECTED) {
-					System.out.println("Cupon " + item.toString()
+					System.out.println("Cupon " + item.getNroCupon()
 							+ " seleccionado.");
 
 					//TODO:Implementar
-					//miControlador.setCupon(item.toString());
+					miControlador.setCupon(item.getNroCupon());
 					
 
 

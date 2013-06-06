@@ -410,9 +410,9 @@ public class Controlador {
 		this.cupones = cupones;
 	}
 
-	public void setCupon(String valor) {
-//		//TODO:Implementar
-//	cajaprincipal.getCompraActual().setCupon(valor);
+	public void setCupon(int cupon) {
+		//TODO:Implementar
+		cajaprincipal.getCompraActual().setCupon(cupon);
 	}
 	
 }

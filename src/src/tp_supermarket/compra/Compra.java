@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import tp_supermarket.Cupones;
 import tp_supermarket.caja.MedioDePago;
 import tp_supermarket.producto.Producto;
 import tp_supermarket.promocion.Promocion;
@@ -24,6 +25,7 @@ public class Compra {
 	private int caja;
 	private Date fechayhora;
 	private String tipoCliente = "ALL";
+	private int cupon;
 
 	public Compra() {
 		this.totalSD = 0;
@@ -31,6 +33,7 @@ public class Compra {
 		productos = new ArrayList<Producto>();
 		productosAplicanPromo = new ArrayList<Producto>();
 		this.medioDePago = new MedioDePago("Efectivo", "");
+		this.cupon =-1;
 	}
 
 	public Compra(String medP, String entidad) {
@@ -39,6 +42,7 @@ public class Compra {
 		productos = new ArrayList<Producto>();
 		productosAplicanPromo = new ArrayList<Producto>();
 		this.medioDePago = new MedioDePago(medP, entidad);
+		this.cupon =-1;
 	}
 
 	public void agregarProducto(Producto unProducto) {
@@ -105,6 +109,15 @@ public class Compra {
 		
 		this.totalSD=totalSinDescuento;
 //		this.totalCD=total;
+		
+		//DESC CUPON
+		if (this.cupon!=-1){
+			Cupones cupon= Cupones.getInstance();
+			//OJO ACA CON EL GET INDEX
+			float descupon=cupon.getListadoCupones().get(this.cupon).getMonto();
+			total=total-descupon;
+		}
+		
 		this.totalDesc=(totalSinDescuento-total);
 		System.out.println("");
 		System.out.println("TOTAL SIN DESCUENTO: $ " + this.getTotalSD());
@@ -248,6 +261,11 @@ public class Compra {
 
 		}
 		return total;
+	}
+
+	public void setCupon(int cupon) {
+		this.cupon = cupon;
+		
 	}
 	
 }
