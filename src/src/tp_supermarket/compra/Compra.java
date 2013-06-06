@@ -76,18 +76,41 @@ public class Compra {
 		System.out.println("########################################");
 		System.out.println("Productos Comprados");
 		System.out.println("########################################");
+		
+		//TODO: REEMPLAZAR POR UN ITERADOR
+		for (int i=0; i< this.productos.size(); i++){
+			// id me da codigo de barra o algo asi y me da el descuento
+			System.out.printf("%1$-2d %2$-30s $%3$-10.2f\n",this.productos.get(i).getId(),this.productos.get(i).getNombre(),this.productos.get(i).getCosto());
+			total+=this.productos.get(i).getCosto();
+			
+		}
+			
+		totalSinDescuento = total;
 
 		System.out.println("");
 		System.out.println("########################################");
 		System.out.println("Descuentos aplicados");
 		System.out.println("########################################");
-
-		this.totalDesc = (this.totalSD - this.totalCD);
+		
+		for (int i=0; i< this.productosAplicanPromo.size(); i++){
+			
+			System.out.print(this.productosAplicanPromo.get(i).getNombre());
+			System.out.print("\t\t");
+			System.out.print(this.productosAplicanPromo.get(i).getCosto());
+			System.out.println();
+			
+			total+=this.productosAplicanPromo.get(i).getCosto();
+			
+		}
+		
+		this.totalSD=totalSinDescuento;
+//		this.totalCD=total;
+		this.totalDesc=(totalSinDescuento-total);
 		System.out.println("");
-		System.out.println("TOTAL SIN DESCUENTO: $ " + totalSinDescuento);
-		System.out.println("TOTAL CON DESCUENTO: $ " + total);
+		System.out.println("TOTAL SIN DESCUENTO: $ " + this.getTotalSD());
+		System.out.println("TOTAL CON DESCUENTO: $ " + this.getTotalCD());
 		System.out.println("USTED AHORRO UN "
-				+ df.format(100 - (total / totalSinDescuento) * 100)
+				+ df.format(100 - (this.getTotalCD() / totalSinDescuento) * 100)
 				+ "% EN SU COMPRA");
 
 		// System.out.println("TOTAL CON DESCUENTO ESPECIAL: $ "+total*(1-(25*Math.random())/100));

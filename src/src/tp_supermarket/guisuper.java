@@ -392,7 +392,7 @@ public class guisuper {
 						System.out.println("Tipo de cliente " + item.toString()
 								+ " seleccionado.");
 
-						miControlador.setTipoCliente(item.toString());
+						miControlador.setTipoCliente("Jubilados");
 						
 
 
