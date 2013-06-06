@@ -84,7 +84,7 @@ public class guisuper {
 		frmSuperTecnicasGui.getContentPane().setBackground(
 				SystemColor.activeCaption);
 		frmSuperTecnicasGui.setTitle("Super Tecnicas");
-		frmSuperTecnicasGui.setBounds(100, 100, 753, 678);
+		frmSuperTecnicasGui.setBounds(100, 100, 753, 719);
 		frmSuperTecnicasGui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmSuperTecnicasGui.getContentPane().setLayout(null);
 
@@ -140,7 +140,7 @@ public class guisuper {
 //				}
 			}
 		});
-		btnFinalizarCompra.setBounds(578, 529, 140, 23);
+		btnFinalizarCompra.setBounds(565, 634, 140, 23);
 		frmSuperTecnicasGui.getContentPane().add(btnFinalizarCompra);
 
 		//BOTON SELECCIONAR MEDIO DE PAGO
@@ -230,6 +230,26 @@ public class guisuper {
 		for (int i = 0; i < miControlador.getMediosDePagosDisponibles().size(); i++) {
 
 			medios.add(miControlador.getMediosDePagosDisponibles().get(i));
+
+		}
+		
+		//Tipos de clientes en vista
+		
+		ArrayList<String> tclientes = new ArrayList<String>();
+
+		for (int i = 0; i < miControlador.getTiposDeClientes().size(); i++) {
+
+			tclientes.add(miControlador.getTiposDeClientes().get(i));
+
+		}
+		
+		//Tipos de cupones en vista
+		
+		ArrayList<String> tcupon = new ArrayList<String>();
+
+		for (int i = 0; i < miControlador.getTipoDesc().size(); i++) {
+
+			tcupon.add(miControlador.getTipoDesc().get(i));
 
 		}
 		
@@ -329,6 +349,22 @@ public class guisuper {
 		btnRankingVentas.setBounds(10, 597, 135, 23);
 		frmSuperTecnicasGui.getContentPane().add(btnRankingVentas);
 		
+		JComboBox comboBox_1 = new JComboBox(tclientes.toArray());
+		comboBox_1.setBounds(344, 581, 140, 20);
+		frmSuperTecnicasGui.getContentPane().add(comboBox_1);
+		
+		JLabel lblSeleccionarTipoDe = new JLabel("Seleccionar Tipo De Cliente");
+		lblSeleccionarTipoDe.setBounds(343, 561, 159, 14);
+		frmSuperTecnicasGui.getContentPane().add(lblSeleccionarTipoDe);
+		
+		JLabel lblTieneCuponDe = new JLabel("Tiene Cupon de Descuento?");
+		lblTieneCuponDe.setBounds(343, 615, 159, 14);
+		frmSuperTecnicasGui.getContentPane().add(lblTieneCuponDe);
+		
+		JComboBox comboBox_2 = new JComboBox(tcupon.toArray());
+		comboBox_2.setBounds(344, 635, 140, 20);
+		frmSuperTecnicasGui.getContentPane().add(comboBox_2);
+		
 		comboBox.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
@@ -349,7 +385,51 @@ public class guisuper {
 				}
 			}
 		});
+		
+		comboBox_1.addItemListener(new ItemListener() {
+				@Override
+				public void itemStateChanged(ItemEvent e) {
+					// getItem returns an object so it gets cast
+					// as a String to retrieve the item value
+					String item = (String) e.getItem();
+					if (e.getStateChange() == ItemEvent.SELECTED) {
+						System.out.println("Tipo de cliente " + item.toString()
+								+ " seleccionado.");
 
+						miControlador.setTipoCliente(item.toString());
+						
+
+
+					} else {
+						System.out.println("Tipo de cliente " + item.toString()
+								+ " cancelado.");
+					}
+				}
+			});
+
+		
+		comboBox_2.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				// getItem returns an object so it gets cast
+				// as a String to retrieve the item value
+				String item = (String) e.getItem();
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					System.out.println("Cupon " + item.toString()
+							+ " seleccionado.");
+
+					//TODO:Implementar
+					miControlador.setTipoDesc(item.toString());
+					
+
+
+				} else {
+					System.out.println("Cupon " + item.toString()
+							+ " cancelado.");
+				}
+			}
+		});
+		
 		System.setOut(printStream);
 		System.setErr(printStream);
 		System.out
