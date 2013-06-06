@@ -386,8 +386,10 @@ public class Controlador {
 	}
 	
 	public void setTipoCliente(String tipoCliente){
+		if (!this.cajaprincipal.isEstadoCaja()){
+			cajaprincipal.getCompraActual().setTipoCliente(tipoCliente);
+		}
 		
-		cajaprincipal.getCompraActual().setTipoCliente(tipoCliente);
 	}
 
 	public ArrayList<String> getTipoDesc() {
