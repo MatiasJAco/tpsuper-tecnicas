@@ -69,6 +69,7 @@ public class guisuper {
 
 	private Controlador miControlador;
 	private MedioDePago med;
+	ArrayList<String> tcupon = new ArrayList<String>();
 	
 	/**
 	 * Initialize the contents of the frame.
@@ -119,6 +120,7 @@ public class guisuper {
 			public void actionPerformed(ActionEvent e) {
 
 				miControlador.terminarCompra();
+				cargarCupones();
 
 //				try {
 //					Clip clip = AudioSystem.getClip();
@@ -245,13 +247,9 @@ public class guisuper {
 		
 		//Tipos de cupones en vista
 		
-		ArrayList<String> tcupon = new ArrayList<String>();
+		
 
-		for (int i = 0; i < miControlador.getTipoDesc().size(); i++) {
-
-			tcupon.add(miControlador.getTipoDesc().get(i));
-
-		}
+		cargarCupones();
 		
 		JComboBox comboBox = new JComboBox(medios.toArray());
 		comboBox.setBounds(344, 530, 140, 20);
@@ -413,7 +411,7 @@ public class guisuper {
 							+ " seleccionado.");
 
 					//TODO:Implementar
-					miControlador.setTipoDesc(item.toString());
+					//miControlador.setCupon(item.toString());
 					
 
 
@@ -429,5 +427,14 @@ public class guisuper {
 		System.out
 				.println("Bienvenido USUARIO (Pulse Abrir Caja para iniciar)");
 
+	}
+
+	private void cargarCupones() {
+		for (int i = 0; i < miControlador.getCupones().size(); i++) {
+
+			tcupon.add(Integer.toString(miControlador.getCupones().get(i).getNroCupon()));
+
+		}
+		
 	}
 }

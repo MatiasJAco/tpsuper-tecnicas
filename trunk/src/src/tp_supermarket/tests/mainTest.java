@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import tp_supermarket.Cupones;
 import tp_supermarket.bonificacion.Bonificacion;
 import tp_supermarket.bonificacion.BonificacionDescuentoCategoria;
 import tp_supermarket.bonificacion.BonificacionDescuentoCupon;
@@ -511,6 +512,8 @@ public class mainTest {
 		for (int i = 0; i < misproducts.size(); i++) {
 			total += misproducts.get(i).getCosto();
 		}
+		Cupones cupon= Cupones.getInstance();
+		cupon.mostrarListadoCupones();
 		
 		assertEquals(valorDeCuponEsperado,((BonificacionDescuentoCupon) miPromo.getBonificaciones().get(0)).getCuponGenerado().getValor() , 0.0001);
 	}
