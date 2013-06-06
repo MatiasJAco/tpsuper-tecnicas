@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 import tp_supermarket.bonificacion.Bonificacion;
 import tp_supermarket.bonificacion.BonificacionDescuentoCategoria;
+import tp_supermarket.bonificacion.BonificacionDescuentoCupon;
 import tp_supermarket.bonificacion.BonificacionDescuentoMarca;
 import tp_supermarket.bonificacion.BonificacionDescuentoMedioDePago;
 import tp_supermarket.bonificacion.BonificacionDescuentoNombre;
@@ -43,7 +44,7 @@ public class Controlador {
 	private MedioDePago med;
 	private ArrayList<MedioDePago> mediosDePagoDisponibles;
 	private ArrayList<String> tipoDeCliente;
-	private ArrayList<String> tipoDesc;
+	private ArrayList<Cupon> cupones;
 	
 
 	public Controlador() {
@@ -53,11 +54,11 @@ public class Controlador {
 		this.cajaprincipal = new Caja(5000, misPromociones);
 		this.med = new MedioDePago();
 		this.tipoDeCliente = new ArrayList<String>();
-		this.tipoDesc=new ArrayList<String>();
+		this.setCupones(new ArrayList<Cupon>());
 		cargarBaseDeDatosProductos();
 		cargarMediosDePagoDisponibles();
 		cargarTipoDeClientes();
-		cargarTipoDesc();
+		cargarCupones();
 	}
 
 	public void cargarBaseDeDatosProductos() {
@@ -158,11 +159,13 @@ public class Controlador {
 	}
 	
 	
-	public void cargarTipoDesc(){
-		this.tipoDesc.add("Sin Cupon");
-		this.tipoDesc.add("Cupon 10%");
-		this.tipoDesc.add("Cupon 15%");
-		this.tipoDesc.add("Cupon T1");
+	public void cargarCupones(){
+		Cupones cupon= Cupones.getInstance();
+		ArrayList<Cupon> cupones = cupon.getListadoCupones();
+		for (int i=0; i<cupones.size();i++){
+			
+		}
+		
 	}
 	
 	public ArrayList<Producto> listadoProductos() {
@@ -177,6 +180,13 @@ public class Controlador {
 		ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();
 		ArrayList<RestriccionTipoCliente> cli = new ArrayList<RestriccionTipoCliente>();
 		cli.add(new RestriccionTipoCliente("Jubilados", 10.0f));
+		
+		ArrayList<Restriccion> excepciones = new ArrayList<Restriccion>();
+		BonificacionDescuentoCupon bDescuento = new BonificacionDescuentoCupon(20,10,1,2,"Coca Cola");
+		bonificaciones.add(bDescuento);
+		
+		Promocion miPromo = new Promocion(restricciones, excepciones, bonificaciones);
+		misPromociones.add(miPromo);
 		
 		Promocion promoJubilados = new Promocion(restricciones, bonificaciones);
 		promoJubilados.setTiposClientesAplicanPromo(cli);
@@ -392,13 +402,17 @@ public class Controlador {
 		
 	}
 
-	public ArrayList<String> getTipoDesc() {
-		return tipoDesc;
+	public ArrayList<Cupon> getCupones() {
+		return cupones;
 	}
 
-	public void setTipoDesc(String tipoDesc) {
-		//TODO:Implementar
-	//cajaprincipal.getCompraActual().setTipoDesc(tipoDesc);
+	public void setCupones(ArrayList<Cupon> cupones) {
+		this.cupones = cupones;
+	}
+
+	public void setCupon(String valor) {
+//		//TODO:Implementar
+//	cajaprincipal.getCompraActual().setCupon(valor);
 	}
 	
 }

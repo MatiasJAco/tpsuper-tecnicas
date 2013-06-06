@@ -2,6 +2,7 @@ package tp_supermarket.bonificacion;
 
 import java.util.ArrayList;
 
+import tp_supermarket.Cupones;
 import tp_supermarket.producto.Producto;
 import tp_supermarket.restriccion.Restriccion;
 
@@ -77,6 +78,7 @@ public class BonificacionDescuentoCupon extends Bonificacion {
 					+ porcentaje + " % con su cupon", total);
 			descuentos.add(nuevoDescuento);
 			this.valorCuponGenerado=(totalAcumulado- acum) ;
+			this.agregarAListadoCupones();
 		}
 		
 		return descuentos;
@@ -90,6 +92,11 @@ public class BonificacionDescuentoCupon extends Bonificacion {
 
 	public double getValor() {
 		return this.valor;	
+	}
+	
+	public void agregarAListadoCupones(){
+		Cupones cupon= Cupones.getInstance();
+		cupon.setCupon(this.valorCuponGenerado);
 	}
 
 }
