@@ -16,7 +16,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.PrintStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -70,6 +73,7 @@ public class guisuper {
 	private Controlador miControlador;
 	private MedioDePago med;
 	ArrayList<String> tcupon = new ArrayList<String>();
+	JComboBox comboBox_2 = new JComboBox();
 	
 	/**
 	 * Initialize the contents of the frame.
@@ -109,7 +113,10 @@ public class guisuper {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				miControlador.iniciarCompra();
+				cargarCupones();
 			}
+
+			
 		});
 		btnNewButton_1.setBounds(343, 56, 169, 23);
 		frmSuperTecnicasGui.getContentPane().add(btnNewButton_1);
@@ -120,7 +127,7 @@ public class guisuper {
 			public void actionPerformed(ActionEvent e) {
 
 				miControlador.terminarCompra();
-				cargarCupones();
+				
 
 //				try {
 //					Clip clip = AudioSystem.getClip();
@@ -247,9 +254,7 @@ public class guisuper {
 		
 		//Tipos de cupones en vista
 		
-		
-
-		cargarCupones();
+		//cargarCupones();
 		
 		JComboBox comboBox = new JComboBox(medios.toArray());
 		comboBox.setBounds(344, 530, 140, 20);
@@ -359,7 +364,7 @@ public class guisuper {
 		lblTieneCuponDe.setBounds(343, 615, 159, 14);
 		frmSuperTecnicasGui.getContentPane().add(lblTieneCuponDe);
 		
-		JComboBox comboBox_2 = new JComboBox(tcupon.toArray());
+		
 		comboBox_2.setBounds(344, 635, 140, 20);
 		frmSuperTecnicasGui.getContentPane().add(comboBox_2);
 		
@@ -405,18 +410,18 @@ public class guisuper {
 		comboBox_2.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				Cupon item = (Cupon) e.getItem();
+				String item = (String) e.getItem();
 				if (e.getStateChange() == ItemEvent.SELECTED) {
-					System.out.println("Cupon " + item.getNroCupon()
+					System.out.println("Cupon " + item
 							+ " seleccionado.");
 
 					//TODO:Implementar
-					miControlador.setCupon(item.getNroCupon());
+					miControlador.setCupon(Integer.parseInt(item));
 					
 
 
 				} else {
-					System.out.println("Cupon " + item.toString()
+					System.out.println("Cupon " + item
 							+ " cancelado.");
 				}
 			}
@@ -429,12 +434,26 @@ public class guisuper {
 
 	}
 
-	private void cargarCupones() {
+	public void cargarCupones() {
+		System.out.println("Cargando Cupones");
+		
+		comboBox_2.removeAllItems();
+		tcupon.clear();
+		tcupon.add("-1");
+
 		for (int i = 0; i < miControlador.getCupones().size(); i++) {
 
 			tcupon.add(Integer.toString(miControlador.getCupones().get(i).getNroCupon()));
-
-		}
+			//System.out.print("Cargando Cupon: ");
+			//System.out.println(Integer.toString(miControlador.getCupones().get(i).getNroCupon()));
 		
 	}
+		for (int i = 0; i < tcupon.size(); i++) {
+			comboBox_2.addItem(tcupon.get(i).toString());
+		}
+		
 }
+
+}
+
+

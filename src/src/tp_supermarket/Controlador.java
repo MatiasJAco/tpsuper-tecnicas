@@ -161,11 +161,8 @@ public class Controlador {
 	
 	public void cargarCupones(){
 		Cupones cupon= Cupones.getInstance();
-		ArrayList<Cupon> cupones = cupon.getListadoCupones();
-		for (int i=0; i<cupones.size();i++){
-			
-		}
-		
+		this.cupones = cupon.getListadoCupones();
+
 	}
 	
 	public ArrayList<Producto> listadoProductos() {
@@ -173,33 +170,61 @@ public class Controlador {
 	}
 
 	public void cargarPromocionesYBonificaciones() {	
-		ArrayList<Promocion> misPromociones = ParserXml.getPromocionesFromXml(this.path);
 		
+		/*
+		 * Definicion de los medios de pagos para la promocion
+		 */
+		ArrayList<MedioDePago> mediosDePagosPromo = new ArrayList<MedioDePago>();
+		MedioDePago medioDePago1 = new MedioDePago("Efectivo", "");
+		mediosDePagosPromo.add(medioDePago1);
 		
-		ArrayList<Restriccion> restricciones = new ArrayList<Restriccion>();
+		/*
+		 * Bonificacion por medio de pago
+		 */
 		ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();
-		ArrayList<RestriccionTipoCliente> cli = new ArrayList<RestriccionTipoCliente>();
-		cli.add(new RestriccionTipoCliente("Jubilados", 10.0f));
-		
-		ArrayList<Restriccion> excepciones = new ArrayList<Restriccion>();
 		BonificacionDescuentoCupon bDescuento = new BonificacionDescuentoCupon(20,10,1,2,"Coca Cola");
 		bonificaciones.add(bDescuento);
+		/*
+		 * Restricciones de la promo
+		 */
+		ArrayList<Restriccion> restricciones = new ArrayList<Restriccion>();
+		/*
+		 * Excepciones de la promo
+		 */
+		ArrayList<Restriccion> excepciones = new ArrayList<Restriccion>();
+		/*
+		 * Nueva promo
+		 */
+		Promocion miPromo = new Promocion(restricciones, excepciones,
+				bonificaciones, mediosDePagosPromo);
 		
-		Promocion miPromo = new Promocion(restricciones, excepciones, bonificaciones);
 		misPromociones.add(miPromo);
 		
-		Promocion promoJubilados = new Promocion(restricciones, bonificaciones);
-		promoJubilados.setTiposClientesAplicanPromo(cli);
-		//misPromociones.add(promoJubilados);
-		for (int i=0; i<misPromociones.size();i++){
+		
+//		Esto estaba antes parser y demas, por aca viene la mano, ver como cargar cupon! y VOILA
+	
+//		ArrayList<Promocion> misPromociones = ParserXml.getPromocionesFromXml(this.path);
 //		
+//		
+//		ArrayList<Restriccion> restricciones = new ArrayList<Restriccion>();
+//		ArrayList<Bonificacion> bonificaciones = new ArrayList<Bonificacion>();
+//		ArrayList<RestriccionTipoCliente> cli = new ArrayList<RestriccionTipoCliente>();
+//		cli.add(new RestriccionTipoCliente("Jubilados", 10.0f));
+//		
+//		ArrayList<Restriccion> excepciones = new ArrayList<Restriccion>();
+//		BonificacionDescuentoCupon bDescuento = new BonificacionDescuentoCupon(20,10,1,2,"Coca Cola");
+//		bonificaciones.add(bDescuento);
+//		
+//		Promocion miPromo = new Promocion(restricciones, excepciones, bonificaciones);
+//		misPromociones.add(miPromo);
+//		
+//		Promocion promoJubilados = new Promocion(restricciones, bonificaciones);
+//		promoJubilados.setTiposClientesAplicanPromo(cli);
 //
-//		BonificacionDescuentoMedioDePago bonJub = new BonificacionDescuentoMedioDePago(10);
-			misPromociones.get(i).setTiposClientesAplicanPromo(cli);
-//		misPromociones.get(i).agregarMedioDePago(new MedioDePago("Descuento Jubilados 10%",""));
-//			
-//			
-	}
+//		for (int i=0; i<misPromociones.size();i++){
+//			misPromociones.get(i).setTiposClientesAplicanPromo(cli);
+//	
+//	}
 		try {
 			cajaprincipal.setPromociones(misPromociones);
 			System.out.println("Promociones y Bonificaciones Actualizadas");
