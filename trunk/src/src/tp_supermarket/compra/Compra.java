@@ -108,7 +108,7 @@ public class Compra {
 		}
 		
 		this.totalSD=totalSinDescuento;
-//		this.totalCD=total;
+		this.totalCD=total;
 		
 		//DESC CUPON
 		if (this.cupon!=-1){
